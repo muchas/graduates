@@ -1,0 +1,82 @@
+{% extends "front_base.html" %}
+
+{% block header %}
+{{ wizard.form.media }}
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>Zakładanie konta</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content">
+<div class="container">
+<div class="row">
+    <div class="span12 txt-middle">
+        <h2>{{ person }}</h2>
+        <p>Uczeń klasy B w latach 1998-2001</p>
+        <div class="well well-form txt-lefty" style="margin-top:30px">
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-error">
+                      {{ error|escape }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post" style="padding-left:inherit">{% csrf_token %}
+                {{ wizard.management_form }}
+		        <div class="control-group">
+		          <div class="controls">
+                    {{ form.email.label_tag }}
+			        <div class="input-prepend">
+                      <input id="{{ form.email.id_for_label }}" name="registration-email" type="email" aria-invalid="false" class="span3" required>
+			        </div>
+                      {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <p style="color:#b94a48">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+				  </div>
+			    </div>
+			    <div class="control-group">
+		          <div class="controls">
+                    {{ form.password1.label_tag }}
+			        <div class="input-prepend">
+                     <input id="{{ form.password1.id_for_label }}" name="registration-password1" type="password" class="span3" required>
+			        </div>
+                    {% if form.password1.errors %}
+                        {% for error in form.password1.errors %}
+                            <p style="color:#b94a48">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+				  </div>
+		        </div>
+			    <div class="control-group">
+		          <div class="controls">
+                    {{ form.password2.label_tag }}
+			        <div class="input-prepend">
+                      <input id="{{ form.password2.id_for_label }}" name="registration-password2" type="password" class="span3" required>
+			        </div>
+                    {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                            <p style="color:#b94a48">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+				  </div>
+		        </div>
+            <p>Krok {{ wizard.steps.step1 }} z {{ wizard.steps.count }}</p>
+            <button type="submit" class="btn btn-primary">Załóż konto</button>
+            {% if wizard.steps.prev %}
+            <button name="wizard_goto_step" type="submit" class="btn" value="{{ wizard.steps.first }}">Powrót</button>
+            {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+</div></div>
+{% endblock %}

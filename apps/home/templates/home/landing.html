@@ -1,0 +1,80 @@
+{% extends 'front_base.html' %}
+
+        {% block header %}
+            	<div id="landing">
+	  <div class="container">
+	    <div class="row">
+		  <div class="span5">
+		    <h1 style="font-size: 35px">Witaj w portalu absolwentów!</h1>	
+			<p style="line-height: 22px; text-indent: 4%">V Liceum już od ponad 25 lat przyciąga wyjątkowe osoby, które wspólnie tworzą niezwykłą mozaikę doświadczeń i ścieżek życia, utkaną z miast, uniwersytetów, instytucji, firm i osiągnięć na różnorodnych polach. Portal absolwentów to wirtualne miejsce spotkań tej społeczności, dzięki któremu absolwenci mogą utrzymywać kontakt ze szkołą, dzielić się swoimi doświadczeniami oraz poznać losy innych - osób, z którymi mają tak wiele wspólnego.</p>
+		    <p><a href="{% url 'registration' %}" class="btn btn-primary btn-action">Dołącz już dziś</a></p>
+		  </div>
+		  <div class="span7">
+		    <div class="js-video">
+			  <iframe src="http://player.vimeo.com/video/38498748?title=0&amp;byline=0&amp;portrait=0&amp;color=38e8ae" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		    </div>
+		  </div>
+		</div>
+            </div></div>
+          {% endblock %}
+
+{% block content %}
+    	<div id="content" class="txt-middle">
+	  <div class="container">
+<div class="row">
+  <div class="span12">
+    <h2>Wirtualne miejsce spotkań wyjątkowych osób</h2>
+    <hr class="dashed">
+  </div>
+</div>
+<div class="row">
+  <div class="span4 bouncy">
+    <div class="icon_wrapper">
+      <i class="glyphicons-globe animated"></i>
+    </div>
+    <h2>Idea portalu</h2>
+    <p>Portal powstał z myślą o potencjalnych owocach spotkań: wspólnie napisanych artykułach naukowych; projektach biznesowych zrealizowanych z przyjaciółmi z liceum, których cenimy i którym ufamy; cennym radom przekazywanym kolejnym pokoleniom absolwentów V LO; oraz najzwyczajniej ciekawych i stymulujących rozmowach w dobrym towarzystwie.</p>
+  </div>
+  <div class="span4 bouncy">
+    <div class="icon_wrapper">
+      <i class="glyphicons-envelope animated"></i>
+    </div>
+    <h2>Kontakt ze szkołą</h2>
+    <p>Jeżeli Twoje konto nie jest jeszcze aktywne, zarejestruj się. Jeżeli jesteś sympatykiem V LO, zarejestruj się jako Sympatyk V LO aby otrzymywać informacje o działalności szkoły..</p>
+  </div>
+  <div class="span4 bouncy">
+    <div class="icon_wrapper">
+      <i class="glyphicons-lock animated"></i>
+    </div>
+    <h2>Bezpieczeństwo</h2>
+    <p>Bezpieczeństwo Twoich danych jest priorytetem Portalu. Wszystkie dane, które wprowadzasz, dostępne są jedynie dla absolwentów oraz nauczycieli V LO zarejestrowanych w serwisie. Żadna ze stron zawierających Twoje dane nie jest indeksowana przez silniki wyszukiwania. Strona wykorzystuje pliki cookies.</p>
+  </div>
+</div>
+<hr class="dashed">
+<div class="row">
+  <div class="span4">
+    <a class="thumbnail" href="">
+      <img alt="image" src="{{ STATIC_URL }}img/first.jpg">
+    </a>
+    <h2>Image 1</h2>
+    <p>Optional subtext to help better explain the image above can go here.</p>
+  </div>
+  <div class="span4">
+    <a class="thumbnail" href="">
+      <img alt="image" src="http://quickimage.it/400x200">
+    </a>
+    <h2>Image 2</h2>
+    <p>Optional subtext to help better explain the image above can go here.</p>
+  </div>
+  <div class="span4">
+    <a class="thumbnail" href="">
+      <img alt="image" src="http://quickimage.it/400x200">
+    </a>
+    <h2>Image 3</h2>
+    <p>Optional subtext to help better explain the image above can go here.</p>
+  </div>
+
+</div>
+          </div></div>
+
+{% endblock %}

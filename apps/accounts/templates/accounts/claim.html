@@ -1,0 +1,52 @@
+{% extends 'front_base.html' %}
+
+{% block headline %}
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>Zgłoszenie podszycia</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content">
+<div class="container txt-middle">
+<div class="row">
+    <div class="span12">
+        <div class="well well-form txt-lefty" style="margin-top:30px">
+            <h3>Formularz kontaktowy</h3>
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-error">
+                      {{ error|escape }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post">{% csrf_token %}
+                {% for field in form %}
+		        <div class="control-group">
+		          <div class="controls">
+                    {{ field.label_tag }}
+			        <div class="input-prepend">
+                        {{ field }}
+			        </div>
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                            <p style="color:#b94a48">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+				  </div>
+			    </div>
+                {% endfor %}
+            <button type="submit" class="btn btn-primary">Wyślij zgłoszenie</button>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+{% endblock %}

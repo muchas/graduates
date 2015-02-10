@@ -1,0 +1,121 @@
+{% load staticfiles %}
+{% load current from navigation %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bounce | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Evan Clemente">
+	
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="{{ STATIC_URL }}css/glyphicons.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href="{{ STATIC_URL }}css/base.css" rel="stylesheet">
+	<link href="{{ STATIC_URL }}css/blue.css" rel="stylesheet">
+	
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
+  </head>  
+
+  <body>
+
+	<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-primary btn-dropnav" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>		
+          <a class="brand" href="/"><i class="glyphicons-book" style="margin-right: 6px;"></i>  Absolwenci V LO</a>
+		  <div class="nav-collapse collapse">
+            <ul class="nav pull-right animated">
+			  <li class=""><a role="button" href="/">Start</a></li>
+			  <li class="{% current 'login' %}"><a href="{% url 'login' %}">Logowanie</a></li>
+			  <li class="{% current 'registration' %}"><a href="{% url 'registration' %}">Rejestracja</a></li>
+              <li class="{% current 'faq' %}"><a href="{% url 'faq' %}">FAQ</a></li>
+			  <li><a href="#">Kontakt</a></li>
+            </ul>
+		  </div>
+        </div>
+      </div>
+    </div>	
+
+    {% block header %}{% endblock %}
+
+    {% block headline %}{% endblock %}
+
+
+        {% block content %}{% endblock %}
+
+ {% block footer %}
+	<div id="footer">
+	  <div class="container">
+	    <div class="row">
+		  <div class="span3">
+			<h3>Quick Links</h3>
+			<ul class="animated">
+			  <li><a href="#">Home</a></li>
+			  <li><a href="#">About Us</a></li>
+			  <li><a href="#">Features</a></li>
+			  <li><a href="#">Pricing</a></li>
+			</ul>			
+		  </div>
+		  <div class="span3">		
+			<h3>Company</h3>
+			<ul class="animated">
+			  <li><a href="#">Privacy Policy</a></li>
+			  <li><a href="#">Terms of Use</a></li>
+			  <li><a href="#">FAQ</a></li>
+			</ul>	
+		  </div>
+		  <div class="span3">
+			<h3>We're Social</h3>
+			<ul class="animated">
+			  <li><a href="#">Facebook</a></li>
+			  <li><a href="#">Twitter</a></li>
+			  <li><a href="#">Google &#43;</a></li>
+			</ul>		  
+		  </div>
+		  <div class="span3">
+			<h3>Subscribe</h3>
+			<p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>			
+		    <form>
+              <input class="span3" type="text" placeholder="Your Email" name="subscribe">
+			  <button class="btn btn-primary">Subscribe</button>
+			</form>
+		  </div>		  
+		</div>	  
+      </div>	  
+    </div>
+
+	<div id="copywrite">
+	  <div class="container">
+	    <div class="row">
+		  <div class="span12">
+		    <p>&copy; 2015 V Liceum Ogólnokształcące<span id="totop" class="pull-right">Przewiń do góry <i class="icon-arrow-up icon-white"></i></span></p>			
+		  </div>		  
+		</div>	  
+      </div>	  
+    </div>
+{% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+	<script src="{{ STATIC_URL }}js/jquery.fitvids.js"></script>
+	<script src="{{ STATIC_URL }}js/jqBootstrapValidation.js"></script>
+	<script src="{{ STATIC_URL }}js/bounce.js"></script>
+
+  </body>
+</html>

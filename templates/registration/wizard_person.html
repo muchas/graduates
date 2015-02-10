@@ -1,0 +1,79 @@
+{% extends "front_base.html" %}
+
+{% block header %}
+{{ wizard.form.media }}
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>Weryfikacja tożsamości</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content">
+<div class="container">
+<div class="row">
+    <div class="span7">
+        <h2>Utwórz konto</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, eum, quaerat eaque et odit consectetur fugit doloribus quasi saepe voluptas?</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, harum praesentium eveniet in corporis voluptatum!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, harum praesentium eveniet in corporis voluptatum!</p>
+    </div>
+    <div class="span5">
+        <div class="well well-form txt-lefty">
+            <h3></h3>
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-error">
+                      {{ error|escape }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post">{% csrf_token %}
+                {{ wizard.management_form }}
+                <div class="control-group">
+		          <div class="controls">
+                    {{ wizard.form.first_name.label_tag }}
+			        <div class="input-prepend">
+                      <input id="{{ wizard.form.first_name.id_for_label }}" name="person-first_name" type="text" aria-invalid="false" class="span3">
+			        </div>
+				  </div>
+			    </div>
+                <div class="control-group">
+		          <div class="controls">
+                    {{ wizard.form.last_name.label_tag }}
+			        <div class="input-prepend">
+                      <input id="{{ wizard.form.last_name.id_for_label }}" name="person-last_name" type="text" class="span3">
+			        </div>
+                    <div class="help-block">
+                        <small>{{ wizard.form.last_name.help_text }}</small>
+                    </div>
+				  </div>
+			    </div>
+            <p>Krok {{ wizard.steps.step1 }} z {{ wizard.steps.count }}</p>
+            {% if wizard.steps.prev %}
+            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">First step</button>
+            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Next step</button>
+            {% endif %}
+            <input type="submit" class="btn btn-primary" value="Zweryfikuj dane"/>
+            </form>
+        </div>
+    </div>
+</div>
+</div></div>
+
+<div id="headline">
+  <div class="container well">
+    <div class="row">
+      <div class="span12 txt-middle">
+        <h3>Twoje konto zostało zajęte?</h3>
+        <p><a href="{% url 'claim' %}" class="btn btn-action btn-primary">Zgłoś podszycie</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

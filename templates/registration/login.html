@@ -1,0 +1,56 @@
+{% extends 'front_base.html' %}
+
+
+{% block content %}
+    	<div id="content" class="txt-middle">
+	  <div class="container">
+	    <div class="row">
+		  <div class="span12">
+		    <div class="well well-form txt-lefty">
+              <h3>Logowanie</h3>
+
+                {% if form.errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-error">
+                          {{ error|escape }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+   			  <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+		        <div class="control-group">
+		          <div class="controls">
+			        <div class="input-prepend">
+			          <span class="add-on"><i class="icon-user"></i></span>
+                      {{ form.email }}
+			        </div>
+				  </div>
+			    </div>
+			    <div class="control-group">
+		          <div class="controls">
+			        <div class="input-prepend">
+			          <span class="add-on"><i class="icon-lock"></i></span>
+                      {{ form.password }}
+			        </div>
+				  </div>
+		        </div>
+                <div class="form-actions">
+			      <label class="checkbox">
+                    <input type="checkbox" name="remember_me">
+                    Zapamiętaj hasło
+                  </label>
+			      <button class="btn btn-primary" type="submit">Zaloguj się</button>
+                </div>
+              </form>
+		      <div class="form-extra" style="text-align: right">
+			    <a href="{% url 'password_reset' %}">Zapomniałeś hasła?</a>
+			  </div>
+            </div>
+		  </div>
+		</div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

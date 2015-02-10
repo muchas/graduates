@@ -1,0 +1,3 @@
+Witaj!
+
+Aby aktywować konto kliknij w link, który będzie aktywny przez {{ expiration_days }} najbliższe dni: {% url 'registration_activate' activation_key=activation_key %}
