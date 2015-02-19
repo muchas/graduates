@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-9">
+        <h5>{{ company.name }}, {{ name }}</h5>
+        <h6 class="text-muted">Branża: {{ branch.name }}</h6>
+        <h6 class="text-muted">{{ city.name }}, {{#beautifydate start}}{{ start }}{{/beautifydate}} - {{#if end }}{{#beautifydate end}}{{ end }}{{/beautifydate}}{{else}}obecnie{{/if}}</h6>
+    </div>
+    <div class="col-md-3">
+        <a class="edit btn btn-default"><i class="fa fa-edit"></i> Edytuj</a>
+        <a class="remove btn btn-default"><i class="fa fa-times"></i> Usuń</a>
+    </div>
+</div>
+<hr>

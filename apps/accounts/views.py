@@ -3,6 +3,8 @@ from django.views.generic import FormView, TemplateView
 from django.views.generic.base import View
 from django.contrib.auth.views import login
 from django.contrib.formtools.wizard.views import SessionWizardView
+from rest_framework import views
+from rest_framework.permissions import IsAuthenticated
 from apps.accounts import signals
 from apps.accounts.models import RegistrationProfile, Claim
 from apps.community.models import Person
@@ -17,6 +19,7 @@ class LoginView(View):
         if not request.POST.get('remember_me', None):
             request.session.set_expiry(0)
         else:
+            #TODO move expiration time to SETTINGS
             request.session.set_expiry(3600*24*14)
         return login(request, authentication_form=AuthenticationForm)
 

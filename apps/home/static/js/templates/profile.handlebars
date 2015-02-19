@@ -1,0 +1,150 @@
+<div class="row">
+    <div class="col-md-3 col-sm-5">
+      <div class="profile-avatar">
+        <img src="https://scontent-ams.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/1502480_571617809599850_387561572_n.jpg?oh=42d2e1a8b1bdbcd4e7163bd299c6eae7&oe=555D4B50" class="profile-avatar-img thumbnail" alt="Profile Image">
+      </div> <!-- /.profile-avatar -->
+
+      <div class="list-group">
+        {{#if is_owner }}
+            <a href="#/profile/edit" class="list-group-item">
+                  <i class="fa fa-edit text-primary"></i> &nbsp;&nbsp; Edytuj profil
+                  <i class="fa fa-chevron-right list-group-chevron"></i>
+            </a>
+        {{else}}
+          <a href="javascript:;" class="list-group-item">
+              <i class="fa fa-envelope text-primary"></i> &nbsp;&nbsp; Wyślij wiadomość
+              <i class="fa fa-chevron-right list-group-chevron"></i>
+            </a>
+        {{/if}}
+      </div> <!-- /.list-group -->
+    </div> <!-- /.col -->
+
+    <div class="col-md-6 col-sm-7">
+      <h3>{{ first_name }} {{ last_name }}</h3>
+      <h5>
+      {{#if teacher_learn_years.length }}
+          {{#if is_male }}Nauczyciel{{ else }}Nauczycielka{{/if}}
+          {{#each subjects }}
+              {{ name_brand }}
+          {{/each}}
+          z lat
+          {{#each teacher_learn_years }}
+                {{ this }}
+          {{/each}}
+      {{else}}
+          {{#if is_male}}Uczeń{{ else }}Uczennica{{/if}}
+          <a href="">klasy {{ group.symbol }}</a> z lat {{ group.first_year }}-{{ group.last_year }}
+      {{/if}}
+      </h5>
+      {{#if universities.length }}
+          <h5 class="text-muted">{{ universities.0.university.name }} - {{ universities.0.school }}</h5>
+      {{/if}}
+      {{#if employments.length }}
+          <h5 class="text-muted">{{ employments.0.company.name }} - {{ employments.0.name }}</h5>
+      {{/if}}
+
+      <br>
+      {{#if personal_data.length }}
+      <h4 class="content-title"><u>Kontakt</u></h4>
+       {{/if}}
+      <div id="personal-data"></div>
+      {{#if personal_data.length }}<br>{{/if}}
+
+       {{#if group }}
+      <h4 class="content-title"><u>Edukacja</u></h4>
+        <h5>Liceum</h5>
+           <p>W V LO {{#if is_male }}uczęszczał{{else}}uczęszczała{{/if}} do <a href="">klasy {{ group.symbol }}</a> z lat {{ group.first_year }}-{{ group.last_year }}, której wychowawcą {{#if group.tutor.is_male }}był{{else}}była{{/if}} <a href="#/person/{{ group.tutor.id }}">{{ group.tutor.first_name }} {{ group.tutor.last_name }}</a>.</p>
+
+        <br>
+
+      {{/if}}
+      <div id="universities"></div>
+
+      {{#if show_now_section }}
+      <h4 class="content-title"><u>Obecnie</u></h4>
+       {{#if description }}
+        <h5>Krótki opis</h5>
+         <p>{{ description }}</p>
+        <br>
+       {{/if}}
+
+        {{#if employments.length }}
+        <h4>Doświadczenie</h4>
+        <br>
+        {{/if}}
+
+       {{/if}}
+        <div id="employments"></div>
+
+        <br class="visible-xs">
+        <br class="visible-xs">
+
+      </div> <!-- /.col -->
+
+      <div class="col-md-3">
+
+          <h5 class="content-title"><u>Social Stats</u></h5>
+
+        <div class="list-group">
+
+          <a href="javascript:;" class="list-group-item">
+              <h3 class="pull-right"><i class="fa fa-eye text-primary"></i></h3>
+              <h4 class="list-group-item-heading">38,847</h4>
+              <p class="list-group-item-text">Profile Views</p>
+            </a>
+
+          <a href="javascript:;" class="list-group-item">
+            <h3 class="pull-right"><i class="fa fa-facebook-square  text-primary"></i></h3>
+            <h4 class="list-group-item-heading">3,482</h4>
+            <p class="list-group-item-text">Facebook Likes</p>
+          </a>
+
+          <a href="javascript:;" class="list-group-item">
+            <h3 class="pull-right"><i class="fa fa-twitter-square  text-primary"></i></h3>
+            <h4 class="list-group-item-heading">5,845</h4>
+            <p class="list-group-item-text">Twitter Followers</p>
+          </a>
+        </div> <!-- /.list-group -->
+
+        <br>
+        {{#unless is_owner }}
+        <h5 class="content-title"><u>Wspólne z {{ first_name }} {{ last_name }}</u></h5>
+
+        <div class="well">
+
+
+          <ul class="icons-list text-md">
+
+            <li>
+              <i class="icon-li fa fa-university"></i>
+
+              <strong>1</strong> uczelnia wyższa
+              <br>
+            </li>
+
+            <li>
+              <i class="icon-li fa fa-home"></i>
+
+              <strong>3</strong> miasta, z którymi jesteście powiązani
+              <br>
+            </li>
+
+            <li>
+              <i class="icon-li fa fa-suitcase"></i>
+
+              branża IT
+              <br>
+            </li>
+            <li>
+              <i class="icon-li fa fa-user"></i>
+
+               wychowawca klasy w liceum
+              <br>
+            </li>
+          </ul>
+
+        </div> <!-- /.well -->
+        {{/unless}}
+      </div> <!-- /.col -->
+
+</div> <!-- /.row -->

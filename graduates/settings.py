@@ -111,6 +111,14 @@ class Default(Configuration):
         }
     }
 
+    REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': (
+            'rest_framework.permissions.IsAuthenticated',
+        )
+    }
+
+    URLS_JS_GENERATED_FILE='static/js/routes.js'
+
 
 class Development(Default):
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

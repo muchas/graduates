@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-9">
+        <h5>{{ university.name }}, {{ school }}</h5>
+        {{#if department }}
+        <h6 class="text-muted">Wydział: {{ department.name }}</h6>
+        {{/if}}
+        <h6 class="text-muted">{{#beautifydate start}}{{ start }}{{/beautifydate}} - {{#beautifydate end }}{{ end }}{{/beautifydate}}</h6>
+        <br>
+    </div>
+    <div class="col-md-3">
+        <a class="edit btn btn-default"><i class="fa fa-edit"></i> Edytuj</a>
+        <a class="remove btn btn-default"><i class="fa fa-times"></i> Usuń</a>
+    </div>
+</div>
+<hr>

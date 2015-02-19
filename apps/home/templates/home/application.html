@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <title>Analytics Dashboard &middot; MVP Ready Admin</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
+  <!-- Google Font: Open Sans -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300,700">
+ <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/mvpready/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/datepicker.css">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/mvpready-admin.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/mvpready-flat.css">
+  <!-- <link href="{{ STATIC_URL }}css/custom.css" rel="stylesheet">-->
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+<script id="profile-template" type="text/template">
+
+</script>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+  <header class="navbar navbar-inverse" role="banner">
+
+    <div class="container">
+
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="fa fa-cog"></i>
+        </button>
+
+        <a href="{{ STATIC_URL }}" class="navbar-brand" style="font-weight: 200; margin-top: 4px;font-size:20px;">
+            <i class="fa fa-book" style="margin-right: 5px;"></i> 
+            Absolwenci V LO
+        </a>
+      </div> <!-- /.navbar-header -->
+
+
+      <nav class="collapse navbar-collapse" role="navigation">
+
+        <ul class="nav navbar-nav noticebar navbar-left">
+          <li class="dropdown">
+            <a href="{{ STATIC_URL }}page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell"></i>
+              <span class="navbar-visible-collapsed">&nbsp;Notifications&nbsp;</span>
+              <span class="badge badge-primary">3</span>
+            </a>
+
+            <ul class="dropdown-menu noticebar-menu noticebar-hoverable" role="menu">
+
+              <li class="nav-header">
+                <div class="pull-left">
+                  Notifications
+                </div>
+
+                <div class="pull-right">
+                  <a href="javascript:;">Mark as Read</a>
+                </div>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}page-notifications.html" class="noticebar-item">
+                  <span class="noticebar-item-image">
+                    <i class="fa fa-cloud-upload text-success"></i>
+                  </span>
+                  <span class="noticebar-item-body">
+                    <strong class="noticebar-item-title">Templates Synced</strong>
+                    <span class="noticebar-item-text">20 Templates have been synced to the Mashon Demo instance.</span>
+                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 12 minutes ago</span>
+                  </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}page-notifications.html" class="noticebar-item">
+                  <span class="noticebar-item-image">
+                    <i class="fa fa-ban text-danger"></i>
+                  </span>
+                  <span class="noticebar-item-body">
+                    <strong class="noticebar-item-title">Sync Error</strong>
+                    <span class="noticebar-item-text">5 Designs have been failed to be synced to the Mashon Demo instance.</span>
+                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
+                  </span>
+                </a>
+              </li>
+
+              <li class="noticebar-menu-view-all">
+                <a href="{{ STATIC_URL }}page-notifications.html">View All Notifications</a>
+              </li>
+            </ul>
+          </li>
+
+
+
+          <li class="dropdown">
+            <a href="{{ STATIC_URL }}page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope"></i>
+              <span class="navbar-visible-collapsed">&nbsp;Messages&nbsp;</span>
+            </a>
+
+            <ul class="dropdown-menu noticebar-menu noticebar-hoverable" role="menu">                
+              <li class="nav-header">
+                <div class="pull-left">
+                  Messages
+                </div>
+
+                <div class="pull-right">
+                  <a href="javascript:;">New Message</a>
+                </div>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}page-notifications.html" class="noticebar-item">
+                  <span class="noticebar-item-image">
+                    <img src="{{ STATIC_URL }}img/avatars/avatar-1-md.jpg" style="width: 50px" alt="">
+                  </span>
+
+                  <span class="noticebar-item-body">
+                    <strong class="noticebar-item-title">New Message</strong>
+                    <span class="noticebar-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</span>
+                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
+                  </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}page-notifications.html" class="noticebar-item">
+                  <span class="noticebar-item-image">
+                    <img src="{{ STATIC_URL }}img/avatars/avatar-2-md.jpg" style="width: 50px" alt="">
+                  </span>
+
+                  <span class="noticebar-item-body">
+                    <strong class="noticebar-item-title">New Message</strong>
+                    <span class="noticebar-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</span>
+                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 5 hours ago</span>
+                  </span>
+                </a>
+              </li>
+
+              <li class="noticebar-menu-view-all">
+                <a href="{{ STATIC_URL }}page-notifications.html">View All Messages</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-exclamation-triangle"></i>
+              <span class="navbar-visible-collapsed">&nbsp;Alerts&nbsp;</span>
+            </a>
+
+            <ul class="dropdown-menu noticebar-menu noticebar-hoverable" role="menu">                
+              <li class="nav-header">
+                <div class="pull-left">
+                  Alerts
+                </div>
+              </li>
+
+              <li class="noticebar-empty">                  
+                <h4 class="noticebar-empty-title">No alerts here.</h4>
+                <p class="noticebar-empty-text">Check out what other makers are doing on Explore!</p>                
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+
+      <form class="navbar-form navbar-left" role="search" style="margin-top:12px;margin-left:5px;">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Szukaj osoby" style="width: 300px">
+          <button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>
+        </div>
+      </form>
+
+        <ul class="nav navbar-nav navbar-right">    
+
+          <li>
+            <a href="javsacript:;">Twoja opinia</a>
+          </li>    
+
+          <li>
+            <a href="javascript:;">Resources</a>
+          </li>    
+
+          <li class="dropdown navbar-profile">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+              <img src="{{ STATIC_URL }}img/avatars/avatar-1-xs.jpg" class="navbar-profile-avatar" alt="">
+              <span class="navbar-profile-label">rod@rod.me &nbsp;</span>
+              <i class="fa fa-caret-down"></i>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+
+              <li>
+                <a href="#/profile">
+                  <i class="fa fa-user"></i> 
+                  &nbsp;&nbsp;My Profile
+                </a>
+              </li>
+
+              <li>
+                <a href="#/profile/edit">
+                  <i class="fa fa-dollar"></i> 
+                  &nbsp;&nbsp;Plans & Billing
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}page-settings.html">
+                  <i class="fa fa-cogs"></i> 
+                  &nbsp;&nbsp;Settings
+                </a>
+              </li>
+
+              <li class="divider"></li>
+
+              <li>
+                <a href="{{ STATIC_URL }}account-login.html">
+                  <i class="fa fa-sign-out"></i> 
+                  &nbsp;&nbsp;Logout
+                </a>
+              </li>
+
+            </ul>
+
+          </li>
+
+        </ul>
+
+      </nav>
+
+    </div> <!-- /.container -->
+
+  </header>
+
+
+  <div class="mainnav">
+
+    <div class="container">
+
+      <a class="mainnav-toggle" data-toggle="collapse" data-target=".mainnav-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </a>
+
+      <nav class="collapse mainnav-collapse" role="navigation">
+
+        <ul class="mainnav-menu">
+
+          <li class="dropdown active">
+          	<a href="{{ STATIC_URL }}index.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          	Społeczność
+          	<i class="mainnav-caret"></i>
+          	</a>
+
+          	<ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="{{ STATIC_URL }}index.html">
+                <i class="fa fa-dashboard"></i> 
+                &nbsp;&nbsp;Mapa absolwentów
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}dashboard-2.html">
+                <i class="fa fa-dashboard"></i> 
+                &nbsp;&nbsp;Szkoła
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}dashboard-3.html">
+                <i class="fa fa-dashboard"></i> 
+                &nbsp;&nbsp;Nauczyciele
+                </a>
+              </li>
+              <li>
+                <a href="{{ STATIC_URL }}dashboard-3.html">
+                <i class="fa fa-dashboard"></i> 
+                &nbsp;&nbsp;Zaawansowane wyszukiwanie
+                </a>
+              </li>
+          	</ul>
+          </li>
+
+
+          <li class="dropdown ">
+
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            Dyskusja
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+
+              <li>
+                <a href="{{ STATIC_URL }}components-tabs.html">
+                <i class="fa fa-bars"></i> 
+                &nbsp;&nbsp;Tabs &amp; Accordions
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}components-popups.html">
+                <i class="fa fa-calendar-o"></i> 
+                &nbsp;&nbsp;Popups &amp; Alerts
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}components-validation.html">
+                <i class="fa fa-check"></i> 
+                &nbsp;&nbsp;Validation
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}components-datatables.html">
+                <i class="fa fa-table"></i> 
+                &nbsp;&nbsp;Data Tables
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}components-gallery.html">
+                <i class="fa fa-picture-o"></i> 
+                &nbsp;&nbsp;Gallery
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}components-charts.html">
+                <i class="fa fa-bar-chart-o"></i> 
+                &nbsp;&nbsp;Charts
+                </a>
+              </li>		  
+            </ul>
+          </li>
+
+
+          <li class="dropdown ">
+
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            Moja klasa
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="{{ STATIC_URL }}page-pricing.html">
+                <i class="fa fa-money"></i> 
+                &nbsp;&nbsp;Plans & Billing
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}page-profile.html">
+                <i class="fa fa-user"></i> 
+                &nbsp;&nbsp;Profile
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}page-settings.html">
+                <i class="fa fa-cogs"></i> 
+                &nbsp;&nbsp;Settings
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ STATIC_URL }}page-faq.html">
+                <i class="fa fa-question"></i> 
+                &nbsp;&nbsp;FAQ
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="dropdown ">
+
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            Galeria
+            <i class="mainnav-caret"></i>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="{{ STATIC_URL }}page-notifications.html">
+                <i class="fa fa-bell"></i> 
+                &nbsp;&nbsp;Notifications
+                </a>
+              </li>			
+
+              <li>
+                <a href="{{ STATIC_URL }}extras-icons.html">
+                <i class="fa fa-smile-o"></i> 
+                &nbsp;&nbsp;Font Icons
+                </a>
+              </li> 
+
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">
+                <i class="fa fa-ban"></i> 
+                &nbsp;&nbsp;Error Pages
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{{ STATIC_URL }}page-404.html">
+                    <i class="fa fa-ban"></i> 
+                    &nbsp;&nbsp;404 Error
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="{{ STATIC_URL }}page-500.html">
+                    <i class="fa fa-ban"></i> 
+                    &nbsp;&nbsp;500 Error
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="dropdown-submenu">
+
+                <a tabindex="-1" href="#">
+                <i class="fa fa-lock"></i> 
+                &nbsp;&nbsp;Login Pages
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{{ STATIC_URL }}account-login.html">
+                    <i class="fa fa-unlock"></i> 
+                    &nbsp;&nbsp;Login
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="{{ STATIC_URL }}account-login-social.html">
+                    <i class="fa fa-unlock"></i> 
+                    &nbsp;&nbsp;Login Social
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="{{ STATIC_URL }}account-signup.html">
+                    <i class="fa fa-star"></i> 
+                    &nbsp;&nbsp;Signup
+                    </a>
+                    </li>
+
+                  <li>
+                    <a href="{{ STATIC_URL }}account-forgot.html">
+                    <i class="fa fa-envelope"></i> 
+                    &nbsp;&nbsp;Forgot Password
+                    </a>
+                  </li>
+                </ul>
+              </li> 
+
+
+            </ul>
+
+          </li>
+        </ul>
+
+      </nav>
+        <h4 style="margin-top: 25px; float: right;">1031 zarejestrowanych</h4>
+
+    </div> <!-- /.container -->
+
+  </div> <!-- /.mainnav -->
+
+  <div class="content">
+
+    <div class="container" id="content">
+
+
+    </div> <!-- /.container -->
+
+  </div> <!-- .content -->
+
+</div> <!-- /#wrapper -->
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">Copyright &copy; 2013 MVP Ready.</p>
+  </div>
+</footer>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script type="text/javascript">
+{#  function LeafletMap(options) {#}
+{#    this.markers = [];#}
+{#    this.onMarkerClick = options.onMarkerClick;#}
+{#    this.map = new L.Map(options.name);#}
+{#    this.osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';#}
+{#    this.mbUrl = 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';#}
+{#    this.mblayer = new L.TileLayer(this.mbUrl, {id: 'examples.map-i875mjb7'});#}
+{##}
+{#    this.osm = new L.TileLayer(this.osmUrl, { minZoom: options.minZoom, maxZoom: options.maxZoom });#}
+{#    this.map.setView(new L.LatLng(options.x, options.y), options.zoom);#}
+{#    this.map.addLayer(this.mblayer);#}
+{#  }#}
+{##}
+{#  LeafletMap.prototype.addCity = function(city) {#}
+{#    var marker = L.marker([city.get('x'), city.get('y')]).addTo(this.map);#}
+{#    marker.on('click', function() { #}
+{#      this.onMarkerClick(city);#}
+{#    }.bind(this));#}
+{#    this.markers.push(marker);#}
+{#  }#}
+{##}
+{#  var map = new LeafletMap({#}
+{#    name: "map",#}
+{#    minZoom: 2,#}
+{#    maxZoom: 12,#}
+{#    x: 51.8,#}
+{#    y: 19.3,#}
+{#    zoom: 5,#}
+{##}
+{#    onMarkerClick: function(city) {#}
+{#      App.cityArea.show(new City.Views.Element({ model: city }));#}
+{#    }#}
+{#  });#}
+
+</script>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Core JS -->
+<script src="{{ STATIC_URL }}js/libs/jquery-1.11.2.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
+
+<!--[if lt IE 9]>
+<script src="{{ STATIC_URL }}js/libs/excanvas.compiled.js"></script>
+<![endif]-->
+
+<!-- Plugin JS -->
+<script src="{{ STATIC_URL }}js/plugins/flot/jquery.flot.js"></script>
+<script src="{{ STATIC_URL }}js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="{{ STATIC_URL }}js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="{{ STATIC_URL }}js/plugins/flot/jquery.flot.resize.js"></script>
+
+<!-- App JS -->
+<script src="{{ STATIC_URL }}js/mvpready-core.js"></script>
+<script src="{{ STATIC_URL }}js/mvpready-admin.js"></script>
+
+<!-- Core JS -->
+<script src="{{ STATIC_URL }}js/libs/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}js/libs/jquery.cookie.js"></script>
+<script src="{{ STATIC_URL }}js/libs/underscore-min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/handlebars-v3.0.0.js"></script>
+<script src="{{ STATIC_URL }}js/libs/backbone-min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/deep-model.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/backbone-forms.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/backbone.wreqr.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/backbone.babysitter.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/backbone.marionette.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/moment-with-locales.min.js"></script>
+
+
+<script src="{{ STATIC_URL }}js/routing.js"></script>
+<script src="{{ STATIC_URL }}js/routes.js"></script>
+<script src="{{ STATIC_URL }}js/utils.js"></script>
+<script src="{{ STATIC_URL }}js/handlebars.js"></script>
+
+
+<script src="{{ STATIC_URL }}js/config.js"></script>
+<script src="{{ STATIC_URL }}js/forms/editors/month.js"></script>
+
+<script src="{{ STATIC_URL }}js/commands/base.js"></script>
+<script src="{{ STATIC_URL }}js/commands/profile.js"></script>
+
+<!-- Models -->
+<script src="{{ STATIC_URL }}js/models/profile.js"></script>
+<script src="{{ STATIC_URL }}js/models/community.js"></script>
+
+<!-- Forms -->
+<script src="{{ STATIC_URL }}js/forms/profile.js"></script>
+
+<!-- Views -->
+<script src="{{ STATIC_URL }}js/views/layout/root.js"></script>
+<script src="{{ STATIC_URL }}js/views/layout/profile.js"></script>
+<script src="{{ STATIC_URL }}js/views/layout/exception.js"></script>
+<script src="{{ STATIC_URL }}js/views/item/profile.js"></script>
+<script src="{{ STATIC_URL }}js/views/collection/profile.js"></script>
+
+
+<!-- Controllers -->
+<script src="{{ STATIC_URL }}js/controllers/profile.js"></script>
+<script src="{{ STATIC_URL }}js/controllers/community.js"></script>
+
+<!-- Routers -->
+<script src="{{ STATIC_URL }}js/routers/profile.js"></script>
+<script src="{{ STATIC_URL }}js/routers/community.js"></script>
+<script src="{{ STATIC_URL }}js/routers/discussion.js"></script>
+<script src="{{ STATIC_URL }}js/routers/common.js"></script>
+
+<script src="{{ STATIC_URL }}js/app.js"></script>
+
+
+</body>
+</html>

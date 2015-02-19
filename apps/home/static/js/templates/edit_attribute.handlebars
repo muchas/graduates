@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-10">
+        <strong>{{ name }}</strong>: {{ value }}
+        {{#if is_public }}
+        <span class="label label-info" style="margin-left:5px">Publiczne</span>
+        {{else}}
+        <span class="label label-primary" style="margin-left:5px">Prywatne</span>
+        {{/if}}
+    </div>
+    <div class="col-md-2">
+        <a class="edit btn btn-default"><i class="fa fa-edit"></i> Edytuj</a>
+    </div>
+</div>
+<hr />

@@ -1,0 +1,28 @@
+{
+  "name": "graduates",
+  "version": "0.0.1",
+  "description": "Social media application based on graduates community.",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-compass": "^1.0.1",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:sagnitor/graduates.git"
+  },
+  "keywords": [
+    "graduates"
+  ],
+  "author": "Slawomir Mucha",
+  "license": "ISC"
+}

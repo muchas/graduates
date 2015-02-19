@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from model_utils.models import TimeStampedModel
 
 
 YEAR_CHOICES = []
@@ -9,8 +10,8 @@ for r in range(1989, (datetime.datetime.now().year+1)):
 
 class City(models.Model):
     name = models.CharField(max_length=90)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
     is_verified = models.BooleanField(default=False)
 
     def __unicode__(self):
@@ -19,8 +20,19 @@ class City(models.Model):
 
 class University(models.Model):
     name = models.CharField(max_length=255)
+    acronym = models.CharField(max_length=10, null=True, blank=True)
     is_verified = models.BooleanField(default=False)
     city = models.ForeignKey(City)
+
+    def __unicode__(self):
+        return u"%s" % self.name
+
+
+class UniversityDepartment(models.Model):
+    name = models.CharField(max_length=255, blank=True)
+    acronym = models.CharField(max_length=10, null=True, blank=True)
+    is_verified = models.BooleanField(default=False)
+    university = models.ForeignKey(University)
 
     def __unicode__(self):
         return u"%s" % self.name
@@ -70,6 +82,7 @@ class Person(models.Model):
     married_name = models.CharField(max_length=255, blank=True, null=True)
     picture = models.ImageField(upload_to='media/pictures/', blank=True, null=True)
     sex = models.SmallIntegerField(choices=SEX_CHOICES, default=NOT_KNOWN)
+    description = models.TextField(null=True, blank=True)
 
     group = models.ForeignKey(Group, related_name='pupils', blank=True, null=True)
     universities = models.ManyToManyField(University, through='Student')
@@ -86,8 +99,12 @@ class Person(models.Model):
             self.last_name
         )
 
+    @property
+    def public_personal_data(self):
+        return self.personaldata_set.filter(is_public=True)
 
-class Industry(models.Model):
+
+class Branch(models.Model):
     name = models.CharField(max_length=255)
 
     def __unicode__(self):
@@ -102,8 +119,8 @@ class Company(models.Model):
 
 
 class Employment(models.Model):
-    person = models.ForeignKey(Person)
-    industry = models.ForeignKey(Industry)
+    person = models.ForeignKey(Person, related_name='employments')
+    branch = models.ForeignKey(Branch)
     company = models.ForeignKey(Company)
     city = models.ForeignKey(City)
 
@@ -115,10 +132,10 @@ class Employment(models.Model):
 class Student(models.Model):
     university = models.ForeignKey(University)
     person = models.ForeignKey(Person)
+    department = models.ForeignKey(UniversityDepartment, null=True, blank=True)
     start = models.DateField()
     end = models.DateField()
     school = models.CharField(max_length=255)
-    department = models.CharField(max_length=255, null=True, blank=True)
 
 
 class TeacherLearnYears(models.Model):
@@ -132,7 +149,34 @@ class TeacherLearnYears(models.Model):
         blank=True)
 
     def __unicode__(self):
-        if self.from_year == self.to_year or not self.to_year:
+        if self.from_year == self.to_year:
             return "%s" % self.from_year
+        elif not self.to_year:
+            return "%s - obecnie" % self.from_year
         else:
             return "%s-%s" % (self.from_year, self.to_year)
+
+
+class Attribute(models.Model):
+    EMAIL_FIELD, CHAR_FIELD, INTEGER_FIELD = range(3)
+    TYPE_CHOICES = (
+        (EMAIL_FIELD, 'email'),
+        (CHAR_FIELD, 'char'),
+        (INTEGER_FIELD, 'integer'),
+    )
+    name = models.CharField(max_length=255)
+    data_type = models.IntegerField(choices=TYPE_CHOICES, default=CHAR_FIELD)
+    display_order = models.SmallIntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+
+class PersonalData(TimeStampedModel):
+    is_public = models.BooleanField(default=True)
+    value = models.CharField(max_length=255, null=True, blank=True, default="")
+    attribute = models.ForeignKey(Attribute)
+    person = models.ForeignKey(Person)
+
+    class Meta:
+        unique_together=(('person', 'attribute'),)
