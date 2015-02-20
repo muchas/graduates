@@ -3,11 +3,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics, views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute
+from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University
 from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly
 from apps.community.serializers import TeacherSerializer, GroupSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
-    AttributeSerializer
+    AttributeSerializer, UniversitySerializer
 
 
 class CityDetailView(views.APIView):
@@ -59,6 +59,12 @@ class PersonGroupView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user.person.group
+
+
+class UniversityListView(generics.ListAPIView):
+    serializer_class = UniversitySerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = University.objects.all()
 
 
 class StudentListView(generics.ListCreateAPIView):

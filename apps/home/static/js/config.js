@@ -1,6 +1,7 @@
 var App = {
     Controller: {},
     Command: {},
+    Data: {},
     Model: {},
     Form: {
         Editor: {}

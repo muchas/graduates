@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from apps.community.models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
     UniversityDepartment, PersonalData, Attribute
@@ -69,6 +70,7 @@ class UniversityDepartmentSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'acronym')
 
 
+#TODO Refactor - the most hacky nad messy part (update_related)
 class StudentSerializer(serializers.ModelSerializer):
     department = UniversityDepartmentSerializer(allow_null=True)
     university = UniversitySerializer()
@@ -78,11 +80,16 @@ class StudentSerializer(serializers.ModelSerializer):
         exclude = ('person',)
 
     def update_related(self, validated_data):
-        city, is_city_created = City.objects.get_or_create(name=validated_data.get('university').get('city').get('name'))
-        university, is_university_created = University.objects.get_or_create(
-            name=validated_data.get('university').get('name'),
-            city=city
-        )
+        university_id = self.initial_data['university'].get('id')
+        if university_id:
+            university = get_object_or_404(University, pk=university_id)
+        else:
+            city, is_city_created = City.objects.get_or_create(name=validated_data.get('university').get('city').get('name'))
+            university, is_university_created = University.objects.get_or_create(
+                name=validated_data.get('university').get('name'),
+                city=city
+            )
+
         department = None
         department_name = validated_data.get('department').get('name')
         if department_name:

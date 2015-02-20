@@ -34,25 +34,40 @@ App.Controller.ProfileController = {
             layout.personal_data.show(new App.CollectionView.EditableAttributes({ collection: personal_data }))
         });
 
-        App.instance.execute("profile/universities", function(response) {
-           var universities = new App.Collection.Universities(response);
-            layout.universities.show(new App.CollectionView.EditableUniversities({ collection: universities }));
-        });
+        this.showUniversities(layout);
 
         App.instance.execute("profile/description", function(response) {
             var description = new App.Model.Description(response);
             layout.description.show(new App.ItemView.EditableDescription({ model: description }));
         });
 
-        this._showEmployments(layout);
+        this.showEmployments(layout);
+
+
+        App.instance.execute("university/buildings", function(response) {
+            App.Data.universities = response;
+        });
+
 
         // Listeners
         App.instance.vent.on("employment-created", function() {
-            this._showEmployments(layout);
+            this.showEmployments(layout);
         }.bind(this));
+
+        App.instance.vent.on("student-created", function() {
+            this.showUniversities(layout);
+        }.bind(this));
+
     },
 
-    _showEmployments: function(layout) {
+    showUniversities: function(layout) {
+        App.instance.execute("profile/universities", function(response) {
+           var universities = new App.Collection.Universities(response);
+            layout.universities.show(new App.CollectionView.EditableUniversities({ collection: universities }));
+        });
+    },
+
+    showEmployments: function(layout) {
          App.instance.execute("profile/employments", function(response) {
            var employments = new App.Collection.Employments(response);
             layout.employments.show(new App.CollectionView.EditableEmployments({ collection: employments }));
