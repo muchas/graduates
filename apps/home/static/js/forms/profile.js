@@ -7,8 +7,10 @@ App.Form.Base = Backbone.Form.extend({
     save: function() {
        if(this.validate() === null) {
            this.commit();
+           this.onSave();
+       } else {
+
        }
-       this.onSave();
     },
 
     hide: function() {
@@ -82,7 +84,7 @@ App.Form.Description = App.Form.Base.extend({
 App.Form.University = App.Form.Base.extend({
     template: Handlebars.templates.university_form,
     schema: {
-        school: { type: 'Text', editorClass: "form-control" },
+        school: { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'university.id': {
             type: 'Select',
             editorClass: "form-control",
@@ -136,6 +138,7 @@ App.Form.University = App.Form.Base.extend({
         this.$el.fadeOut(300, function() {
             if(this.parent) {
                 this.parent.$el.html(form.render().$el);
+                form.initializeTypeahead();
             }
             if(this.region) {
                 this.region.show(form);
@@ -148,18 +151,27 @@ App.Form.University = App.Form.Base.extend({
 App.Form.UniversityExtended = App.Form.Base.extend({
     template: Handlebars.templates.university_extended_form,
     schema: {
-        school: { type: 'Text', editorClass: "form-control" },
-        'university.name': { type: 'Text', editorClass: "form-control" },
-        'university.city.name': { type: 'Text', editorClass: "form-control" },
+        school: { type: 'Text', editorClass: "form-control", validators: ['required'] },
+        'university.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
+        'university.city.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'department.name': { type: 'Text', editorClass: "form-control" },
         start: { type: App.Form.Editor.Month },
-        end: { type: App.Form.Editor.Month }
+        end: { type: App.Form.Editor.Month, validators: ['required'] }
     },
 
     events: {
         'click .save': 'save',
         'click .cancel': 'hide',
         'click .back': 'shiftForm'
+    },
+
+    initializeTypeahead: function(options) {
+        this.$el.find('.city input').typeahead({
+            items: 4,
+            source: $.map(App.Data.cities, function(city) {
+               return city.name
+            })
+        })
     },
 
     onSave: function() {

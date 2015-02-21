@@ -48,6 +48,14 @@ App.Controller.ProfileController = {
             App.Data.universities = response;
         });
 
+        App.instance.execute("city/all", function(response) {
+           App.Data.cities = response;
+        });
+
+        App.instance.execute("university/departments", function(response) {
+           App.Data.departmens = response;
+        });
+
 
         // Listeners
         App.instance.vent.on("employment-created", function() {
