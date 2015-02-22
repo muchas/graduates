@@ -159,11 +159,11 @@ App.Form.University = App.Form.Base.extend({
         this.$el.fadeOut(300, function() {
             if(this.parent) {
                 this.parent.$el.html(form.render().$el);
-                form.initializeTypeahead();
             }
             if(this.region) {
                 this.region.show(form);
             }
+            form.initializeTypeahead();
             this.remove();
         }.bind(this));
     }
