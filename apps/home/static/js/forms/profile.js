@@ -39,11 +39,11 @@ App.Form.Employment = App.Form.Base.extend({
     template: Handlebars.templates.employment_form,
 
     schema: {
-        name: { type:'Text', editorClass: "form-control" },
-        'company.name': { type: 'Text', editorClass: "form-control" },
-        'city.name': { type: 'Text', editorClass: "form-control" },
-        'branch.name': { type: 'Text', editorClass: "form-control" },
-        start: { type: App.Form.Editor.Month },
+        name: { type:'Text', editorClass: "form-control", validators: ['required'] },
+        'company.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
+        'city.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
+        'branch.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
+        start: { type: App.Form.Editor.Month, validators: ['required'] },
         end: { type: App.Form.Editor.Month }
     },
 
