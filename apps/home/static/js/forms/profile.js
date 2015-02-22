@@ -6,9 +6,10 @@ App.Form.Base = Backbone.Form.extend({
 
     save: function() {
        var errors = this.commit();
-       if(errors === null) {
+       if(_.isUndefined(errors)) {
            this.onSave();
        } else {
+           console.log(errors);
            this.$el.find('.form-error').empty();
            _.each(errors, function(error, key) {
                key = key.replace(/\./g, '-');
@@ -53,6 +54,22 @@ App.Form.Employment = App.Form.Base.extend({
         } else {
             this.createEmployment();
         }
+    },
+
+    initializeTypeahead: function() {
+        this.$el.find('.city input').typeahead({
+            items: 4,
+            source: $.map(App.Data.cities, function(city) {
+               return city.name;
+            })
+        });
+
+        this.$el.find('.branch input').typeahead({
+           items:4,
+           source: $.map(App.Data.branches, function(branch) {
+               return branch.name;
+           })
+        });
     },
 
     updateEmployment: function() {

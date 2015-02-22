@@ -56,6 +56,9 @@ App.Controller.ProfileController = {
            App.Data.departmens = response;
         });
 
+        App.instance.execute("community/branches", function(response) {
+           App.Data.branches = response;
+        });
 
         // Listeners
         App.instance.vent.on("employment-created", function() {
