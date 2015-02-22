@@ -27,6 +27,7 @@ App.Layouts.EditProfile = Marionette.LayoutView.extend({
         if(!this.newEmployment.hasView()) {
             this.employmentForm = new App.Form.Employment({ model: new App.Model.Employment() });
             this.newEmployment.show(this.employmentForm);
+            this.employmentForm.initializeTypeahead();
         }
     },
 

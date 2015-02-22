@@ -45,6 +45,7 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
     new App.Command.Employment();
     new App.Command.University();
     new App.Command.City();
+    new App.Command.Community();
 
     Backbone.history.start();
 

@@ -4,11 +4,11 @@ from rest_framework import generics, views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University, \
-    UniversityDepartment
+    UniversityDepartment, Branch
 from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly
 from apps.community.serializers import TeacherSerializer, GroupSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
-    AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer
+    AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer
 
 
 class CityDetailView(views.APIView):
@@ -33,6 +33,12 @@ class CityDetailView(views.APIView):
 class CityListView(generics.ListAPIView):
     queryset = City.objects.filter(is_verified=True)
     serializer_class = CitySerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class BranchListView(generics.ListAPIView):
+    queryset = Branch.objects.all()
+    serializer_class = BranchSerializer
     permission_classes = (IsAuthenticated,)
 
 
