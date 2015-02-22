@@ -5,11 +5,15 @@ App.Form.Base = Backbone.Form.extend({
     },
 
     save: function() {
-       if(this.validate() === null) {
-           this.commit();
+       var errors = this.commit();
+       if(errors === null) {
            this.onSave();
        } else {
-
+           this.$el.find('.form-error').empty();
+           _.each(errors, function(error, key) {
+               key = key.replace(/\./g, '-');
+               this.$el.find('.'+ key + '-error').html(Handlebars.templates.form_error({ message: error.message }));
+           }.bind(this));
        }
     },
 
@@ -93,8 +97,8 @@ App.Form.University = App.Form.Base.extend({
             }
         },
         'department.name': { type: 'Text', editorClass: "form-control" },
-        start: { type: App.Form.Editor.Month },
-        end: { type: App.Form.Editor.Month }
+        start: { type: App.Form.Editor.Month, validators: ['required'] },
+        end: { type: App.Form.Editor.Month, validators: ['required'] }
     },
 
     events: {
@@ -106,7 +110,7 @@ App.Form.University = App.Form.Base.extend({
     onSave: function() {
         console.log(this.model.toJSON());
         // TODO Refactory this hacky part
-        // these fields are required in backed but doesn't matter if id exists
+        // these fields are required in backend but doesn't matter if id exists
         this.model.set('university.name', 'Fake');
         this.model.set('university.city.name', 'Fake');
         if(this.model.id) {
@@ -155,7 +159,7 @@ App.Form.UniversityExtended = App.Form.Base.extend({
         'university.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'university.city.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'department.name': { type: 'Text', editorClass: "form-control" },
-        start: { type: App.Form.Editor.Month },
+        start: { type: App.Form.Editor.Month, validators: ['required'] },
         end: { type: App.Form.Editor.Month, validators: ['required'] }
     },
 
