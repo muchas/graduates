@@ -44,7 +44,17 @@ App.Command.University = App.Command.Base.extend({
     commands: {
         "university/create": "postStudent",
         "university/update": "putStudent",
-        "university/remove": "deleteStudent"
+        "university/remove": "deleteStudent",
+        "university/buildings": "getBuildings",
+        "university/departments": "getAllDepartments"
+    },
+
+    getBuildings: function(callback) {
+        this.jsonRequest("GET", "university-list", {}, {}, callback);
+    },
+
+    getAllDepartments: function(callback) {
+       this.jsonRequest("GET", "department-list", {}, {}, callback);
     },
 
     postStudent: function(data, callback) {

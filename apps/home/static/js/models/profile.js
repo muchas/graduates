@@ -1,7 +1,11 @@
 App.Model.Profile = Backbone.Model.extend({});
 App.Model.PersonalData = Backbone.Model.extend({});
 App.Model.Employment = Backbone.DeepModel.extend({});
-App.Model.University = Backbone.Model.extend({});
+App.Model.University = Backbone.DeepModel.extend({
+    toString: function() {
+        return this.get('name');
+    }
+});
 App.Model.Description = Backbone.Model.extend({});
 
 

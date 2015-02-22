@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from apps.community.views import TeacherListView, PersonGroupView, CityListView, CityDetailView, GroupDetailView, \
     StudentListView, EmploymentListView, StudentView, EmploymentView, GroupListView, PersonDescriptionView, \
-    PersonProfileView, PersonalDataUpdateView, AttributeListView
+    PersonProfileView, PersonalDataUpdateView, AttributeListView, UniversityListView, DepartmentListView
 
 urlpatterns = patterns('',
                        url(r'teachers/', TeacherListView.as_view(), name='teacher-list'),
@@ -17,5 +17,7 @@ urlpatterns = patterns('',
                        url(r'description/', PersonDescriptionView.as_view(), name='person-description'),
                        url(r'person/(?P<pk>\d+)/', PersonProfileView.as_view(), name='person-card'),
                        url(r'attributes/', AttributeListView.as_view(), name='personal-data-list'),
-                       url(r'attribute/(?P<pk>\d+)/', PersonalDataUpdateView.as_view(), name='personal-data')
+                       url(r'attribute/(?P<pk>\d+)/', PersonalDataUpdateView.as_view(), name='personal-data'),
+                       url(r'universities/', UniversityListView.as_view(), name='university-list'),
+                       url(r'departments/', DepartmentListView.as_view(), name='department-list')
 )

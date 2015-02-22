@@ -1,6 +1,7 @@
 var App = {
     Controller: {},
     Command: {},
+    Data: {},
     Model: {},
     Form: {
         Editor: {}
@@ -32,6 +33,14 @@ Marionette.Region.prototype.attachHtml = function(view){
  *  Handlebars templates settings
  */
 Handlebars.registerPartial('student', Handlebars.templates.university);
+
+
+/**
+ * Form validation messages setup
+ */
+Backbone.Form.validators.errMessages.required = 'To pole jest wymagane.';
+//Backbone.Form.validators.errMessages.match = 'This value must match the value of {{field}}';
+//Backbone.Form.validators.errMessages.email = '{{value}} is an invalid email address.';
 
 
 /**

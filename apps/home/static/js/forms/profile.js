@@ -5,10 +5,16 @@ App.Form.Base = Backbone.Form.extend({
     },
 
     save: function() {
-       if(this.validate() === null) {
-           this.commit();
+       var errors = this.commit();
+       if(errors === null) {
+           this.onSave();
+       } else {
+           this.$el.find('.form-error').empty();
+           _.each(errors, function(error, key) {
+               key = key.replace(/\./g, '-');
+               this.$el.find('.'+ key + '-error').html(Handlebars.templates.form_error({ message: error.message }));
+           }.bind(this));
        }
-       this.onSave();
     },
 
     hide: function() {
@@ -82,33 +88,138 @@ App.Form.Description = App.Form.Base.extend({
 App.Form.University = App.Form.Base.extend({
     template: Handlebars.templates.university_form,
     schema: {
-        school: { type: 'Text', editorClass: "form-control" },
-        'university.id': { type: 'Select', editorClass: "form-control", options: { 1: 'AGH',  2: 'UW', 3 :'UJ'} },
+        school: { type: 'Text', editorClass: "form-control", validators: ['required'] },
+        'university.id': {
+            type: 'Select',
+            editorClass: "form-control",
+            options: function(callback, editor) {
+                callback(new App.Collection.Universities(App.Data.universities));
+            }
+        },
         'department.name': { type: 'Text', editorClass: "form-control" },
-        start: { type: App.Form.Editor.Month },
-        end: { type: App.Form.Editor.Month }
+        start: { type: App.Form.Editor.Month, validators: ['required'] },
+        end: { type: App.Form.Editor.Month, validators: ['required'] }
+    },
+
+    events: {
+        'click .save': 'save',
+        'click .cancel': 'hide',
+        'click .unverified': 'shiftForm'
     },
 
     onSave: function() {
-        console.log('Save university');
         console.log(this.model.toJSON());
+        // TODO Refactory this hacky part
+        // these fields are required in backend but doesn't matter if id exists
+        this.model.set('university.name', 'Fake');
+        this.model.set('university.city.name', 'Fake');
+        if(this.model.id) {
+            this.updateUniversity();
+        } else {
+            this.createUniversity();
+        }
+    },
+
+    createUniversity: function() {
+        App.instance.execute('university/create', this.model.toJSON(), function(response) {
+            App.instance.vent.trigger('student-created');
+            this.model.set(response);
+            this.hide();
+        }.bind(this));
+    },
+
+    updateUniversity: function() {
+        App.instance.execute('university/update', this.model.id, this.model.toJSON(), function(response) {
+            this.model.set(response);
+            this.hide();
+        }.bind(this));
+    },
+
+    shiftForm: function() {
+        var form = new App.Form.UniversityExtended({ model: this.model });
+        form.parent = this.parent;
+        form.region = this.region;
+        this.$el.fadeOut(300, function() {
+            if(this.parent) {
+                this.parent.$el.html(form.render().$el);
+                form.initializeTypeahead();
+            }
+            if(this.region) {
+                this.region.show(form);
+            }
+            this.remove();
+        }.bind(this));
     }
 });
 
-App.Form.UniversityExtended = Backbone.Form.extend({
+App.Form.UniversityExtended = App.Form.Base.extend({
     template: Handlebars.templates.university_extended_form,
     schema: {
-        school: { type: 'Text', editorClass: "form-control" },
-        'university.name': { type: 'Text', editorClass: "form-control" },
-        'university.city.name': { type: 'Text', editorClass: "form-control" },
+        school: { type: 'Text', editorClass: "form-control", validators: ['required'] },
+        'university.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
+        'university.city.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'department.name': { type: 'Text', editorClass: "form-control" },
-        start: { type: App.Form.Editor.Month },
-        end: { type: App.Form.Editor.Month }
+        start: { type: App.Form.Editor.Month, validators: ['required'] },
+        end: { type: App.Form.Editor.Month, validators: ['required'] }
+    },
+
+    events: {
+        'click .save': 'save',
+        'click .cancel': 'hide',
+        'click .back': 'shiftForm'
+    },
+
+    initializeTypeahead: function(options) {
+        this.$el.find('.city input').typeahead({
+            items: 4,
+            source: $.map(App.Data.cities, function(city) {
+               return city.name
+            })
+        })
     },
 
     onSave: function() {
+        this.model.set('university.id', null);
+        if(this.model.id) {
+            this.updateUniversity();
+        } else {
+            this.createUniversity();
+        }
+
         console.log('Save university - extended form');
         console.log(this.model.toJSON());
+//        this.previousForm.remove();
+//        this.hide();
+    },
+
+    createUniversity: function() {
+        App.instance.execute('university/create', this.model.toJSON(), function(response) {
+            this.model.set(response);
+            App.instance.vent.trigger('student-created');
+            this.hide();
+        }.bind(this));
+    },
+
+    updateUniversity: function() {
+        App.instance.execute('university/update', this.model.id, this.model.toJSON(), function(response) {
+            this.model.set(response);
+            this.hide();
+        }.bind(this));
+    },
+
+    shiftForm: function() {
+        var form = new App.Form.University({ model: this.model });
+        form.parent = this.parent;
+        form.region = this.region;
+        this.$el.fadeOut(300, function() {
+            if(this.parent) {
+                this.parent.$el.html(form.render().$el);
+            }
+            if(this.region) {
+                this.region.show(form);
+            }
+            this.remove();
+        }.bind(this));
     }
 });
 
