@@ -139,3 +139,18 @@ App.Command.Attribute = App.Command.Base.extend({
         this.jsonRequest("PUT", "personal-data", { pk: id }, data, callback);
     }
 });
+
+App.Command.MarriedName = App.Command.Base.extend({
+   commands: {
+       "married-name/edit": "putMarriedName",
+       "married-name/get": "getMarriedName"
+   },
+
+    putMarriedName: function(data, callback) {
+        this.jsonRequest("PUT", 'profile-married-name', {}, data, callback);
+    },
+
+    getMarriedName: function(callback) {
+        this.jsonRequest("GET", 'profile-married-name', {}, {}, callback);
+    }
+});

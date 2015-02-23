@@ -24,6 +24,12 @@ class PersonPhotoSerializer(serializers.ModelSerializer):
         fields = ('id', 'picture')
 
 
+class PersonMarriedNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ('id', 'married_name')
+
+
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City

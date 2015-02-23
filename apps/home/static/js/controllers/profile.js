@@ -85,7 +85,6 @@ App.Controller.ProfileController = {
     showProfileHeader: function(layout) {
         App.instance.execute("profile/my", function(response) {
            var person = new App.Model.Profile(response);
-            console.log(response);
             layout.header.show(new App.ItemView.ProfileEditHeader({ model: person }));
         });
     },
