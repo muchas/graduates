@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-3">
+         <div class="profile-avatar">
+            {{#if picture }}
+            <img src="{{ picture }}" class="profile-avatar-img thumbnail" alt="Profile Image">
+            {{else}}
+            <img src="noname" class="profile-avatar-img thumbnail" alt="Profile Image">
+            {{/if}}
+        </div> <!-- /.profile-avatar -->
+    </div>
+    <div class="col-md-3">
+          <h3>{{ first_name }} {{ last_name }}</h3>
+    </div>
+</div>

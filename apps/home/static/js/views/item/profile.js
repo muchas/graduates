@@ -96,3 +96,8 @@ App.ItemView.EditableAttribute = Marionette.ItemView.extend({
         this.$el.fadeIn(400);
     }
 });
+
+
+App.ItemView.ProfileEditHeader = Marionette.ItemView.extend({
+   template: Handlebars.templates.edit_profile_header
+});

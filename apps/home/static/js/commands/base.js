@@ -10,17 +10,7 @@ App.Command.Base = Backbone.View.extend({
             method: method,
             data: JSON.stringify(data),
             success: successCallback,
-            error: function (response) {
-                if (response.status === 404) {
-                    this.show404();
-                }
-                else if (response.status === 403) {
-                    this.show403();
-                }
-                else {
-                    this.show500();
-                }
-            }.bind(this),
+            error: this.handleErrors.bind(this),
             dataType: "json"
         });
     },
@@ -29,6 +19,18 @@ App.Command.Base = Backbone.View.extend({
         _.each(this.commands, function (callback, commandName) {
             App.instance.commands.setHandler(commandName, this[callback].bind(this));
         }.bind(this));
+    },
+
+    handleErrors: function(response) {
+        if (response.status === 404) {
+            this.show404();
+        }
+        else if (response.status === 403) {
+            this.show403();
+        }
+        else {
+            this.show500();
+        }
     },
 
     show404: function() {

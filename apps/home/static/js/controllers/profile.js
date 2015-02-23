@@ -29,6 +29,13 @@ App.Controller.ProfileController = {
         var layout = new App.Layouts.EditProfile();
         App.layout.content.show(layout);
 
+        this.showProfileHeader(layout);
+
+        App.instance.execute("profile/photo", function(response) {
+            var photo = new App.Model.Photo(response);
+            layout.photo.show(new App.Form.Photo({ model: photo }));
+        });
+
         App.instance.execute("profile/personal_data", function(response) {
            var personal_data = new App.Collection.PersonalData(response);
             layout.personal_data.show(new App.CollectionView.EditableAttributes({ collection: personal_data }))
@@ -69,6 +76,18 @@ App.Controller.ProfileController = {
             this.showUniversities(layout);
         }.bind(this));
 
+        App.instance.vent.on("profile-photo-uploaded", function() {
+            this.showProfileHeader(layout);
+        }.bind(this));
+
+    },
+
+    showProfileHeader: function(layout) {
+        App.instance.execute("profile/my", function(response) {
+           var person = new App.Model.Profile(response);
+            console.log(response);
+            layout.header.show(new App.ItemView.ProfileEditHeader({ model: person }));
+        });
     },
 
     showUniversities: function(layout) {

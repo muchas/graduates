@@ -1,4 +1,5 @@
 App.Model.Profile = Backbone.Model.extend({});
+App.Model.Photo = Backbone.Model.extend({});
 App.Model.PersonalData = Backbone.Model.extend({});
 App.Model.Employment = Backbone.DeepModel.extend({});
 App.Model.University = Backbone.DeepModel.extend({

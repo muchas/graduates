@@ -12,6 +12,7 @@ App.Form.Base = Backbone.Form.extend({
            console.log(errors);
            this.$el.find('.form-error').empty();
            _.each(errors, function(error, key) {
+               // '.' char has special meaning in CSS, so we replace it with '-'
                key = key.replace(/\./g, '-');
                this.$el.find('.'+ key + '-error').html(Handlebars.templates.form_error({ message: error.message }));
            }.bind(this));
@@ -256,6 +257,52 @@ App.Form.Attribute = App.Form.Base.extend({
             // which is always boolean true for select - we fix this by setting boolean value from response
             this.model.set('is_public', response.is_public);
             this.hide();
+        }.bind(this));
+    }
+});
+
+
+App.Form.Photo = Marionette.ItemView.extend({
+    template: Handlebars.templates.photo_form,
+
+    events: {
+        'click .upload': 'uploadImage',
+        'click .remove': 'removeImage'
+    },
+
+    onRender: function() {
+        this.$el.find('input[type=file]').on('change', this.onChangeFileInput.bind(this));
+    },
+
+    onChangeFileInput: function(event) {
+        var files = event.target.files;
+        console.log(event);
+        if(files && files[0]) {
+          this.file = files[0];
+        }
+    },
+
+    uploadImage: function() {
+        if(!this.file) {
+            return null;
+        }
+
+        var data = new FormData();
+        data.append('picture', this.file);
+
+        App.instance.execute("profile/uploadPhoto", data, function(response) {
+            this.model.set(response);
+            App.instance.vent.trigger('profile-photo-uploaded');
+            this.render();
+        }.bind(this));
+    },
+
+    removeImage: function() {
+        App.instance.execute("profile/removePhoto", function(response) {
+            console.log(response);
+            this.model.set(response);
+            App.instance.vent.trigger('profile-photo-uploaded');
+            this.render();
         }.bind(this));
     }
 });

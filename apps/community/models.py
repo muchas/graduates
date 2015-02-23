@@ -80,7 +80,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=255, blank=False)
     last_name = models.CharField(max_length=255, blank=False)
     married_name = models.CharField(max_length=255, blank=True, null=True)
-    picture = models.ImageField(upload_to='media/pictures/', blank=True, null=True)
+    picture = models.ImageField(upload_to='pictures/', blank=True, null=True)
     sex = models.SmallIntegerField(choices=SEX_CHOICES, default=NOT_KNOWN)
     description = models.TextField(null=True, blank=True)
 

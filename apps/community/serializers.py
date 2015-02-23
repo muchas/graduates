@@ -17,6 +17,12 @@ class PersonDescriptionSerializer(serializers.ModelSerializer):
         fields = ('id', 'description')
 
 
+class PersonPhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ('id', 'picture')
+
+
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City

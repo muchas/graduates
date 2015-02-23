@@ -8,7 +8,8 @@ from apps.community.models import Person, City, Group, Student, Employment, Pers
 from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly
 from apps.community.serializers import TeacherSerializer, GroupSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
-    AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer
+    AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
+    PersonSerializer
 
 
 class CityDetailView(views.APIView):
@@ -112,8 +113,24 @@ class EmploymentView(generics.RetrieveUpdateDestroyAPIView):
         return Employment.objects.filter(person=self.request.user.person)
 
 
+class AuthenticatedPersonView(generics.RetrieveAPIView):
+    serializer_class = PersonSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        return self.request.user.person
+
+
 class PersonDescriptionView(generics.RetrieveUpdateAPIView):
     serializer_class = PersonDescriptionSerializer
+    permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+    def get_object(self):
+        return self.request.user.person
+
+
+class PersonPhotoView(generics.RetrieveUpdateAPIView):
+    serializer_class = PersonPhotoSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
 
     def get_object(self):
