@@ -21,4 +21,4 @@ urlpatterns = patterns('',
     url(r'^claim/$', ClaimView.as_view(), name='claim'),
     url(r'^community/', include('apps.community.urls')),
     url(r'', include('django.contrib.auth.urls')),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

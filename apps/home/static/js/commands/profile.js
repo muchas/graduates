@@ -7,15 +7,22 @@ App.Command.Profile = App.Command.Base.extend({
         "profile/employments": "getEmployments",
         "profile/universities": "getUniversities",
         "profile/description": "getDescription",
-        "profile/personal_data": "getPersonalData"
+        "profile/personal_data": "getPersonalData",
+        "profile/photo": "getPhoto",
+        "profile/uploadPhoto": "uploadPhoto",
+        "profile/removePhoto": "removePhoto",
     },
 
     getPersonInformation: function(id, callback) {
         this.jsonRequest("GET", "person-card", { pk: id }, {}, callback);
     },
 
+    getPhoto: function(callback) {
+        this.jsonRequest("GET", "person-photo", {}, {}, callback);
+    },
+
     getAuthenticatedPersonInformation: function(callback) {
-        this.jsonRequest("GET", "my-profile", {}, callback);
+        this.jsonRequest("GET", "profile-header", {}, {}, callback);
     },
 
     getPersonSimilarity: function(id, callback) {
@@ -36,6 +43,24 @@ App.Command.Profile = App.Command.Base.extend({
 
     getPersonalData: function(callback) {
         this.jsonRequest("GET", "personal-data-list", {}, {}, callback);
+    },
+
+    uploadPhoto: function(data, callback) {
+        $.ajax({
+            url: Routing.generate('person-photo', {}),
+            method: "PUT",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: callback,
+            error: this.handleErrors.bind(this),
+            dataType: "json"
+        });
+    },
+
+    removePhoto: function(callback) {
+        this.jsonRequest("PUT", "person-photo", {}, { picture: null }, callback);
     }
 });
 

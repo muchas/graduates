@@ -128,6 +128,10 @@ class Development(Default):
     RECAPTCHA_PUBLIC_KEY = '6Leypf8SAAAAAP8M7JlGB9xDw3Ohw9w7n6LY4Rn9'
     RECAPTCHA_PRIVATE_KEY= '6Leypf8SAAAAAC1h9vEWSwvOzyTr-vpRmYOsGz3a'
 
+    MEDIA_ROOT = '/Users/smucha/Workspace/graduates/media'
+
+    MEDIA_URL = '/media/'
+
 
 class Staging(Default):
     pass
