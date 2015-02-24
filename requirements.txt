@@ -9,8 +9,10 @@ djangorestframework==3.0.2
 easy-thumbnails==2.2
 mock==1.0.1
 model-mommy==1.2.2
+ply==3.4
 pyelasticsearch==0.7.1
 requests==2.5.1
 simplejson==3.6.5
 six==1.7.3
+slimit==0.8.1
 wsgiref==0.1.2

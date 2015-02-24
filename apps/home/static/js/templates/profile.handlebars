@@ -1,7 +1,11 @@
 <div class="row">
     <div class="col-md-3 col-sm-5">
       <div class="profile-avatar">
-        <img src="https://scontent-ams.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/1502480_571617809599850_387561572_n.jpg?oh=42d2e1a8b1bdbcd4e7163bd299c6eae7&oe=555D4B50" class="profile-avatar-img thumbnail" alt="Profile Image">
+        {{#if thumbnail }}
+        <img src="{{ thumbnail }}" class="profile-avatar-img thumbnail" alt="Profile Image">
+        {{else}}
+        <img src="media/unknown.png" class="profile-avatar-img thumbnail" alt="Profile Image">
+        {{/if}}
       </div> <!-- /.profile-avatar -->
 
       <div class="list-group">

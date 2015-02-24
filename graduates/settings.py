@@ -61,6 +61,7 @@ class Default(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
         'rest_framework',
+        'easy_thumbnails',
         'captcha',
         'apps.home',
         'apps.community',
@@ -118,6 +119,15 @@ class Default(Configuration):
     }
 
     URLS_JS_GENERATED_FILE='static/js/routes.js'
+
+    THUMBNAIL_ALIASES = {
+        '': {
+            'photo': {
+                'size': (263, 263),
+                'quality': 100
+            },
+        },
+    }
 
 
 class Development(Default):

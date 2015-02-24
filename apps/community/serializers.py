@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
+from easy_thumbnails.files import get_thumbnailer
 from apps.community.models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
     UniversityDepartment, PersonalData, Attribute
 from apps.community.validators import EmailValidator, IntegerValidator
@@ -202,12 +203,17 @@ class PersonProfileSerializer(serializers.ModelSerializer):
     teacher_learn_years = serializers.StringRelatedField(many=True)
     subjects = SubjectSerializer(many=True)
     personal_data = PersonalDataSerializer(source='public_personal_data', many=True)
+    thumbnail = serializers.SerializerMethodField('get_photo_thumbnail')
     is_owner = serializers.SerializerMethodField('check_ownership')
     is_male = serializers.SerializerMethodField('is_person_male')
     show_now_section = serializers.SerializerMethodField('is_section_now_not_empty')
 
     class Meta:
         model = Person
+
+    def get_photo_thumbnail(self, person):
+        if person.picture:
+            return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
 
     def is_person_male(self, person):
         return person.sex == Person.MALE

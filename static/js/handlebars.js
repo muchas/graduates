@@ -104,7 +104,7 @@ this["Handlebars"]["templates"]["edit_profile_header"] = Handlebars.template({"1
     + escapeExpression(((helper = (helper = helpers.picture || (depth0 != null ? depth0.picture : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"picture","hash":{},"data":data}) : helper)))
     + "\" class=\"profile-avatar-img thumbnail\" alt=\"Profile Image\">\n";
 },"3":function(depth0,helpers,partials,data) {
-  return "            <img src=\"noname\" class=\"profile-avatar-img thumbnail\" alt=\"Profile Image\">\n";
+  return "            <img src=\"media/unknown.png\" class=\"profile-avatar-img thumbnail\" alt=\"Profile Image\">\n";
   },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"row\">\n    <div class=\"col-md-3\">\n         <div class=\"profile-avatar\">\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.picture : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.program(3, data),"data":data});
@@ -196,37 +196,44 @@ this["Handlebars"]["templates"]["photo_form"] = Handlebars.template({"1":functio
 },"useData":true});
 
 this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-  return "            <a href=\"#/profile/edit\" class=\"list-group-item\">\n                  <i class=\"fa fa-edit text-primary\"></i> &nbsp;&nbsp; Edytuj profil\n                  <i class=\"fa fa-chevron-right list-group-chevron\"></i>\n            </a>\n";
-  },"3":function(depth0,helpers,partials,data) {
-  return "          <a href=\"javascript:;\" class=\"list-group-item\">\n              <i class=\"fa fa-envelope text-primary\"></i> &nbsp;&nbsp; Wyślij wiadomość\n              <i class=\"fa fa-chevron-right list-group-chevron\"></i>\n            </a>\n";
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "        <img src=\""
+    + escapeExpression(((helper = (helper = helpers.thumbnail || (depth0 != null ? depth0.thumbnail : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"thumbnail","hash":{},"data":data}) : helper)))
+    + "\" class=\"profile-avatar-img thumbnail\" alt=\"Profile Image\">\n";
+},"3":function(depth0,helpers,partials,data) {
+  return "        <img src=\"media/unknown.png\" class=\"profile-avatar-img thumbnail\" alt=\"Profile Image\">\n";
   },"5":function(depth0,helpers,partials,data) {
+  return "            <a href=\"#/profile/edit\" class=\"list-group-item\">\n                  <i class=\"fa fa-edit text-primary\"></i> &nbsp;&nbsp; Edytuj profil\n                  <i class=\"fa fa-chevron-right list-group-chevron\"></i>\n            </a>\n";
+  },"7":function(depth0,helpers,partials,data) {
+  return "          <a href=\"javascript:;\" class=\"list-group-item\">\n              <i class=\"fa fa-envelope text-primary\"></i> &nbsp;&nbsp; Wyślij wiadomość\n              <i class=\"fa fa-chevron-right list-group-chevron\"></i>\n            </a>\n";
+  },"9":function(depth0,helpers,partials,data) {
   var stack1, buffer = "          ";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_male : depth0), {"name":"if","hash":{},"fn":this.program(6, data),"inverse":this.program(8, data),"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_male : depth0), {"name":"if","hash":{},"fn":this.program(10, data),"inverse":this.program(12, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n";
-  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.subjects : depth0), {"name":"each","hash":{},"fn":this.program(10, data),"inverse":this.noop,"data":data});
+  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.subjects : depth0), {"name":"each","hash":{},"fn":this.program(14, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "          z lat\n";
-  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.teacher_learn_years : depth0), {"name":"each","hash":{},"fn":this.program(12, data),"inverse":this.noop,"data":data});
+  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.teacher_learn_years : depth0), {"name":"each","hash":{},"fn":this.program(16, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer;
-},"6":function(depth0,helpers,partials,data) {
+},"10":function(depth0,helpers,partials,data) {
   return "Nauczyciel";
-  },"8":function(depth0,helpers,partials,data) {
+  },"12":function(depth0,helpers,partials,data) {
   return "Nauczycielka";
-  },"10":function(depth0,helpers,partials,data) {
+  },"14":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "              "
     + escapeExpression(((helper = (helper = helpers.name_brand || (depth0 != null ? depth0.name_brand : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"name_brand","hash":{},"data":data}) : helper)))
     + "\n";
-},"12":function(depth0,helpers,partials,data) {
+},"16":function(depth0,helpers,partials,data) {
   var lambda=this.lambda, escapeExpression=this.escapeExpression;
   return "                "
     + escapeExpression(lambda(depth0, depth0))
     + "\n";
-},"14":function(depth0,helpers,partials,data) {
+},"18":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression, buffer = "          ";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_male : depth0), {"name":"if","hash":{},"fn":this.program(15, data),"inverse":this.program(17, data),"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_male : depth0), {"name":"if","hash":{},"fn":this.program(19, data),"inverse":this.program(21, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n          <a href=\"\">klasy "
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.symbol : stack1), depth0))
@@ -235,31 +242,31 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
     + "-"
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.last_year : stack1), depth0))
     + "\n";
-},"15":function(depth0,helpers,partials,data) {
+},"19":function(depth0,helpers,partials,data) {
   return "Uczeń";
-  },"17":function(depth0,helpers,partials,data) {
+  },"21":function(depth0,helpers,partials,data) {
   return "Uczennica";
-  },"19":function(depth0,helpers,partials,data) {
+  },"23":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
   return "          <h5 class=\"text-muted\">"
     + escapeExpression(lambda(((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.universities : depth0)) != null ? stack1['0'] : stack1)) != null ? stack1.university : stack1)) != null ? stack1.name : stack1), depth0))
     + " - "
     + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.universities : depth0)) != null ? stack1['0'] : stack1)) != null ? stack1.school : stack1), depth0))
     + "</h5>\n";
-},"21":function(depth0,helpers,partials,data) {
+},"25":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
   return "          <h5 class=\"text-muted\">"
     + escapeExpression(lambda(((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.employments : depth0)) != null ? stack1['0'] : stack1)) != null ? stack1.company : stack1)) != null ? stack1.name : stack1), depth0))
     + " - "
     + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.employments : depth0)) != null ? stack1['0'] : stack1)) != null ? stack1.name : stack1), depth0))
     + "</h5>\n";
-},"23":function(depth0,helpers,partials,data) {
+},"27":function(depth0,helpers,partials,data) {
   return "      <h4 class=\"content-title\"><u>Kontakt</u></h4>\n";
-  },"25":function(depth0,helpers,partials,data) {
+  },"29":function(depth0,helpers,partials,data) {
   return "<br>";
-  },"27":function(depth0,helpers,partials,data) {
+  },"31":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression, buffer = "      <h4 class=\"content-title\"><u>Edukacja</u></h4>\n        <h5>Liceum</h5>\n           <p>W V LO ";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_male : depth0), {"name":"if","hash":{},"fn":this.program(28, data),"inverse":this.program(30, data),"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_male : depth0), {"name":"if","hash":{},"fn":this.program(32, data),"inverse":this.program(34, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += " do <a href=\"\">klasy "
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.symbol : stack1), depth0))
@@ -268,7 +275,7 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
     + "-"
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.last_year : stack1), depth0))
     + ", której wychowawcą ";
-  stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.tutor : stack1)) != null ? stack1.is_male : stack1), {"name":"if","hash":{},"fn":this.program(32, data),"inverse":this.program(34, data),"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.tutor : stack1)) != null ? stack1.is_male : stack1), {"name":"if","hash":{},"fn":this.program(36, data),"inverse":this.program(38, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + " <a href=\"#/person/"
     + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.tutor : stack1)) != null ? stack1.id : stack1), depth0))
@@ -277,30 +284,30 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
     + " "
     + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.tutor : stack1)) != null ? stack1.last_name : stack1), depth0))
     + "</a>.</p>\n\n        <br>\n\n";
-},"28":function(depth0,helpers,partials,data) {
+},"32":function(depth0,helpers,partials,data) {
   return "uczęszczał";
-  },"30":function(depth0,helpers,partials,data) {
-  return "uczęszczała";
-  },"32":function(depth0,helpers,partials,data) {
-  return "był";
   },"34":function(depth0,helpers,partials,data) {
-  return "była";
+  return "uczęszczała";
   },"36":function(depth0,helpers,partials,data) {
+  return "był";
+  },"38":function(depth0,helpers,partials,data) {
+  return "była";
+  },"40":function(depth0,helpers,partials,data) {
   var stack1, buffer = "      <h4 class=\"content-title\"><u>Obecnie</u></h4>\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.description : depth0), {"name":"if","hash":{},"fn":this.program(37, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.description : depth0), {"name":"if","hash":{},"fn":this.program(41, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.employments : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(39, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.employments : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(43, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n";
-},"37":function(depth0,helpers,partials,data) {
+},"41":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "        <h5>Krótki opis</h5>\n         <p>"
     + escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper)))
     + "</p>\n        <br>\n";
-},"39":function(depth0,helpers,partials,data) {
+},"43":function(depth0,helpers,partials,data) {
   return "        <h4>Doświadczenie</h4>\n        <br>\n";
-  },"41":function(depth0,helpers,partials,data) {
+  },"45":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "        <h5 class=\"content-title\"><u>Wspólne z "
     + escapeExpression(((helper = (helper = helpers.first_name || (depth0 != null ? depth0.first_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"first_name","hash":{},"data":data}) : helper)))
@@ -308,35 +315,38 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
     + escapeExpression(((helper = (helper = helpers.last_name || (depth0 != null ? depth0.last_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"last_name","hash":{},"data":data}) : helper)))
     + "</u></h5>\n\n        <div class=\"well\">\n\n\n          <ul class=\"icons-list text-md\">\n\n            <li>\n              <i class=\"icon-li fa fa-university\"></i>\n\n              <strong>1</strong> uczelnia wyższa\n              <br>\n            </li>\n\n            <li>\n              <i class=\"icon-li fa fa-home\"></i>\n\n              <strong>3</strong> miasta, z którymi jesteście powiązani\n              <br>\n            </li>\n\n            <li>\n              <i class=\"icon-li fa fa-suitcase\"></i>\n\n              branża IT\n              <br>\n            </li>\n            <li>\n              <i class=\"icon-li fa fa-user\"></i>\n\n               wychowawca klasy w liceum\n              <br>\n            </li>\n          </ul>\n\n        </div> <!-- /.well -->\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"row\">\n    <div class=\"col-md-3 col-sm-5\">\n      <div class=\"profile-avatar\">\n        <img src=\"https://scontent-ams.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/1502480_571617809599850_387561572_n.jpg?oh=42d2e1a8b1bdbcd4e7163bd299c6eae7&oe=555D4B50\" class=\"profile-avatar-img thumbnail\" alt=\"Profile Image\">\n      </div> <!-- /.profile-avatar -->\n\n      <div class=\"list-group\">\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_owner : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.program(3, data),"data":data});
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"row\">\n    <div class=\"col-md-3 col-sm-5\">\n      <div class=\"profile-avatar\">\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.thumbnail : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.program(3, data),"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "      </div> <!-- /.profile-avatar -->\n\n      <div class=\"list-group\">\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_owner : depth0), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.program(7, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "      </div> <!-- /.list-group -->\n    </div> <!-- /.col -->\n\n    <div class=\"col-md-6 col-sm-7\">\n      <h3>"
     + escapeExpression(((helper = (helper = helpers.first_name || (depth0 != null ? depth0.first_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"first_name","hash":{},"data":data}) : helper)))
     + " "
     + escapeExpression(((helper = (helper = helpers.last_name || (depth0 != null ? depth0.last_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"last_name","hash":{},"data":data}) : helper)))
     + "</h3>\n      <h5>\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.teacher_learn_years : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.program(14, data),"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.teacher_learn_years : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(9, data),"inverse":this.program(18, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "      </h5>\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.universities : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(19, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.universities : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(23, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.employments : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(21, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.employments : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(25, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n      <br>\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.personal_data : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(23, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.personal_data : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(27, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "      <div id=\"personal-data\"></div>\n      ";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.personal_data : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(25, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.personal_data : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(29, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.group : depth0), {"name":"if","hash":{},"fn":this.program(27, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.group : depth0), {"name":"if","hash":{},"fn":this.program(31, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "      <div id=\"universities\"></div>\n\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.show_now_section : depth0), {"name":"if","hash":{},"fn":this.program(36, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.show_now_section : depth0), {"name":"if","hash":{},"fn":this.program(40, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "        <div id=\"employments\"></div>\n\n        <br class=\"visible-xs\">\n        <br class=\"visible-xs\">\n\n      </div> <!-- /.col -->\n\n      <div class=\"col-md-3\">\n\n          <h5 class=\"content-title\"><u>Social Stats</u></h5>\n\n        <div class=\"list-group\">\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n              <h3 class=\"pull-right\"><i class=\"fa fa-eye text-primary\"></i></h3>\n              <h4 class=\"list-group-item-heading\">38,847</h4>\n              <p class=\"list-group-item-text\">Profile Views</p>\n            </a>\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n            <h3 class=\"pull-right\"><i class=\"fa fa-facebook-square  text-primary\"></i></h3>\n            <h4 class=\"list-group-item-heading\">3,482</h4>\n            <p class=\"list-group-item-text\">Facebook Likes</p>\n          </a>\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n            <h3 class=\"pull-right\"><i class=\"fa fa-twitter-square  text-primary\"></i></h3>\n            <h4 class=\"list-group-item-heading\">5,845</h4>\n            <p class=\"list-group-item-text\">Twitter Followers</p>\n          </a>\n        </div> <!-- /.list-group -->\n\n        <br>\n";
-  stack1 = helpers.unless.call(depth0, (depth0 != null ? depth0.is_owner : depth0), {"name":"unless","hash":{},"fn":this.program(41, data),"inverse":this.noop,"data":data});
+  stack1 = helpers.unless.call(depth0, (depth0 != null ? depth0.is_owner : depth0), {"name":"unless","hash":{},"fn":this.program(45, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "      </div> <!-- /.col -->\n\n</div> <!-- /.row -->\n";
 },"useData":true});
