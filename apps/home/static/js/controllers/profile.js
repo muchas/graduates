@@ -38,7 +38,7 @@ App.Controller.ProfileController = {
 
         App.instance.execute("profile/personal_data", function(response) {
            var personal_data = new App.Collection.PersonalData(response);
-            layout.personal_data.show(new App.CollectionView.EditableAttributes({ collection: personal_data }))
+            layout.personal_data.show(new App.CollectionView.EditableAttributes({ collection: personal_data }));
         });
 
         this.showUniversities(layout);
@@ -80,12 +80,20 @@ App.Controller.ProfileController = {
             this.showProfileHeader(layout);
         }.bind(this));
 
+        App.instance.vent.on("married-name-changed", function() {
+            this.showProfileHeader(layout);
+        }.bind(this));
+
     },
 
     showProfileHeader: function(layout) {
         App.instance.execute("profile/my", function(response) {
            var person = new App.Model.Profile(response);
             layout.header.show(new App.ItemView.ProfileEditHeader({ model: person }));
+
+            if(person.isFemale()) {
+                layout.marriedName.show(new App.ItemView.EditableMarriedName({ model: person }));
+            }
         });
     },
 

@@ -10,6 +10,7 @@ App.Layouts.ProfileLayout = Marionette.LayoutView.extend({
 App.Layouts.EditProfile = Marionette.LayoutView.extend({
     template: Handlebars.templates.edit_profile,
     regions: {
+        "marriedName": "#married-name",
         "header": "#edit-profile-header",
         "photo": "#photo",
         "universities": "#universities",

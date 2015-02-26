@@ -103,6 +103,24 @@ App.Form.Description = App.Form.Base.extend({
    }
 });
 
+
+App.Form.MarriedName = App.Form.Base.extend({
+   template: Handlebars.templates.married_name_form,
+
+   schema: {
+       married_name: { type: 'Text', editorClass: "form-control" }
+   },
+
+   onSave: function() {
+       // todo show loader on $el
+       App.instance.execute('married-name/edit', this.model.toJSON(), function(response) {
+            // todo hide loader
+           App.instance.vent.trigger('married-name-changed');
+           this.hide();
+       }.bind(this));
+   }
+});
+
 App.Form.University = App.Form.Base.extend({
     template: Handlebars.templates.university_form,
     schema: {

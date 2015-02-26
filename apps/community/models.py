@@ -94,6 +94,16 @@ class Person(models.Model):
         verbose_name_plural = 'people'
 
     def __unicode__(self):
+        return self.full_name
+
+    @property
+    def full_name(self):
+        if self.married_name:
+            return "%s %s (%s)" % (
+                self.first_name,
+                self.married_name,
+                self.last_name
+            )
         return "%s %s" % (
             self.first_name,
             self.last_name

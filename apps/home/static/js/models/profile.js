@@ -1,4 +1,8 @@
-App.Model.Profile = Backbone.Model.extend({});
+App.Model.Profile = Backbone.Model.extend({
+    isFemale: function() {
+        return (this.get('sex') == 2);
+    }
+});
 App.Model.Photo = Backbone.Model.extend({});
 App.Model.PersonalData = Backbone.Model.extend({});
 App.Model.Employment = Backbone.DeepModel.extend({});

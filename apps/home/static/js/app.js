@@ -58,3 +58,5 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
         Backbone.history.navigate("/introduction", true);
     }
 });
+
+App.instance.vent.trigger("sync/init");

@@ -9,7 +9,7 @@ from apps.community.validators import EmailValidator, IntegerValidator
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
-        fields = ('id', 'first_name', 'married_name', 'last_name', 'sex', 'picture')
+        fields = ('id', 'full_name', 'first_name', 'married_name', 'last_name', 'sex', 'picture')
 
 
 class PersonDescriptionSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class TeacherSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('id', 'first_name', 'last_name', 'sex', 'picture', 'teacher_learn_years', 'subjects', 'is_male')
+        fields = ('id', 'full_name', 'sex', 'picture', 'teacher_learn_years', 'subjects', 'is_male')
 
     def is_teacher_male(self, person):
         return person.sex == Person.MALE
@@ -203,6 +203,7 @@ class AttributeSerializer(serializers.ModelSerializer):
 
 
 class PersonProfileSerializer(serializers.ModelSerializer):
+    full_name = serializers.CharField()
     group = ProfileGroupSerializer()
     universities = StudentSerializer(source='student_set', many=True)
     employments = EmploymentSerializer(many=True)

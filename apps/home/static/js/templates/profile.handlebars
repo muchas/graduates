@@ -24,7 +24,7 @@
     </div> <!-- /.col -->
 
     <div class="col-md-6 col-sm-7">
-      <h3>{{ first_name }} {{ last_name }}</h3>
+      <h3>{{ full_name }}</h3>
       <h5>
       {{#if teacher_learn_years.length }}
           {{#if is_male }}Nauczyciel{{ else }}Nauczycielka{{/if}}
@@ -57,7 +57,7 @@
        {{#if group }}
       <h4 class="content-title"><u>Edukacja</u></h4>
         <h5>Liceum</h5>
-           <p>W V LO {{#if is_male }}uczęszczał{{else}}uczęszczała{{/if}} do <a href="">klasy {{ group.symbol }}</a> z lat {{ group.first_year }}-{{ group.last_year }}, której wychowawcą {{#if group.tutor.is_male }}był{{else}}była{{/if}} <a href="#/person/{{ group.tutor.id }}">{{ group.tutor.first_name }} {{ group.tutor.last_name }}</a>.</p>
+           <p>W V LO {{#if is_male }}uczęszczał{{else}}uczęszczała{{/if}} do <a href="">klasy {{ group.symbol }}</a> z lat {{ group.first_year }}-{{ group.last_year }}, której wychowawcą {{#if group.tutor.is_male }}był{{else}}była{{/if}} <a href="#/person/{{ group.tutor.id }}">{{ group.tutor.full_name }}</a>.</p>
 
         <br>
 
