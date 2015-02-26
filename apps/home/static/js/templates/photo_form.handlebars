@@ -1,9 +1,14 @@
 <div style="margin-bottom: 20px;">
     <form enctype="multipart/form-data">
-        <input type="file" style="display: inline-block; float:left" />
-        <a class="upload btn btn-primary">Ustaw</a>
+        <div class="help-block" style="margin-bottom: 15px;">
+            Zwróć uwagę, aby zdjęcie nie było dużo mniejsze niż 256 x 256 pikseli oraz zachowywało podobną proporcję.
+        </div>
+        <div>
+            <input type="file" style="display: inline-block; float:left" />
+            <a class="upload btn btn-primary">Ustaw</a>
         {{#if picture }}
             <a class="remove btn btn-default">Usuń aktualne</a>
         {{/if}}
+        </div>
     </form>
 </div>
