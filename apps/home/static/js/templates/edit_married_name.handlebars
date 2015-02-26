@@ -1,0 +1,18 @@
+<div style="min-height: 150px;">
+    <h4 class="content-title"><u>Zmiana nazwiska</u></h4>
+        <div class="help-block">
+            Jeżeli od czasu liceum zmieniłaś nazwisko i chcesz, aby uaktualnić je w naszej bazie, wyedytuj poniższe pole.
+        </div>
+    <div class="row">
+    <div class="col-md-10">
+        {{#if married_name }}
+        <strong>Aktualne nazwisko:</strong> {{ married_name }}
+        {{else}}
+            <strong>Nazwisko nie zostało zmienione.</strong>
+        {{/if}}
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-default edit"><i class="fa fa-edit"></i> Edytuj</a>
+    </div>
+    </div>
+</div>

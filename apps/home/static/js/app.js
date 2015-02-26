@@ -25,6 +25,9 @@ App.Application = Marionette.Application.extend({
 
 });
 
+App.user = {
+
+};
 App.layout = new App.Layouts.RootLayout();
 App.instance = new App.Application();
 App.instance.start();
@@ -34,6 +37,7 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
 //    $("#app").show();
 
 //    App.instance.topBar.show(new App.Layouts.TopBar());
+
 
     new App.Router.ProfileRouter();
     new App.Router.CommunityRouter();
@@ -46,6 +50,7 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
     new App.Command.University();
     new App.Command.City();
     new App.Command.Community();
+    new App.Command.MarriedName();
 
     Backbone.history.start();
 
@@ -54,4 +59,4 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
     }
 });
 
-App.instance.vent.trigger("sync/init", false);
+App.instance.vent.trigger("sync/init");

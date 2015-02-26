@@ -94,8 +94,22 @@ this["Handlebars"]["templates"]["edit_employment"] = Handlebars.template({"1":fu
   return buffer + "</h6>\n    </div>\n    <div class=\"col-md-3\">\n        <a class=\"edit btn btn-default\"><i class=\"fa fa-edit\"></i> Edytuj</a>\n        <a class=\"remove btn btn-default\"><i class=\"fa fa-times\"></i> Usuń</a>\n    </div>\n</div>\n<hr>\n";
 },"useData":true});
 
+this["Handlebars"]["templates"]["edit_married_name"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "        <strong>Aktualne nazwisko:</strong> "
+    + escapeExpression(((helper = (helper = helpers.married_name || (depth0 != null ? depth0.married_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"married_name","hash":{},"data":data}) : helper)))
+    + "\n";
+},"3":function(depth0,helpers,partials,data) {
+  return "            <strong>Nazwisko nie zostało zmienione.</strong>\n";
+  },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "<div style=\"min-height: 150px;\">\n    <h4 class=\"content-title\"><u>Zmiana nazwiska</u></h4>\n        <div class=\"help-block\">\n            Jeżeli od czasu liceum zmieniłaś nazwisko i chcesz, aby uaktualnić je w naszej bazie, wyedytuj poniższe pole.\n        </div>\n    <div class=\"row\">\n    <div class=\"col-md-10\">\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.married_name : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.program(3, data),"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "    </div>\n    <div class=\"col-md-2\">\n        <a class=\"btn btn-default edit\"><i class=\"fa fa-edit\"></i> Edytuj</a>\n    </div>\n    </div>\n</div>";
+},"useData":true});
+
 this["Handlebars"]["templates"]["edit_profile"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "  <div class=\"layout layout-main-right layout-stack-sm\">\n\n        <div class=\"col-md-3 col-sm-4 layout-sidebar\">\n\n          <div class=\"nav-layout-sidebar-skip\">\n            <strong>Tab Navigation</strong> / <a href=\"#settings-content\">Skip to Content</a>\n          </div>\n\n          <ul id=\"myTab\" class=\"nav nav-layout-sidebar nav-stacked\" style=\"min-height: 350px;\">\n              <li class=\"active\">\n              <a href=\"#profile-tab\" data-toggle=\"tab\">\n              <i class=\"fa fa-user\"></i>\n              &nbsp;&nbsp;Ustawienia profilu\n              </a>\n            </li>\n\n            <li>\n              <a href=\"#password-tab\" data-toggle=\"tab\">\n              <i class=\"fa fa-lock\"></i>\n              &nbsp;&nbsp;Zmiana hasła\n              </a>\n            </li>\n          </ul>\n        </div> <!-- /.col -->\n\n\n\n        <div class=\"col-md-9 col-sm-8 layout-main\">\n\n          <div id=\"settings-content\" class=\"tab-content stacked-content\">\n\n            <div class=\"tab-pane fade in active\" id=\"profile-tab\">\n\n              <h3 class=\"content-title\"><u>Edycja profilu</u></h3>\n                <div id=\"edit-profile-header\"></div>\n\n                <div class=\"row-fluid\">\n                    <h4 class=\"content-title\"><u>Zdjęcie</u></h4>\n                    <div id=\"photo\"></div>\n\n                    <h4 class=\"content-title\"><u>Dane kontaktowe</u></h4>\n                    <p>Pole ustawione jako <i>publiczne</i> widoczne jest dla wszystkich użytkowników portalu, zaś <i>prywatne</i> jedynie dla dyrekcji szkoły.</p>\n                    <hr />\n                    <div id=\"attributes\"></div>\n\n                    <h4 class=\"content-title\"><u>Edukacja</u></h4>\n                    <div id=\"universities\"></div>\n                    <div id=\"new-university\"></div>\n                    <a id=\"add-university\" class=\"btn btn-default\"><i class=\"fa fa-plus-circle\"></i> Dodaj uczelnię</a>\n\n\n                    <h4 style=\"margin-top: 30px;\" class=\"content-title\"><u>Krótki opis</u></h4>\n                    <div id=\"description\"></div>\n\n                    <h4 class=\"content-title\"><u>Doświadczenie</u></h4>\n                    <div id=\"employments\"></div>\n                    <div id=\"new-employment\"></div>\n                    <a id=\"add-employment\" class=\"btn btn-default\"><i class=\"fa fa-plus-circle\"></i> Dodaj stanowisko</a>\n\n                </div>\n            </div> <!-- /.tab-content -->\n          </div>\n        </div> <!-- /.col -->\n      </div> <!-- /.row -->\n";
+  return "  <div class=\"layout layout-main-right layout-stack-sm\">\n\n        <div class=\"col-md-3 col-sm-4 layout-sidebar\">\n\n          <div class=\"nav-layout-sidebar-skip\">\n            <strong>Tab Navigation</strong> / <a href=\"#settings-content\">Skip to Content</a>\n          </div>\n\n          <ul id=\"myTab\" class=\"nav nav-layout-sidebar nav-stacked\" style=\"min-height: 350px;\">\n              <li class=\"active\">\n              <a href=\"#profile-tab\" data-toggle=\"tab\">\n              <i class=\"fa fa-user\"></i>\n              &nbsp;&nbsp;Ustawienia profilu\n              </a>\n            </li>\n\n            <li>\n              <a href=\"#password-tab\" data-toggle=\"tab\">\n              <i class=\"fa fa-lock\"></i>\n              &nbsp;&nbsp;Zmiana hasła\n              </a>\n            </li>\n          </ul>\n        </div> <!-- /.col -->\n\n\n\n        <div class=\"col-md-9 col-sm-8 layout-main\">\n\n          <div id=\"settings-content\" class=\"tab-content stacked-content\">\n\n            <div class=\"tab-pane fade in active\" id=\"profile-tab\">\n\n              <h3 class=\"content-title\"><u>Edycja profilu</u></h3>\n                <div id=\"edit-profile-header\"></div>\n\n                <div class=\"row-fluid\">\n                    <h4 class=\"content-title\"><u>Zdjęcie</u></h4>\n                    <div id=\"photo\"></div>\n\n                    <div id=\"married-name\"></div>\n\n                    <h4 class=\"content-title\"><u>Dane kontaktowe</u></h4>\n                    <p>Pole ustawione jako <i>publiczne</i> widoczne jest dla wszystkich użytkowników portalu, zaś <i>prywatne</i> jedynie dla dyrekcji szkoły.</p>\n                    <hr />\n                    <div id=\"attributes\"></div>\n\n                    <h4 class=\"content-title\"><u>Edukacja</u></h4>\n                    <div id=\"universities\"></div>\n                    <div id=\"new-university\"></div>\n                    <a id=\"add-university\" class=\"btn btn-default\"><i class=\"fa fa-plus-circle\"></i> Dodaj uczelnię</a>\n\n\n                    <h4 style=\"margin-top: 30px;\" class=\"content-title\"><u>Krótki opis</u></h4>\n                    <div id=\"description\"></div>\n\n                    <h4 class=\"content-title\"><u>Doświadczenie</u></h4>\n                    <div id=\"employments\"></div>\n                    <div id=\"new-employment\"></div>\n                    <a id=\"add-employment\" class=\"btn btn-default\"><i class=\"fa fa-plus-circle\"></i> Dodaj stanowisko</a>\n\n                </div>\n            </div> <!-- /.tab-content -->\n          </div>\n        </div> <!-- /.col -->\n      </div> <!-- /.row -->\n";
   },"useData":true});
 
 this["Handlebars"]["templates"]["edit_profile_header"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
@@ -110,9 +124,7 @@ this["Handlebars"]["templates"]["edit_profile_header"] = Handlebars.template({"1
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.picture : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.program(3, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "        </div> <!-- /.profile-avatar -->\n    </div>\n    <div class=\"col-md-3\">\n          <h3>"
-    + escapeExpression(((helper = (helper = helpers.first_name || (depth0 != null ? depth0.first_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"first_name","hash":{},"data":data}) : helper)))
-    + " "
-    + escapeExpression(((helper = (helper = helpers.last_name || (depth0 != null ? depth0.last_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"last_name","hash":{},"data":data}) : helper)))
+    + escapeExpression(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"full_name","hash":{},"data":data}) : helper)))
     + "</h3>\n    </div>\n</div>";
 },"useData":true});
 
@@ -185,6 +197,10 @@ this["Handlebars"]["templates"]["form_error"] = Handlebars.template({"compiler":
     + escapeExpression(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"message","hash":{},"data":data}) : helper)))
     + "</li>\n</ul>";
 },"useData":true});
+
+this["Handlebars"]["templates"]["married_name_form"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "<div class=\"row-fluid\" style=\"min-height: 160px;\">\n    <h4 class=\"content-title\"><u>Zmiana nazwiska</u></h4>\n    <div class=\"row-fluid\" style=\"margin-bottom: 30px;\">\n        <div class=\"col-md-8\">\n            <h5>Aktualne nazwisko</h5>\n            <div data-editors=\"married_name\" style=\"margin-bottom: 10px;\"></div>\n            <a class=\"save btn btn-default\"><i class=\"fa fa-check\"></i> Zapisz</a>\n            <a class=\"cancel btn btn-default\"><i class=\"fa fa-times\"></i> Anuluj</a>\n        </div>\n    </div>\n</div>";
+  },"useData":true});
 
 this["Handlebars"]["templates"]["photo_form"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   return "            <a class=\"remove btn btn-default\">Usuń aktualne</a>\n";
@@ -280,9 +296,7 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
   return buffer + " <a href=\"#/person/"
     + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.tutor : stack1)) != null ? stack1.id : stack1), depth0))
     + "\">"
-    + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.tutor : stack1)) != null ? stack1.first_name : stack1), depth0))
-    + " "
-    + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.tutor : stack1)) != null ? stack1.last_name : stack1), depth0))
+    + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.tutor : stack1)) != null ? stack1.full_name : stack1), depth0))
     + "</a>.</p>\n\n        <br>\n\n";
 },"32":function(depth0,helpers,partials,data) {
   return "uczęszczał";
@@ -322,9 +336,7 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_owner : depth0), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.program(7, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "      </div> <!-- /.list-group -->\n    </div> <!-- /.col -->\n\n    <div class=\"col-md-6 col-sm-7\">\n      <h3>"
-    + escapeExpression(((helper = (helper = helpers.first_name || (depth0 != null ? depth0.first_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"first_name","hash":{},"data":data}) : helper)))
-    + " "
-    + escapeExpression(((helper = (helper = helpers.last_name || (depth0 != null ? depth0.last_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"last_name","hash":{},"data":data}) : helper)))
+    + escapeExpression(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"full_name","hash":{},"data":data}) : helper)))
     + "</h3>\n      <h5>\n";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.teacher_learn_years : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(9, data),"inverse":this.program(18, data),"data":data});
   if (stack1 != null) { buffer += stack1; }

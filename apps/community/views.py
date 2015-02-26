@@ -5,11 +5,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University, \
     UniversityDepartment, Branch
-from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly
+from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale
 from apps.community.serializers import TeacherSerializer, GroupSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
-    PersonSerializer
+    PersonSerializer, PersonMarriedNameSerializer
 
 
 class CityDetailView(views.APIView):
@@ -115,7 +115,7 @@ class EmploymentView(generics.RetrieveUpdateDestroyAPIView):
 
 class AuthenticatedPersonView(generics.RetrieveAPIView):
     serializer_class = PersonSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsCommunityMember)
 
     def get_object(self):
         return self.request.user.person
@@ -124,6 +124,14 @@ class AuthenticatedPersonView(generics.RetrieveAPIView):
 class PersonDescriptionView(generics.RetrieveUpdateAPIView):
     serializer_class = PersonDescriptionSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+    def get_object(self):
+        return self.request.user.person
+
+
+class PersonMarriedNameView(generics.RetrieveUpdateAPIView):
+    serializer_class = PersonMarriedNameSerializer
+    permission_classes = (IsAuthenticated, IsCommunityMember, IsFemale)
 
     def get_object(self):
         return self.request.user.person

@@ -1,4 +1,5 @@
 from rest_framework import permissions
+from apps.community.models import Person
 
 
 class IsCommunityMember(permissions.BasePermission):
@@ -23,3 +24,8 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         return request.user.person and obj == request.user.person
+
+
+class IsFemale(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.person.sex == Person.FEMALE

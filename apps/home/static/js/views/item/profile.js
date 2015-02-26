@@ -52,6 +52,24 @@ App.ItemView.EditableDescription = Marionette.ItemView.extend({
     }
 });
 
+
+App.ItemView.EditableMarriedName = Marionette.ItemView.extend({
+   template: Handlebars.templates.edit_married_name,
+   events: {
+       'click .edit': 'edit'
+   },
+
+    edit: function() {
+        this.form = new App.Form.MarriedName({ model: this.model });
+        this.form.parent = this;
+        this.$el.fadeOut(300, function() {
+            this.$el.html(this.form.render().$el);
+        }.bind(this));
+        this.$el.fadeIn(400);
+    }
+});
+
+
 App.ItemView.EditableUniversity = Marionette.ItemView.extend({
     template: Handlebars.templates.edit_university,
     events: {
