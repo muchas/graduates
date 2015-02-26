@@ -124,7 +124,8 @@ class Default(Configuration):
         '': {
             'photo': {
                 'size': (263, 263),
-                'quality': 100
+                'quality': 100,
+                'crop': 'scale'
             },
         },
     }
