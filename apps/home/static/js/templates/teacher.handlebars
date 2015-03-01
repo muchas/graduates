@@ -1,0 +1,22 @@
+<div class="col-md-4 pupil-column" style="margin-bottom: 20px;">
+    <div style="width: 40%; float:left;">
+      {{#if picture }}
+      <img src="{{ picture }}" class="thumbnail" style="width: 125px; height: 125px;">
+      {{else}}
+      <img src="media/unknown.png" class="thumbnail" style="width: 125px; height: 125px;">
+      {{/if}}
+    </div>
+    <div style="width:60%;float:left">
+      <h5><a href="#/person/{{ id }}" style="color: black">{{ full_name }}</a></h5>
+        <p>{{#if is_male }}nauczyciel{{else}}nauczycielka{{/if}}
+          {{#each subjects }}
+              {{ name_brand }}
+          {{/each}}
+            <br />
+          z lat
+          {{#each teacher_learn_years }}
+                {{ this }}
+          {{/each}}
+        </p>
+    </div>
+</div>

@@ -405,6 +405,51 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
   return buffer + "      </div> <!-- /.col -->\n\n</div> <!-- /.row -->\n";
 },"useData":true});
 
+this["Handlebars"]["templates"]["teacher"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "      <img src=\""
+    + escapeExpression(((helper = (helper = helpers.picture || (depth0 != null ? depth0.picture : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"picture","hash":{},"data":data}) : helper)))
+    + "\" class=\"thumbnail\" style=\"width: 125px; height: 125px;\">\n";
+},"3":function(depth0,helpers,partials,data) {
+  return "      <img src=\"media/unknown.png\" class=\"thumbnail\" style=\"width: 125px; height: 125px;\">\n";
+  },"5":function(depth0,helpers,partials,data) {
+  return "nauczyciel";
+  },"7":function(depth0,helpers,partials,data) {
+  return "nauczycielka";
+  },"9":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "              "
+    + escapeExpression(((helper = (helper = helpers.name_brand || (depth0 != null ? depth0.name_brand : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"name_brand","hash":{},"data":data}) : helper)))
+    + "\n";
+},"11":function(depth0,helpers,partials,data) {
+  var lambda=this.lambda, escapeExpression=this.escapeExpression;
+  return "                "
+    + escapeExpression(lambda(depth0, depth0))
+    + "\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"col-md-4 pupil-column\" style=\"margin-bottom: 20px;\">\n    <div style=\"width: 40%; float:left;\">\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.picture : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.program(3, data),"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "    </div>\n    <div style=\"width:60%;float:left\">\n      <h5><a href=\"#/person/"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "\" style=\"color: black\">"
+    + escapeExpression(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"full_name","hash":{},"data":data}) : helper)))
+    + "</a></h5>\n        <p>";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.is_male : depth0), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.program(7, data),"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n";
+  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.subjects : depth0), {"name":"each","hash":{},"fn":this.program(9, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "            <br />\n          z lat\n";
+  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.teacher_learn_years : depth0), {"name":"each","hash":{},"fn":this.program(11, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "        </p>\n    </div>\n</div>";
+},"useData":true});
+
+this["Handlebars"]["templates"]["teachers"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "<div class=\"portlet\">\n    <h3 class=\"portlet-title\">\n      <u>Grono pedagogiczne</u>\n    </h3>\n    <div id=\"teachers\"></div>\n</div>";
+  },"useData":true});
+
 this["Handlebars"]["templates"]["university"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
   return "<h6 class=\"text-muted\">Wydział: "
