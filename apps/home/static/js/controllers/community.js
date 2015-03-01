@@ -5,7 +5,13 @@ App.Controller.CommunityController = {
     },
 
     listTeachers: function() {
-        console.log('List teachers');
+        var layout = new App.Layouts.Teachers();
+        App.layout.content.show(layout);
+        App.instance.execute('community/teachers', function(response) {
+           var teachers = new App.Collection.Teachers(response);
+
+            layout.teachers.show(new App.CollectionView.Teachers({ collection: teachers }));
+        });
     },
 
     showMyGroup: function() {
