@@ -12,8 +12,12 @@ App.Controller.CommunityController = {
         console.log('Show my group');
     },
 
-    showGroup: function() {
+    showGroup: function(id) {
+        App.instance.execute('community/group', id, function(response) {
+             var group = new App.Model.Group(response);
 
+             App.layout.content.show(new App.ItemView.Group({ model: group }));
+        });
     },
 
     showCommunity: function() {

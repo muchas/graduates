@@ -4,7 +4,7 @@ App.Router.CommunityRouter = Marionette.AppRouter.extend({
         "": "showDashboard",
         "teachers": "listTeachers",
         "group": "showMyGroup",
-        "group/:id/": "showGroup",
+        "group/:id": "showGroup",
         "community": "showCommunity",
         "university/:id": "showUniversity",
         "company/:id": "showCompany"

@@ -37,7 +37,7 @@
           {{/each}}
       {{else}}
           {{#if is_male}}Uczeń{{ else }}Uczennica{{/if}}
-          <a href="">klasy {{ group.symbol }}</a> z lat {{ group.first_year }}-{{ group.last_year }}
+          <a href="#/group/{{ group.id }}">klasy {{ group.symbol }}</a> z lat {{ group.first_year }}-{{ group.last_year }}
       {{/if}}
       </h5>
       {{#if universities.length }}
@@ -57,7 +57,7 @@
        {{#if group }}
       <h4 class="content-title"><u>Edukacja</u></h4>
         <h5>Liceum</h5>
-           <p>W V LO {{#if is_male }}uczęszczał{{else}}uczęszczała{{/if}} do <a href="">klasy {{ group.symbol }}</a> z lat {{ group.first_year }}-{{ group.last_year }}, której wychowawcą {{#if group.tutor.is_male }}był{{else}}była{{/if}} <a href="#/person/{{ group.tutor.id }}">{{ group.tutor.full_name }}</a>.</p>
+           <p>W V LO {{#if is_male }}uczęszczał{{else}}uczęszczała{{/if}} do <a href="#/group/{{ group.id }}">klasy {{ group.symbol }}</a> z lat {{ group.first_year }}-{{ group.last_year }}, której wychowawcą {{#if group.tutor.is_male }}był{{else}}była{{/if}} <a href="#/person/{{ group.tutor.id }}">{{ group.tutor.full_name }}</a>.</p>
 
         <br>
 

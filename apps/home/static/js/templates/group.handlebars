@@ -1,0 +1,95 @@
+<div class="layout layout-stack-sm layout-main-left">
+
+<div class="col-sm-7 col-md-8 layout-main">
+
+  <div class="portlet">
+
+    <h3 class="portlet-title">
+      <u>Klasa A</u>
+    </h3>
+
+    <style type="text/css">
+      .pupil-thumbnail {
+        width:125px;
+        height:125px;
+        display:block;
+        margin-left:auto;
+        margin-right: auto
+      }
+
+      .pupil-column {
+        text-align: center;
+      }
+
+    </style>
+    <div class="portlet-body">
+        {{#each pupils}}
+            <div class="col-md-3 pupil-column" style="margin-bottom: 30px;">
+                {{#if picture }}
+                <img src="{{ picture }}" class="thumbnail pupil-thumbnail">
+                {{else}}
+                <img src="media/unknown.png" class="thumbnail pupil-thumbnail">
+                {{/if}}
+                <h5><a href="#/person/{{ id }}" style="color: black">{{ full_name }}</a></h5>
+            </div>
+        {{/each}}
+    </div> <!-- /.portlet-body -->
+  </div> <!-- /.portlet -->
+
+
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+
+
+    </div> <!-- /.col -->
+
+    <div class="col-md-6">
+
+      <div class="portlet">
+
+
+      </div> <!-- /.portlet -->
+
+    </div> <!-- /.col -->
+
+  </div> <!-- /.row -->
+
+
+
+</div> <!-- /.layout-main -->
+
+
+
+<div class="col-sm-5 col-md-4 layout-sidebar">
+
+<!--    <div class="portlet">
+    <a href="javascript:;" class="btn btn-primary btn-jumbo btn-block ">New Product</a>
+    <br>
+    <a href="javascript:;" class="btn btn-secondary btn-lg btn-block ">New Template</a>
+  </div> -->
+
+  <h4>Informacje</h4>
+
+  <div class="well">
+
+    <ul class="icons-list text-md">
+      <li>
+        <i class="icon-li fa fa-user"></i>
+          Wychowawcą klasy {{#if is_male }}był{{else}}była{{/if}}
+        <a href="#/person/{{ tutor.id }}">{{ tutor.full_name }}</a>
+      </li>
+      <li>
+        <i class="icon-li fa fa-calendar"></i>
+        Uczniowie tej klasy uczęszczali do liceum w latach
+        <strong>{{ first_year }}-{{ last_year }}</strong>
+      </li>
+      </li>
+    </ul>
+  </div> <!-- /.well -->
+
+</div> <!-- /.layout-sidebar -->
+
+</div> <!-- /.layout -->
