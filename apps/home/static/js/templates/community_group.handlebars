@@ -1,0 +1,8 @@
+<div class="col-md-4" style="margin-bottom: 25px">
+    <h4>Rocznik {{ year }}</h4>
+    <ul>
+      {{#each groups }}
+      <li><a href="#/group/{{ id }}">Klasa {{ symbol }}</a> - wych. <a href="#/person/{{ tutor.id }}">{{ tutor.full_name }}</a></li>
+      {{/each}}
+    </ul>
+</div>

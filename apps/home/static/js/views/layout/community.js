@@ -4,3 +4,11 @@ App.Layouts.Teachers = Marionette.LayoutView.extend({
         'teachers': '#teachers'
     }
 });
+
+App.Layouts.Community = Marionette.LayoutView.extend({
+   template: Handlebars.templates.community,
+   regions: {
+       'students': '#students',
+       'graduates': '#graduates'
+   }
+});

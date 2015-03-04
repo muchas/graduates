@@ -17,3 +17,12 @@ class IntegerValidator(object):
     def __call__(self, attrs):
         value = attrs[self.field]
         validate_integer(value)
+
+
+class ImageValidator(object):
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, attrs):
+        value = attrs[self.field]
+        import pdb; pdb.set_trace()

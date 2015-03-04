@@ -6,10 +6,10 @@ from rest_framework.response import Response
 from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University, \
     UniversityDepartment, Branch
 from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale
-from apps.community.serializers import TeacherSerializer, GroupSerializer, CitySerializer, StudentSerializer, \
+from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
-    PersonSerializer, PersonMarriedNameSerializer
+    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer
 
 
 class CityDetailView(views.APIView):
@@ -49,20 +49,50 @@ class TeacherListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-class GroupListView(generics.ListAPIView):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+class GraduatedGroupListView(views.APIView):
     permission_classes = (IsAuthenticated,)
+
+    def get(self, *args, **kwargs):
+        groups = Group.objects.filter(is_graduated=True).order_by('last_year')
+        result = {}
+        results = []
+        for group in groups:
+            if not group.last_year in result:
+                result[group.last_year] = []
+            serializer = GroupSerializer(group)
+            result[group.last_year].append(serializer.data)
+
+        for year, groups in result.iteritems():
+            results.append({'year': year, 'groups': groups})
+        return Response(results)
+
+
+class StudentGroupListView(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, *args, **kwargs):
+        groups = Group.objects.filter(is_graduated=False).order_by('last_year')
+        years = {}
+        results = []
+        for group in groups:
+            if not group.last_year in years:
+                years[group.last_year] = []
+            serializer = GroupSerializer(group)
+            years[group.last_year].append(serializer.data)
+
+        for year, groups in years.iteritems():
+            results.append({'year': year, 'groups': groups})
+        return Response(results)
 
 
 class GroupDetailView(generics.RetrieveAPIView):
     queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+    serializer_class = GroupDetailsSerializer
     permission_classes = (IsAuthenticated,)
 
 
 class PersonGroupView(generics.RetrieveAPIView):
-    serializer_class = GroupSerializer
+    serializer_class = GroupDetailsSerializer
     permission_classes = (IsAuthenticated, IsCommunityMember)
 
     def get_object(self):

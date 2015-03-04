@@ -60,13 +60,21 @@ class TeacherSerializer(serializers.ModelSerializer):
         return person.sex == Person.MALE
 
 
-class GroupSerializer(serializers.ModelSerializer):
+class GroupDetailsSerializer(serializers.ModelSerializer):
     tutor = TeacherSerializer()
     pupils = PersonSerializer(many=True)
 
     class Meta:
         model = Group
         fields = ('id', 'first_year', 'last_year', 'symbol', 'tutor', 'pupils')
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    tutor = TeacherSerializer()
+
+    class Meta:
+        model = Group
+        fields = ('id', 'first_year', 'last_year', 'symbol', 'tutor')
 
 
 class UniversitySerializer(serializers.ModelSerializer):
