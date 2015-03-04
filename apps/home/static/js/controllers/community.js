@@ -9,7 +9,6 @@ App.Controller.CommunityController = {
         App.layout.content.show(layout);
         App.instance.execute('community/teachers', function(response) {
            var teachers = new App.Collection.Teachers(response);
-
             layout.teachers.show(new App.CollectionView.Teachers({ collection: teachers }));
         });
     },
@@ -27,7 +26,17 @@ App.Controller.CommunityController = {
     },
 
     showCommunity: function() {
+        var layout = new App.Layouts.Community();
+        App.layout.content.show(layout);
+        App.instance.execute('community/student-groups', function(response) {
+           var groups = new App.Collection.Groups(response);
+            layout.students.show(new App.CollectionView.Groups({ collection: groups }));
+        });
 
+        App.instance.execute('community/graduated-groups', function(response) {
+           var groups = new App.Collection.Groups(response);
+            layout.graduates.show(new App.CollectionView.Groups({ collection: groups }));
+        });
     },
 
     showUniversity: function() {

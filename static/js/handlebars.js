@@ -26,6 +26,30 @@ this["Handlebars"]["templates"]["attribute_form"] = Handlebars.template({"compil
     + ": </strong></div>\n        <div data-editors=\"value\" style=\"width: 40%; float:left; margin-left: 10px;\"></div>\n        <div data-editors=\"is_public\" style=\"width: 30%; float:left; margin-left: 10px;\"></div>\n    </div>\n    <div class=\"col-md-3\">\n        <a class=\"save btn btn-default\"><i class=\"fa fa-check\"></i> Zapisz</a>\n        <a class=\"cancel btn btn-default\"><i class=\"fa fa-times\"></i> Anuluj</a>\n    </div>\n</div>\n<hr />";
 },"useData":true});
 
+this["Handlebars"]["templates"]["community"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "<div class=\"layout layout-stack-sm layout-main-left\">\n\n        <div class=\"layout-main\">\n\n          <div class=\"portlet\">\n            <div class=\"portlet-body\">\n              <div class=\"portlet row\" style=\"margin-bottom: 0\">\n\n                <h3 class=\"portlet-title\">\n                  <u>Uczniowie</u>\n                </h3>\n\n                <div id=\"students\" class=\"portlet-body\" style=\"margin-bottom: 30px;\">\n\n                </div>\n\n            </div>\n            <div class=\"portlet row\">\n\n                <h3 class=\"portlet-title\">\n                  <u>Absolwenci</u>\n                </h3>\n\n                <div class=\"portlet-body\">\n                    <div id=\"graduates\"></div>\n                </div>\n            </div>\n\n          </div>\n        </div>\n    </div>\n</div>";
+  },"useData":true});
+
+this["Handlebars"]["templates"]["community_group"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, lambda=this.lambda;
+  return "      <li><a href=\"#/group/"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "\">Klasa "
+    + escapeExpression(((helper = (helper = helpers.symbol || (depth0 != null ? depth0.symbol : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"symbol","hash":{},"data":data}) : helper)))
+    + "</a> - wych. <a href=\"#/person/"
+    + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.tutor : depth0)) != null ? stack1.id : stack1), depth0))
+    + "\">"
+    + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.tutor : depth0)) != null ? stack1.full_name : stack1), depth0))
+    + "</a></li>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"col-md-4\" style=\"margin-bottom: 25px\">\n    <h4>Rocznik "
+    + escapeExpression(((helper = (helper = helpers.year || (depth0 != null ? depth0.year : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"year","hash":{},"data":data}) : helper)))
+    + "</h4>\n    <ul>\n";
+  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.groups : depth0), {"name":"each","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "    </ul>\n</div>";
+},"useData":true});
+
 this["Handlebars"]["templates"]["description"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "";
 },"useData":true});
@@ -219,7 +243,9 @@ this["Handlebars"]["templates"]["group"] = Handlebars.template({"1":function(dep
   },"8":function(depth0,helpers,partials,data) {
   return "była";
   },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, lambda=this.lambda, escapeExpression=this.escapeExpression, functionType="function", helperMissing=helpers.helperMissing, buffer = "<div class=\"layout layout-stack-sm layout-main-left\">\n\n<div class=\"col-sm-7 col-md-8 layout-main\">\n\n  <div class=\"portlet\">\n\n    <h3 class=\"portlet-title\">\n      <u>Klasa A</u>\n    </h3>\n\n    <style type=\"text/css\">\n      .pupil-thumbnail {\n        width:125px;\n        height:125px;\n        display:block;\n        margin-left:auto;\n        margin-right: auto\n      }\n\n      .pupil-column {\n        text-align: center;\n      }\n\n    </style>\n    <div class=\"portlet-body\">\n";
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, lambda=this.lambda, buffer = "<div class=\"layout layout-stack-sm layout-main-left\">\n\n<div class=\"col-sm-7 col-md-8 layout-main\">\n\n  <div class=\"portlet\">\n\n    <h3 class=\"portlet-title\">\n      <u>Klasa "
+    + escapeExpression(((helper = (helper = helpers.symbol || (depth0 != null ? depth0.symbol : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"symbol","hash":{},"data":data}) : helper)))
+    + "</u>\n    </h3>\n\n    <style type=\"text/css\">\n      .pupil-thumbnail {\n        width:125px;\n        height:125px;\n        display:block;\n        margin-left:auto;\n        margin-right: auto\n      }\n\n      .pupil-column {\n        text-align: center;\n      }\n\n    </style>\n    <div class=\"portlet-body\">\n";
   stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.pupils : depth0), {"name":"each","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "    </div> <!-- /.portlet-body -->\n  </div> <!-- /.portlet -->\n\n\n\n  <div class=\"row\">\n\n    <div class=\"col-md-6\">\n\n\n\n    </div> <!-- /.col -->\n\n    <div class=\"col-md-6\">\n\n      <div class=\"portlet\">\n\n\n      </div> <!-- /.portlet -->\n\n    </div> <!-- /.col -->\n\n  </div> <!-- /.row -->\n\n\n\n</div> <!-- /.layout-main -->\n\n\n\n<div class=\"col-sm-5 col-md-4 layout-sidebar\">\n\n<!--    <div class=\"portlet\">\n    <a href=\"javascript:;\" class=\"btn btn-primary btn-jumbo btn-block \">New Product</a>\n    <br>\n    <a href=\"javascript:;\" class=\"btn btn-secondary btn-lg btn-block \">New Template</a>\n  </div> -->\n\n  <h4>Informacje</h4>\n\n  <div class=\"well\">\n\n    <ul class=\"icons-list text-md\">\n      <li>\n        <i class=\"icon-li fa fa-user\"></i>\n          Wychowawcą klasy ";

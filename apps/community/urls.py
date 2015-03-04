@@ -1,13 +1,14 @@
 from django.conf.urls import patterns, url
 from apps.community.views import TeacherListView, PersonGroupView, CityListView, CityDetailView, GroupDetailView, \
-    StudentListView, EmploymentListView, StudentView, EmploymentView, GroupListView, PersonDescriptionView, \
+    StudentListView, EmploymentListView, StudentView, EmploymentView, PersonDescriptionView, \
     PersonProfileView, PersonalDataUpdateView, AttributeListView, UniversityListView, DepartmentListView, BranchListView, \
-    PersonPhotoView, AuthenticatedPersonView, PersonMarriedNameView
+    PersonPhotoView, AuthenticatedPersonView, PersonMarriedNameView, GraduatedGroupListView, StudentGroupListView
 
 urlpatterns = patterns('',
                        url(r'teachers/', TeacherListView.as_view(), name='teacher-list'),
                        url(r'my-group/', PersonGroupView.as_view()),
-                       url(r'groups/', GroupListView.as_view(), name='group-list'),
+                       url(r'student-groups/', StudentGroupListView.as_view(), name='student-group-list'),
+                       url(r'graduates/', GraduatedGroupListView.as_view(), name='graduated-group-list'),
                        url(r'group/(?P<pk>\d+)/', GroupDetailView.as_view(), name='group'),
                        url(r'cities/', CityListView.as_view(), name='city-list'),
                        url(r'city/(?P<pk>\d+)/', CityDetailView.as_view()),
