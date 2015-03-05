@@ -167,6 +167,14 @@ class PersonMarriedNameView(generics.RetrieveUpdateAPIView):
         return self.request.user.person
 
 
+class PersonSimilarityView(views.APIView):
+    permission_classes = (IsAuthenticated, IsCommunityMember)
+
+    def get(self, *args, **kwargs):
+        person = get_object_or_404(Person, pk=kwargs.pop('pk'))
+        return Response(person.find_similarities_with(self.request.user.person))
+
+
 class PersonPhotoView(generics.RetrieveUpdateAPIView):
     serializer_class = PersonPhotoSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
