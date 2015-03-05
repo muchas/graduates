@@ -3,7 +3,8 @@ App.Layouts.ProfileLayout = Marionette.LayoutView.extend({
     regions: {
         "employments": "#employments",
         "universities": "#universities",
-        "personal_data": "#personal-data"
+        "personal_data": "#personal-data",
+        "profileSimilarity": "#profile-similarity"
     }
 });
 

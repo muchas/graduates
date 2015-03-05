@@ -1,0 +1,38 @@
+<div class="well">
+  <ul class="icons-list text-md">
+  {{#if universities.length }}
+    <li>
+      <i class="icon-li fa fa-university"></i>
+      <strong>{{ universities.length }}</strong> uniwersytet
+      <br>
+    </li>
+  {{/if}}
+
+   {{#if cities.length }}
+    <li>
+      <i class="icon-li fa fa-home"></i>
+
+      <strong>{{ cities.length }}</strong> miasta, z którymi jesteście powiązani
+      <br>
+    </li>
+    {{/if}}
+
+    {{#if branches.length }}
+    <li>
+      <i class="icon-li fa fa-suitcase"></i>
+      branża {{#each branches }}
+            {{ this }},
+        {{/each}}
+      <br>
+    </li>
+    {{/if}}
+    {{#if tutor }}
+    <li>
+      <i class="icon-li fa fa-user"></i>
+
+       wychowawca klasy w liceum
+      <br>
+    </li>
+    {{/if}}
+  </ul>
+</div> <!-- /.well -->

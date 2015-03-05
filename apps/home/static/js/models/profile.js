@@ -3,6 +3,7 @@ App.Model.Profile = Backbone.Model.extend({
         return (this.get('sex') == 2);
     }
 });
+App.Model.ProfileSimilarity = Backbone.Model.extend({});
 App.Model.Photo = Backbone.Model.extend({});
 App.Model.PersonalData = Backbone.Model.extend({});
 App.Model.Employment = Backbone.DeepModel.extend({});

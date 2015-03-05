@@ -10,7 +10,7 @@ App.Command.Profile = App.Command.Base.extend({
         "profile/personal_data": "getPersonalData",
         "profile/photo": "getPhoto",
         "profile/uploadPhoto": "uploadPhoto",
-        "profile/removePhoto": "removePhoto",
+        "profile/removePhoto": "removePhoto"
     },
 
     getPersonInformation: function(id, callback) {
@@ -26,7 +26,7 @@ App.Command.Profile = App.Command.Base.extend({
     },
 
     getPersonSimilarity: function(id, callback) {
-      // todo implement
+       this.jsonRequest("GET", "profile-similarity", { pk: id }, {}, callback);
     },
 
     getEmployments: function(callback) {
