@@ -1,19 +1,31 @@
 App.Controller.ProfileController = {
     showPerson: function(id) {
+
+        var profile = new App.Model.Profile();
+        var layout = new App.Layouts.ProfileLayout({ model: profile });
+
         App.instance.execute("profile/person", id, function(response) {
-            var profile = new App.Model.Profile(response);
             var personal_data = new App.Collection.PersonalData(response.personal_data);
             var universities = new App.Collection.Universities(response.universities);
             var employments = new App.Collection.Employments(response.employments);
 
-            var layout = new App.Layouts.ProfileLayout({ model: profile });
+            profile.set(response);
 
             App.layout.content.show(layout);
 
             layout.personal_data.show(new App.CollectionView.PersonalData({ collection: personal_data }));
             layout.universities.show(new App.CollectionView.Universities({ collection: universities }));
             layout.employments.show(new App.CollectionView.Employments({ collection: employments }));
+
+            if(!profile.get('is_owner')) {
+                App.instance.execute("profile/similarity", id, function(response) {
+                    var similarity = new App.Model.ProfileSimilarity(response);
+                    var similarityView = new App.ItemView.ProfileSimilarity({ model: similarity });
+                    layout.profileSimilarity.show(similarityView);
+                });
+            }
         });
+
     },
 
     invitePerson: function(id) {

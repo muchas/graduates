@@ -12,7 +12,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
+from django.utils.translation import ugettext_lazy as _
 from configurations import Configuration
+
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -40,9 +42,14 @@ class Default(Configuration):
 
     LANGUAGE_CODE = 'pl'
 
+    LANGUAGES = (
+        ('pl', _('Polish')),
+        ('en', _('English')),
+    )
+
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
-    USE_I18N = False
+    USE_I18N = True
 
     USE_THOUSAND_SEPARATOR = True
 
@@ -95,6 +102,7 @@ class Default(Configuration):
         'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'django.middleware.locale.LocaleMiddleware'
     )
 
     ROOT_URLCONF = 'graduates.urls'
@@ -142,6 +150,10 @@ class Development(Default):
     MEDIA_ROOT = '/Users/smucha/Workspace/graduates/media'
 
     MEDIA_URL = '/media/'
+
+    LOCALE_PATHS = (
+        '/Users/smucha/Workspace/graduates/locale',
+    )
 
 
 class Staging(Default):

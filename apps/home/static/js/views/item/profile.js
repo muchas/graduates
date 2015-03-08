@@ -10,6 +10,10 @@ App.ItemView.PersonalData = Marionette.ItemView.extend({
    template: Handlebars.templates.attribute
 });
 
+App.ItemView.ProfileSimilarity = Marionette.ItemView.extend({
+   template: Handlebars.templates.profile_similarity
+});
+
 App.ItemView.EditableEmployment = Marionette.ItemView.extend({
     template: Handlebars.templates.edit_employment,
     events: {

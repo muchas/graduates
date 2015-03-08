@@ -1,5 +1,6 @@
 from django.core.cache import get_cache
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ungettext, ugettext as _
 from rest_framework import generics, views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -165,6 +166,65 @@ class PersonMarriedNameView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user.person
+
+
+class PersonSimilarityView(views.APIView):
+    permission_classes = (IsAuthenticated, IsCommunityMember)
+
+    def find_similarities_with(self, person):
+        visitor = self.request.user.person
+
+        tutor = visitor.retrieve_common_tutor_with(person)
+        universities = visitor.find_common_universities_with(person)
+        branches = visitor.find_common_branches_with(person)
+        companies = visitor.find_common_companies_with(person)
+        cities = visitor.find_common_city_connections_with(person)
+
+        university_count = len(universities)
+        university_message = ungettext(
+            '%(count)d university',
+            '%(count)d universities',
+            university_count
+        ) % {
+            'count': university_count
+        }
+
+        city_count = len(cities)
+        city_message = ungettext(
+            '%(count)d city with which you are connected',
+            '%(count)d cities with which you are connected',
+            city_count
+        ) % {
+            'count': city_count
+        }
+
+        branch_count = len(branches)
+        branch_message = ", ".join([branch.name for branch in branches])
+
+        company_count = len(companies)
+        company_message = ungettext(
+            "%(count)d company",
+            "%(count)d companies",
+            company_count
+        ) % {
+            'count': company_count
+        }
+
+        has_similarities = bool(tutor or city_count or branch_count or company_count or university_count)
+
+        return {
+            'full_name': person.full_name,
+            'has_similarities': has_similarities,
+            'educator': True if tutor else False,
+            'universities': university_message if university_count != 0 else None,
+            'cities': city_message if city_count != 0 else None,
+            'branches': branch_message if branch_count != 0 else None,
+            'companies': company_message if company_count != 0 else None
+        }
+
+    def get(self, *args, **kwargs):
+        person = get_object_or_404(Person, pk=kwargs.pop('pk'))
+        return Response(self.find_similarities_with(person))
 
 
 class PersonPhotoView(generics.RetrieveUpdateAPIView):

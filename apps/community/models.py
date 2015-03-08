@@ -22,7 +22,7 @@ class University(models.Model):
     name = models.CharField(max_length=255)
     acronym = models.CharField(max_length=10, null=True, blank=True)
     is_verified = models.BooleanField(default=False)
-    city = models.ForeignKey(City)
+    city = models.ForeignKey(City, related_name='universities')
 
     def __unicode__(self):
         return u"%s" % self.name
@@ -86,6 +86,8 @@ class Person(models.Model):
 
     group = models.ForeignKey(Group, related_name='pupils', blank=True, null=True)
     universities = models.ManyToManyField(University, through='Student')
+    branches = models.ManyToManyField('Branch', through='Employment')
+    companies = models.ManyToManyField('Company', through='Employment')
     subjects = models.ManyToManyField(Subject, blank=True)
 
     objects = PersonManager()
@@ -113,6 +115,30 @@ class Person(models.Model):
     def public_personal_data(self):
         return self.personaldata_set.filter(is_public=True)
 
+    def retrieve_common_tutor_with(self, person):
+        if self.group and person.group and self.group.id == person.group.id:
+            return self.group.tutor
+
+    def find_common_universities_with(self, person):
+        difference = University.objects.exclude(person__in=[person.pk]).distinct()
+        return University.objects.filter(person__in=[self.pk]).exclude(pk__in=difference).distinct()
+
+    def find_common_city_connections_with(self, person):
+        university_cities = City.objects.filter(universities__in=self.find_common_universities_with(person)).distinct()
+
+        employment_cities_diff = City.objects.exclude(employments__person__in=[person.pk]).distinct()
+        employment_cities = City.objects.filter(employments__person__in=[self.pk]).exclude(pk__in=employment_cities_diff).distinct()
+
+        return employment_cities | university_cities
+
+    def find_common_branches_with(self, person):
+        difference = Branch.objects.exclude(person__in=[person.pk]).distinct()
+        return Branch.objects.filter(person__in=[self.pk]).exclude(pk__in=difference).distinct()
+
+    def find_common_companies_with(self, person):
+        difference = Company.objects.exclude(person__in=[person.pk]).distinct()
+        return Company.objects.filter(person__in=[self.pk]).exclude(pk__in=difference).distinct()
+
 
 class Branch(models.Model):
     name = models.CharField(max_length=255)
@@ -132,7 +158,7 @@ class Employment(models.Model):
     person = models.ForeignKey(Person, related_name='employments')
     branch = models.ForeignKey(Branch)
     company = models.ForeignKey(Company)
-    city = models.ForeignKey(City)
+    city = models.ForeignKey(City, related_name='employments')
 
     name = models.CharField(max_length=255)
     start = models.DateField()

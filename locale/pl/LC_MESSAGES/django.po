@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-08 13:18+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#: apps/accounts/forms.py:103
+msgid "Password"
+msgstr ""
+
+#: apps/accounts/forms.py:109
+msgid "Wprowadź poprawny email oraz hasło. Uwaga: wielkość liter ma znaczenie!"
+msgstr ""
+
+#: apps/accounts/forms.py:111
+msgid "To konto jest niekatywne."
+msgstr ""
+
+#: apps/accounts/models.py:48
+msgid "email adress"
+msgstr ""
+
+#: apps/accounts/models.py:49
+msgid "first name"
+msgstr ""
+
+#: apps/accounts/models.py:50
+msgid "last name"
+msgstr ""
+
+#: apps/accounts/models.py:51
+msgid "staff status"
+msgstr ""
+
+#: apps/accounts/models.py:52
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: apps/accounts/models.py:54
+msgid "active"
+msgstr ""
+
+#: apps/accounts/models.py:55
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: apps/accounts/models.py:57
+msgid "date joined"
+msgstr ""
+
+#: apps/accounts/models.py:220
+msgid "user"
+msgstr ""
+
+#: apps/accounts/models.py:226
+msgid "registration profile"
+msgstr ""
+
+#: apps/accounts/models.py:227
+msgid "registration profiles"
+msgstr ""
+
+#: apps/community/views.py:185
+#, python-format
+msgid "%(count)d university"
+msgid_plural "%(count)d universities"
+msgstr[0] "%(count)d uczelnia wyższa"
+msgstr[1] "%(count)d uczelnie wyższe"
+msgstr[2] "%(count)d uczelni wyższych"
+
+#: apps/community/views.py:194
+#, python-format
+msgid "%(count)d city with which you are connected"
+msgid_plural "%(count)d cities with which you are connected"
+msgstr[0] "%(count)d miasto, z którym jesteście powiązani"
+msgstr[1] "%(count)d miasta, z którymi jesteście powiązani"
+msgstr[2] "%(count)d miast, z którymi jesteście powiązani"
+
+#: apps/community/views.py:206
+#, python-format
+msgid "%(count)d company"
+msgid_plural "%(count)d companies"
+msgstr[0] "%(count)d firma"
+msgstr[1] "%(count)d firmy"
+msgstr[2] "%(count)d firm"
+
+#: graduates/settings.py:46
+msgid "Polish"
+msgstr "Polski"
+
+#: graduates/settings.py:47
+msgid "English"
+msgstr "Angielski"

@@ -1,0 +1,45 @@
+{{#if has_similarities }}
+<h5 class="content-title"><u>Wspólne z {{ full_name }}</u></h5>
+<div class="well">
+  <ul class="icons-list text-md">
+  {{#if universities }}
+    <li>
+      <i class="icon-li fa fa-university"></i>
+      {{ universities }}
+      <br>
+    </li>
+  {{/if}}
+
+   {{#if cities }}
+    <li>
+      <i class="icon-li fa fa-home"></i>
+      {{ cities }}
+      <br>
+    </li>
+    {{/if}}
+
+    {{#if companies }}
+    <li>
+      <i class="icon-li fa fa-suitcase"></i>
+      {{ companies }}
+      <br>
+    </li>
+    {{/if}}
+
+    {{#if branches }}
+    <li>
+      <i class="icon-li fa fa-share-alt"></i>
+      {{ branches }}
+      <br>
+    </li>
+    {{/if}}
+    {{#if educator }}
+    <li>
+      <i class="icon-li fa fa-user"></i>
+       wychowawca klasy w liceum
+      <br>
+    </li>
+    {{/if}}
+  </ul>
+</div> <!-- /.well -->
+{{/if}}

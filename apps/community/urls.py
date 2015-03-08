@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 from apps.community.views import TeacherListView, PersonGroupView, CityListView, CityDetailView, GroupDetailView, \
     StudentListView, EmploymentListView, StudentView, EmploymentView, PersonDescriptionView, \
     PersonProfileView, PersonalDataUpdateView, AttributeListView, UniversityListView, DepartmentListView, BranchListView, \
-    PersonPhotoView, AuthenticatedPersonView, PersonMarriedNameView, GraduatedGroupListView, StudentGroupListView
+    PersonPhotoView, AuthenticatedPersonView, PersonMarriedNameView, GraduatedGroupListView, StudentGroupListView, \
+    PersonSimilarityView
 
 urlpatterns = patterns('',
                        url(r'teachers/', TeacherListView.as_view(), name='teacher-list'),
@@ -25,5 +26,6 @@ urlpatterns = patterns('',
                        url(r'departments/', DepartmentListView.as_view(), name='department-list'),
                        url(r'branches/', BranchListView.as_view(), name='branch-list'),
                        url(r'my-profile/', AuthenticatedPersonView.as_view(), name='profile-header'),
-                       url(r'married-name/', PersonMarriedNameView.as_view(), name='profile-married-name')
+                       url(r'married-name/', PersonMarriedNameView.as_view(), name='profile-married-name'),
+                       url(r'similarity/(?P<pk>\d+)/', PersonSimilarityView.as_view(), name='profile-similarity')
 )
