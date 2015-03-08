@@ -389,14 +389,7 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
     + "</p>\n        <br>\n";
 },"43":function(depth0,helpers,partials,data) {
   return "        <h4>Doświadczenie</h4>\n        <br>\n";
-  },"45":function(depth0,helpers,partials,data) {
-  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-  return "            <h5 class=\"content-title\"><u>Wspólne z "
-    + escapeExpression(((helper = (helper = helpers.first_name || (depth0 != null ? depth0.first_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"first_name","hash":{},"data":data}) : helper)))
-    + " "
-    + escapeExpression(((helper = (helper = helpers.last_name || (depth0 != null ? depth0.last_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"last_name","hash":{},"data":data}) : helper)))
-    + "</u></h5>\n";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"row\">\n    <div class=\"col-md-3 col-sm-5\">\n      <div class=\"profile-avatar\">\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.thumbnail : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.program(3, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
@@ -425,48 +418,55 @@ this["Handlebars"]["templates"]["profile"] = Handlebars.template({"1":function(d
   buffer += "      <div id=\"universities\"></div>\n\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.show_now_section : depth0), {"name":"if","hash":{},"fn":this.program(40, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  buffer += "        <div id=\"employments\"></div>\n\n        <br class=\"visible-xs\">\n        <br class=\"visible-xs\">\n\n      </div> <!-- /.col -->\n\n      <div class=\"col-md-3\">\n\n          <h5 class=\"content-title\"><u>Social Stats</u></h5>\n\n        <div class=\"list-group\">\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n              <h3 class=\"pull-right\"><i class=\"fa fa-eye text-primary\"></i></h3>\n              <h4 class=\"list-group-item-heading\">38,847</h4>\n              <p class=\"list-group-item-text\">Profile Views</p>\n            </a>\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n            <h3 class=\"pull-right\"><i class=\"fa fa-facebook-square  text-primary\"></i></h3>\n            <h4 class=\"list-group-item-heading\">3,482</h4>\n            <p class=\"list-group-item-text\">Facebook Likes</p>\n          </a>\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n            <h3 class=\"pull-right\"><i class=\"fa fa-twitter-square  text-primary\"></i></h3>\n            <h4 class=\"list-group-item-heading\">5,845</h4>\n            <p class=\"list-group-item-text\">Twitter Followers</p>\n          </a>\n        </div> <!-- /.list-group -->\n\n        <br>\n";
-  stack1 = helpers.unless.call(depth0, (depth0 != null ? depth0.is_owner : depth0), {"name":"unless","hash":{},"fn":this.program(45, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "      <div id=\"profile-similarity\"></div>\n\n      </div> <!-- /.col -->\n\n</div> <!-- /.row -->\n";
+  return buffer + "        <div id=\"employments\"></div>\n\n        <br class=\"visible-xs\">\n        <br class=\"visible-xs\">\n\n      </div> <!-- /.col -->\n\n      <div class=\"col-md-3\">\n\n          <h5 class=\"content-title\"><u>Social Stats</u></h5>\n\n        <div class=\"list-group\">\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n              <h3 class=\"pull-right\"><i class=\"fa fa-eye text-primary\"></i></h3>\n              <h4 class=\"list-group-item-heading\">38,847</h4>\n              <p class=\"list-group-item-text\">Profile Views</p>\n            </a>\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n            <h3 class=\"pull-right\"><i class=\"fa fa-facebook-square  text-primary\"></i></h3>\n            <h4 class=\"list-group-item-heading\">3,482</h4>\n            <p class=\"list-group-item-text\">Facebook Likes</p>\n          </a>\n\n          <a href=\"javascript:;\" class=\"list-group-item\">\n            <h3 class=\"pull-right\"><i class=\"fa fa-twitter-square  text-primary\"></i></h3>\n            <h4 class=\"list-group-item-heading\">5,845</h4>\n            <p class=\"list-group-item-text\">Twitter Followers</p>\n          </a>\n        </div> <!-- /.list-group -->\n\n        <br>\n\n      <div id=\"profile-similarity\"></div>\n\n      </div> <!-- /.col -->\n\n</div> <!-- /.row -->\n";
 },"useData":true});
 
 this["Handlebars"]["templates"]["profile_similarity"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-  var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
-  return "    <li>\n      <i class=\"icon-li fa fa-university\"></i>\n      <strong>"
-    + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.universities : depth0)) != null ? stack1.length : stack1), depth0))
-    + "</strong> uniwersytet\n      <br>\n    </li>\n";
-},"3":function(depth0,helpers,partials,data) {
-  var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
-  return "    <li>\n      <i class=\"icon-li fa fa-home\"></i>\n\n      <strong>"
-    + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.cities : depth0)) != null ? stack1.length : stack1), depth0))
-    + "</strong> miasta, z którymi jesteście powiązani\n      <br>\n    </li>\n";
-},"5":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "    <li>\n      <i class=\"icon-li fa fa-suitcase\"></i>\n      branża ";
-  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.branches : depth0), {"name":"each","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<h5 class=\"content-title\"><u>Wspólne z "
+    + escapeExpression(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"full_name","hash":{},"data":data}) : helper)))
+    + "</u></h5>\n<div class=\"well\">\n  <ul class=\"icons-list text-md\">\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.universities : depth0), {"name":"if","hash":{},"fn":this.program(2, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "      <br>\n    </li>\n";
+  buffer += "\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.cities : depth0), {"name":"if","hash":{},"fn":this.program(4, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.companies : depth0), {"name":"if","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.branches : depth0), {"name":"if","hash":{},"fn":this.program(8, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.educator : depth0), {"name":"if","hash":{},"fn":this.program(10, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "  </ul>\n</div> <!-- /.well -->\n";
+},"2":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "    <li>\n      <i class=\"icon-li fa fa-university\"></i>\n      "
+    + escapeExpression(((helper = (helper = helpers.universities || (depth0 != null ? depth0.universities : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"universities","hash":{},"data":data}) : helper)))
+    + "\n      <br>\n    </li>\n";
+},"4":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "    <li>\n      <i class=\"icon-li fa fa-home\"></i>\n      "
+    + escapeExpression(((helper = (helper = helpers.cities || (depth0 != null ? depth0.cities : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"cities","hash":{},"data":data}) : helper)))
+    + "\n      <br>\n    </li>\n";
 },"6":function(depth0,helpers,partials,data) {
-  var lambda=this.lambda, escapeExpression=this.escapeExpression;
-  return "\n            "
-    + escapeExpression(lambda(depth0, depth0))
-    + ",\n";
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "    <li>\n      <i class=\"icon-li fa fa-suitcase\"></i>\n      "
+    + escapeExpression(((helper = (helper = helpers.companies || (depth0 != null ? depth0.companies : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"companies","hash":{},"data":data}) : helper)))
+    + "\n      <br>\n    </li>\n";
 },"8":function(depth0,helpers,partials,data) {
-  return "    <li>\n      <i class=\"icon-li fa fa-user\"></i>\n\n       wychowawca klasy w liceum\n      <br>\n    </li>\n";
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "    <li>\n      <i class=\"icon-li fa fa-share-alt\"></i>\n      "
+    + escapeExpression(((helper = (helper = helpers.branches || (depth0 != null ? depth0.branches : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"branches","hash":{},"data":data}) : helper)))
+    + "\n      <br>\n    </li>\n";
+},"10":function(depth0,helpers,partials,data) {
+  return "    <li>\n      <i class=\"icon-li fa fa-user\"></i>\n       wychowawca klasy w liceum\n      <br>\n    </li>\n";
   },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "<div class=\"well\">\n  <ul class=\"icons-list text-md\">\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.universities : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.cities : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.branches : depth0)) != null ? stack1.length : stack1), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.tutor : depth0), {"name":"if","hash":{},"fn":this.program(8, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "  </ul>\n</div> <!-- /.well -->";
-},"useData":true});
+  var stack1;
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.has_similarities : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { return stack1; }
+  else { return ''; }
+  },"useData":true});
 
 this["Handlebars"]["templates"]["teacher"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;

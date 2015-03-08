@@ -115,21 +115,6 @@ class Person(models.Model):
     def public_personal_data(self):
         return self.personaldata_set.filter(is_public=True)
 
-    def find_similarities_with(self, person):
-        tutor = self.retrieve_common_tutor_with(person)
-        universities = self.find_common_universities_with(person)
-        branches = self.find_common_branches_with(person)
-        companies = self.find_common_companies_with(person)
-        cities = self.find_common_city_connections_with(person)
-        return {
-            'tutor': tutor.full_name if tutor else None,
-            'universities': [university.name for university in universities],
-            'cities': [city.name for city in cities],
-            'branches': [branch.name for branch in branches],
-            'companies': [company.name for company in companies],
-            'years_in_school': self.retrieve_years_in_school_intersection_with(person)
-        }
-
     def retrieve_common_tutor_with(self, person):
         if self.group and person.group and self.group.id == person.group.id:
             return self.group.tutor
@@ -154,19 +139,6 @@ class Person(models.Model):
         difference = Company.objects.exclude(person__in=[person.pk]).distinct()
         return Company.objects.filter(person__in=[self.pk]).exclude(pk__in=difference).distinct()
 
-    def retrieve_years_in_school_intersection_with(self, person):
-        if self.group and person.group:
-            first = self.group.first_year if self.group.first_year > person.group.first_year else person.group.first_year
-            if self.group.last_year and person.group.last_year:
-                last = self.group.last_year if self.group.last_year < person.group.last_year else person.group.last_year
-            else:
-                last = self.group.last_year if self.group.last_year else person.group.last_year
-            if last == first:
-                return first
-            elif last:
-                return str(first) + '-' + str(last)
-            else:
-                return str(first) + '-obecnie'
 
 class Branch(models.Model):
     name = models.CharField(max_length=255)

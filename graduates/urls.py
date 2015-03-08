@@ -5,6 +5,10 @@ from django.conf.urls.static import static
 from apps.home.views import HomePageView, FaqView
 from apps.accounts.views import LoginView, RegistrationWizard, ActivationView, ClaimView
 
+js_info_dict = {
+    'packages': ('apps.community',)
+}
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'graduates.views.home', name='home'),
@@ -20,5 +24,6 @@ urlpatterns = patterns('',
                            name='registration_activate'),
     url(r'^claim/$', ClaimView.as_view(), name='claim'),
     url(r'^community/', include('apps.community.urls')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
     url(r'', include('django.contrib.auth.urls')),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
