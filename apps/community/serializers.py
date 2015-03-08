@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
 from apps.community.models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
-    UniversityDepartment, PersonalData, Attribute
+    UniversityDepartment, PersonalData, Attribute, Invitation
 from apps.community.validators import EmailValidator, IntegerValidator
 
 
@@ -45,6 +45,18 @@ class CityNameSerializer(serializers.ModelSerializer):
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
+
+
+class InvitationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invitation
+        fields = ('email', 'message', 'person')
+
+    def create(self, validated_data):
+        return Invitation.objects.create(
+            invited_by=self.context['request'].user.person,
+            **validated_data
+        )
 
 
 class TeacherSerializer(serializers.ModelSerializer):

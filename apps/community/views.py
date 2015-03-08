@@ -2,6 +2,8 @@ from django.core.cache import get_cache
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ungettext, ugettext as _
 from rest_framework import generics, views
+from django.utils.translation import ugettext as _
+from rest_framework import generics, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University, \
@@ -10,7 +12,7 @@ from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsF
 from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
-    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer
+    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer
 
 
 class CityDetailView(views.APIView):
@@ -281,3 +283,18 @@ class AttributeListView(views.APIView):
 
         return Response([attributes_dict[key] for key in attributes_dict])
 
+
+class PersonInvitationView(generics.CreateAPIView):
+    serializer_class = InvitationSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def send_invitation_email(self, serializer):
+        pass
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        self.send_invitation_email(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

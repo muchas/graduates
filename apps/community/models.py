@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from model_utils.models import TimeStampedModel
+import uuidfield
 
 
 YEAR_CHOICES = []
@@ -216,3 +217,15 @@ class PersonalData(TimeStampedModel):
 
     class Meta:
         unique_together=(('person', 'attribute'),)
+
+
+class Invitation(models.Model):
+    person = models.ForeignKey(Person, related_name='invitations')
+    invited_by = models.ForeignKey(Person, related_name='sent_invitations')
+    email = models.EmailField()
+    message = models.TextField(null=True, blank=True)
+    datetime = models.DateTimeField(auto_now_add=True)
+    uuid = uuidfield.UUIDField(auto=True)
+
+    def is_expired(self):
+        return hasattr(self.person, 'user')
