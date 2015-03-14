@@ -29,7 +29,18 @@ App.Controller.ProfileController = {
     },
 
     invitePerson: function(id) {
-        console.log('Invite person' + id);
+        App.instance.execute("profile/person", id, function(response) {
+             var profile = new App.Model.Profile(response);
+
+            var layout = new App.Layouts.InvitationLayout({ model: profile });
+            App.layout.content.show(layout);
+
+            var invitation = new App.Model.Invitation({ id: id });
+            layout.form.show(new App.Form.Invitation({
+                model: invitation,
+                templateData: profile.toJSON()
+            }));
+        });
     },
 
     showMyProfile: function() {
@@ -49,6 +60,7 @@ App.Controller.ProfileController = {
         });
 
         App.instance.execute("profile/personal_data", function(response) {
+            console.log(response);
            var personal_data = new App.Collection.PersonalData(response);
             layout.personal_data.show(new App.CollectionView.EditableAttributes({ collection: personal_data }));
         });

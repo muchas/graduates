@@ -86,7 +86,9 @@
       </div> <!-- /.col -->
 
       <div class="col-md-3">
-
+        {{#if can_be_invited }}
+        <a href="#/person/{{ id }}/invite" class="btn btn-primary btn-lg btn-block " style="margin-bottom: 20px">Zaproś do rejestracji</a>
+        {{/if}}
           <h5 class="content-title"><u>Social Stats</u></h5>
 
         <div class="list-group">

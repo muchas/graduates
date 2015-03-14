@@ -279,7 +279,6 @@ App.Form.Attribute = App.Form.Base.extend({
     }
 });
 
-
 App.Form.Photo = Marionette.ItemView.extend({
     template: Handlebars.templates.photo_form,
 

@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University, \
     UniversityDepartment, Branch
-from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale
+from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale, IsAllowedToBeInvited
 from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
@@ -286,15 +286,22 @@ class AttributeListView(views.APIView):
 
 class PersonInvitationView(generics.CreateAPIView):
     serializer_class = InvitationSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsAllowedToBeInvited)
+
+    def get_object(self):
+        return get_object_or_404(Person, pk=self.kwargs.get('pk'))
 
     def send_invitation_email(self, serializer):
         pass
 
     def create(self, request, *args, **kwargs):
+        person = self.get_object()
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+
         self.send_invitation_email(serializer)
+
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
