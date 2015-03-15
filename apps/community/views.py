@@ -13,27 +13,15 @@ from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsF
 from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
-    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer
+    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer, CityDetailSerializer
 from utils.mail import send_templated_email
+from utils.rest import RetrieveCachedAPIView
 
 
-class CityDetailView(views.APIView):
+class CityDetailView(RetrieveCachedAPIView):
+    queryset = City.objects.filter(is_verified=True)
+    serializer_class = CityDetailSerializer
     permission_classes = (IsAuthenticated,)
-
-    def get_object(self, pk):
-        cache = get_cache('default')
-        city = cache.get('city_' + pk)
-        if not city:
-            # case when city is not cached
-            # query city and people connected with that city
-            # serialize it and then save in cache
-            # return result
-            pass
-        return city
-
-    def get(self, request, pk, format=None):
-        city = self.get_object(pk)
-        return Response(city)
 
 
 class CityListView(generics.ListAPIView):
@@ -90,7 +78,7 @@ class StudentGroupListView(views.APIView):
         return Response(results)
 
 
-class GroupDetailView(generics.RetrieveAPIView):
+class GroupDetailView(RetrieveCachedAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupDetailsSerializer
     permission_classes = (IsAuthenticated,)

@@ -38,6 +38,13 @@ class CitySerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'latitude', 'longitude')
 
 
+class CityDetailSerializer(serializers.ModelSerializer):
+    people = PersonSerializer(many=True)
+
+    class Meta:
+        model = City
+        fields = ('id', 'name', 'latitude', 'longitude', 'people')
+
 class CityNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = City
