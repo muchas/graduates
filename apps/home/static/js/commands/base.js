@@ -4,7 +4,8 @@ App.Command.Base = Backbone.View.extend({
         this.initCommands();
     },
 
-    jsonRequest: function (method, routeUrl, routeParams, data, successCallback) {
+    jsonRequest: function (method, routeUrl, routeParams, data, successCallback, failureCallback) {
+        this.failureCallback = failureCallback;
         $.ajax({
             url: Routing.generate(routeUrl, routeParams),
             method: method,
@@ -21,11 +22,14 @@ App.Command.Base = Backbone.View.extend({
         }.bind(this));
     },
 
-    handleErrors: function(response) {
-        if (response.status === 404) {
+    handleErrors: function(jqXHR, textStatus, errors) {
+        if(jqXHR.status === 400) {
+            (this.failureCallback ? this.failureCallback(jqXHR.responseJSON) : console.log('Show 400'));
+        }
+        else if (jqXHR.status === 404) {
             this.show404();
         }
-        else if (response.status === 403) {
+        else if (jqXHR.status === 403) {
             this.show403();
         }
         else {
@@ -43,5 +47,12 @@ App.Command.Base = Backbone.View.extend({
 
     show500: function() {
         console.log('Show 500');
+        var n = noty({
+            text: 'Błąd 500',
+            type: 'error'
+        });
+        setTimeout(function() {
+            n.close();
+        }, 10000);
     }
 });

@@ -3,7 +3,7 @@ from apps.community.views import TeacherListView, PersonGroupView, CityListView,
     StudentListView, EmploymentListView, StudentView, EmploymentView, PersonDescriptionView, \
     PersonProfileView, PersonalDataUpdateView, AttributeListView, UniversityListView, DepartmentListView, BranchListView, \
     PersonPhotoView, AuthenticatedPersonView, PersonMarriedNameView, GraduatedGroupListView, StudentGroupListView, \
-    PersonSimilarityView
+    PersonSimilarityView, PersonInvitationView
 
 urlpatterns = patterns('',
                        url(r'teachers/', TeacherListView.as_view(), name='teacher-list'),
@@ -27,5 +27,6 @@ urlpatterns = patterns('',
                        url(r'branches/', BranchListView.as_view(), name='branch-list'),
                        url(r'my-profile/', AuthenticatedPersonView.as_view(), name='profile-header'),
                        url(r'married-name/', PersonMarriedNameView.as_view(), name='profile-married-name'),
-                       url(r'similarity/(?P<pk>\d+)/', PersonSimilarityView.as_view(), name='profile-similarity')
+                       url(r'similarity/(?P<pk>\d+)/', PersonSimilarityView.as_view(), name='profile-similarity'),
+                       url(r'invite/(?P<pk>\d+)/', PersonInvitationView.as_view(), name='profile-invitation')
 )

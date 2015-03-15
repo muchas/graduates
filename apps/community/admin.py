@@ -1,6 +1,6 @@
 from django.contrib import admin
 from models import Person, TeacherLearnYears, Subject, Group, City, Employment, Student, University, \
-    UniversityDepartment, Branch, Company, Attribute, PersonalData
+    UniversityDepartment, Branch, Company, Attribute, PersonalData, Invitation
 
 admin.site.register(Person)
 admin.site.register(TeacherLearnYears)
@@ -15,3 +15,4 @@ admin.site.register(Branch)
 admin.site.register(Company)
 admin.site.register(Attribute)
 admin.site.register(PersonalData)
+admin.site.register(Invitation)

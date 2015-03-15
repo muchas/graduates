@@ -1,16 +1,20 @@
 from django.core.cache import get_cache
+from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ungettext, ugettext as _
 from rest_framework import generics, views
+from django.utils.translation import ugettext as _
+from rest_framework import generics, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University, \
     UniversityDepartment, Branch
-from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale
+from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale, IsAllowedToBeInvited
 from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
-    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer
+    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer
+from utils.mail import send_templated_email
 
 
 class CityDetailView(views.APIView):
@@ -281,3 +285,34 @@ class AttributeListView(views.APIView):
 
         return Response([attributes_dict[key] for key in attributes_dict])
 
+
+class PersonInvitationView(generics.CreateAPIView):
+    serializer_class = InvitationSerializer
+    permission_classes = (IsAuthenticated, IsCommunityMember, IsAllowedToBeInvited)
+
+    def get_object(self):
+        return get_object_or_404(Person, pk=self.kwargs.get('pk'))
+
+    def send_invitation_email(self, serializer, person):
+        data = serializer.data
+        subject = _("Invitation to V LO graduates community.")
+        context = {
+            'person': person,
+            'invited_by': self.request.user.person,
+            'message': data.get('message')
+        }
+
+        send_templated_email(subject, 'community/invite.html', context, [data['email']], self.request.user.email)
+
+
+    def create(self, request, *args, **kwargs):
+        person = self.get_object()
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        self.send_invitation_email(serializer, person)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext as _
 from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
+from apps.accounts.models import User
 from apps.community.models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
-    UniversityDepartment, PersonalData, Attribute
-from apps.community.validators import EmailValidator, IntegerValidator
+    UniversityDepartment, PersonalData, Attribute, Invitation
+from apps.community.validators import EmailValidator, IntegerValidator, UniqueValidator
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -45,6 +47,32 @@ class CityNameSerializer(serializers.ModelSerializer):
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
+
+
+class InvitationSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        validators=[
+            UniqueValidator(
+                field_name='value',
+                queryset=PersonalData.objects.filter(attribute__data_type=Attribute.EMAIL_FIELD),
+                message=_("This e-mail is already used.")
+            ),
+            UniqueValidator(
+                queryset=User.objects.all(),
+                message=_("This e-mail is already used.")
+            )
+        ]
+    )
+
+    class Meta:
+        model = Invitation
+        fields = ('email', 'message', 'person')
+
+    def create(self, validated_data):
+        return Invitation.objects.create(
+            invited_by=self.context['request'].user.person,
+            **validated_data
+        )
 
 
 class TeacherSerializer(serializers.ModelSerializer):
@@ -221,6 +249,7 @@ class PersonProfileSerializer(serializers.ModelSerializer):
     thumbnail = serializers.SerializerMethodField('get_photo_thumbnail')
     is_owner = serializers.SerializerMethodField('check_ownership')
     is_male = serializers.SerializerMethodField('is_person_male')
+    can_be_invited = serializers.SerializerMethodField('check_inviting_ability')
     show_now_section = serializers.SerializerMethodField('is_section_now_not_empty')
 
     class Meta:
@@ -229,6 +258,9 @@ class PersonProfileSerializer(serializers.ModelSerializer):
     def get_photo_thumbnail(self, person):
         if person.picture:
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
+
+    def check_inviting_ability(self, person):
+        return person.allow_invitation and not hasattr(person, 'user')
 
     def is_person_male(self, person):
         return person.sex == Person.MALE

@@ -1,0 +1,13 @@
+<h3>Witaj {{ person.first_name }}!</h3>
+
+<p>
+    <span style="font-weight: bold">{{ invited_by.full_name }}</span> {% if invited_by.sex == 2 %}wysłała{% else %}wysłał{% endif %} Ci zaproszenie do portalu absolwentów
+    V Liceum Ogólnokształcącego.
+
+    {% if message %}
+    {{ invited_by.first_name }} {% if invited_by.sex == 2 %}dodała{% else %}dodał{% endif %} także wiadomość od siebie: <br/>
+    {{ message }}
+    {% endif %}
+
+    Aby się zarejestrować, kliknij następujący link: {% url 'registration' %}
+</p>

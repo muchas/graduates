@@ -42,3 +42,10 @@ App.Layouts.EditProfile = Marionette.LayoutView.extend({
         }
     }
 });
+
+App.Layouts.InvitationLayout = Marionette.LayoutView.extend({
+   template: Handlebars.templates.invitation,
+    regions: {
+        "form": "#invitation-form"
+    }
+});

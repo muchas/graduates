@@ -296,18 +296,6 @@ class RegistrationProfile(models.Model):
         self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
 
 
-class Invitation(models.Model):
-    person = models.ForeignKey(Person, related_name='invitations')
-    invited_by = models.ForeignKey(Person, related_name='sent_invitations')
-    email = models.EmailField()
-    message = models.TextField(null=True, blank=True)
-    datetime = models.DateTimeField(auto_now_add=True)
-    uuid = uuidfield.UUIDField(auto=True)
-
-    def is_expired(self):
-        return hasattr(self.person, 'user')
-
-
 class Claim(models.Model):
     person = models.ForeignKey(Person)
     email = models.EmailField()
