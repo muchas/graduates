@@ -36,6 +36,5 @@ class UniqueValidator(BaseUniqueValidator):
 
     def set_context(self, serializer_field):
         if not self.field_name:
-            BaseUniqueValidator.set_context(self, serializer_field)
-        else:
-            self.instance = getattr(serializer_field.parent, 'instance', None)
+            self.field_name = serializer_field.source_attrs[0]
+        self.instance = getattr(serializer_field.parent, 'instance', None)

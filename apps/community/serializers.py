@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext as _
 from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
+from apps.accounts.models import User
 from apps.community.models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
     UniversityDepartment, PersonalData, Attribute, Invitation
 from apps.community.validators import EmailValidator, IntegerValidator, UniqueValidator
@@ -52,7 +54,12 @@ class InvitationSerializer(serializers.ModelSerializer):
         validators=[
             UniqueValidator(
                 field_name='value',
-                queryset=PersonalData.objects.filter(attribute__data_type=Attribute.EMAIL_FIELD)
+                queryset=PersonalData.objects.filter(attribute__data_type=Attribute.EMAIL_FIELD),
+                message=_("This e-mail is already used.")
+            ),
+            UniqueValidator(
+                queryset=User.objects.all(),
+                message=_("This e-mail is already used.")
             )
         ]
     )

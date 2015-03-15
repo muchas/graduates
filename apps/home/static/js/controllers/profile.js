@@ -35,7 +35,7 @@ App.Controller.ProfileController = {
             var layout = new App.Layouts.InvitationLayout({ model: profile });
             App.layout.content.show(layout);
 
-            var invitation = new App.Model.Invitation({ id: id });
+            var invitation = new App.Model.Invitation({ person: id });
             layout.form.show(new App.Form.Invitation({
                 model: invitation,
                 templateData: profile.toJSON()
