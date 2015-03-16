@@ -73,6 +73,7 @@ class Default(Configuration):
         'apps.home',
         'apps.community',
         'apps.accounts',
+        'debug_toolbar',
     )
 
     TEMPLATE_CONTEXT_PROCESSORS = (
@@ -102,7 +103,8 @@ class Default(Configuration):
         'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'django.middleware.locale.LocaleMiddleware'
+        'django.middleware.locale.LocaleMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
 
     ROOT_URLCONF = 'graduates.urls'
@@ -148,6 +150,7 @@ class Default(Configuration):
             'LOCATION': '127.0.0.1:11211',
         }
     }
+
 
 
 class Development(Default):
