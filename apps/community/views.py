@@ -1,9 +1,5 @@
-from django.core.cache import get_cache
-from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ungettext, ugettext as _
-from rest_framework import generics, views
-from django.utils.translation import ugettext as _
 from rest_framework import generics, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -42,11 +38,11 @@ class TeacherListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-class GraduatedGroupListView(views.APIView):
+class GroupListView(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, *args, **kwargs):
-        groups = Group.objects.filter(is_graduated=True).order_by('last_year')
+        groups = Group.objects.filter(is_graduated=self.is_graduated).order_by('last_year')
         result = {}
         results = []
         for group in groups:
@@ -60,22 +56,12 @@ class GraduatedGroupListView(views.APIView):
         return Response(results)
 
 
-class StudentGroupListView(views.APIView):
-    permission_classes = (IsAuthenticated,)
+class GraduatedGroupListView(GroupListView):
+    is_graduated = True
 
-    def get(self, *args, **kwargs):
-        groups = Group.objects.filter(is_graduated=False).order_by('last_year')
-        years = {}
-        results = []
-        for group in groups:
-            if not group.last_year in years:
-                years[group.last_year] = []
-            serializer = GroupSerializer(group)
-            years[group.last_year].append(serializer.data)
 
-        for year, groups in years.iteritems():
-            results.append({'year': year, 'groups': groups})
-        return Response(results)
+class StudentGroupListView(GroupListView):
+    is_graduated = False
 
 
 class GroupDetailView(RetrieveCachedAPIView):
@@ -291,7 +277,6 @@ class PersonInvitationView(generics.CreateAPIView):
         }
 
         send_templated_email(subject, 'community/invite.html', context, [data['email']], self.request.user.email)
-
 
     def create(self, request, *args, **kwargs):
         person = self.get_object()

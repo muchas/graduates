@@ -129,6 +129,7 @@ class Person(models.Model):
     def find_common_universities_with(self, person):
         return University.objects.filter(person__in=[self.pk]).filter(person__in=[person.pk]).distinct()
 
+    # TODO: Fix bug with common university cities - people can study on different universities but in the same city
     def find_common_city_connections_with(self, person):
         university_cities = City.objects.filter(
             universities__in=self.universities.all()

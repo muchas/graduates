@@ -20,9 +20,9 @@ class CacheModelMixin(object):
             (self.__class__.__name__, lookup_url_kwarg)
         )
 
-        identifier = self.kwargs[lookup_url_kwarg]
+        identifier = str(self.kwargs[lookup_url_kwarg])
 
-        return self.get_serializer_class().__name__ + str(identifier)
+        return self.get_serializer_class().__name__ + identifier
 
     def get_cached_data(self):
         """
