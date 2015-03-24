@@ -122,24 +122,21 @@ class Person(models.Model):
             return self.group.tutor
 
     def find_common_universities_with(self, person):
-        difference = University.objects.exclude(person__in=[person.pk]).distinct()
-        return University.objects.filter(person__in=[self.pk]).exclude(pk__in=difference).distinct()
+        return University.objects.filter(person__in=[self.pk]).filter(person__in=[person.pk]).distinct()
 
     def find_common_city_connections_with(self, person):
-        university_cities = City.objects.filter(universities__in=self.find_common_universities_with(person)).distinct()
-
-        employment_cities_diff = City.objects.exclude(employments__person__in=[person.pk]).distinct()
-        employment_cities = City.objects.filter(employments__person__in=[self.pk]).exclude(pk__in=employment_cities_diff).distinct()
+        university_cities = City.objects.filter(
+            universities__in=self.universities.all()
+        ).filter(universities__in=person.universities.all()).distinct()
+        employment_cities = City.objects.filter(employments__person__in=[self.pk]).filter(employments__person__in=[person.pk]).distinct()
 
         return employment_cities | university_cities
 
     def find_common_branches_with(self, person):
-        difference = Branch.objects.exclude(person__in=[person.pk]).distinct()
-        return Branch.objects.filter(person__in=[self.pk]).exclude(pk__in=difference).distinct()
+        return Branch.objects.filter(person__in=[self.pk]).filter(person__in=[person.pk]).distinct()
 
     def find_common_companies_with(self, person):
-        difference = Company.objects.exclude(person__in=[person.pk]).distinct()
-        return Company.objects.filter(person__in=[self.pk]).exclude(pk__in=difference).distinct()
+        return Company.objects.filter(person__in=[self.pk]).filter(person__in=[person.pk]).distinct()
 
 
 class Branch(models.Model):
