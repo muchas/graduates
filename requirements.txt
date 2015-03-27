@@ -16,3 +16,4 @@ simplejson==3.6.5
 six==1.7.3
 slimit==0.8.1
 wsgiref==0.1.2
+psycopg2==2.6
