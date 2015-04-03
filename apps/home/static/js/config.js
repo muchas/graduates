@@ -8,6 +8,7 @@ var App = {
     },
     Collection: {},
     Router: {},
+    View: {},
     ItemView: {},
     CollectionView: {},
     Layouts: {},
@@ -60,3 +61,27 @@ $.ajaxSetup({
         }
     }
 });
+
+/**
+ * Leaflet map
+ */
+  function LeafletMap(options) {
+    this.markers = [];
+    this.onMarkerClick = options.onMarkerClick;
+    this.map = new L.Map(options.name);
+    this.osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    this.mbUrl = 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
+    this.mblayer = new L.TileLayer(this.mbUrl, {id: 'examples.map-i875mjb7'});
+
+    this.osm = new L.TileLayer(this.osmUrl, { minZoom: options.minZoom, maxZoom: options.maxZoom });
+    this.map.setView(new L.LatLng(options.x, options.y), options.zoom);
+    this.map.addLayer(this.mblayer);
+  }
+
+  LeafletMap.prototype.addCity = function(city, x, y) {
+    var marker = L.marker([x, y]).addTo(this.map);
+    marker.on('click', function() {
+      this.onMarkerClick(city);
+    }.bind(this));
+    this.markers.push(marker);
+  };

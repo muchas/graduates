@@ -12,3 +12,11 @@ App.Layouts.Community = Marionette.LayoutView.extend({
        'graduates': '#graduates'
    }
 });
+
+App.Layouts.Dashboard = Marionette.LayoutView.extend({
+   template: Handlebars.templates.dashboard,
+    regions: {
+        'map': '#map',
+        'city': '#city'
+    }
+});

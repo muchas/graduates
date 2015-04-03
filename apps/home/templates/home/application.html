@@ -274,14 +274,14 @@
         <ul class="mainnav-menu">
 
           <li class="dropdown active">
-          	<a href="{{ STATIC_URL }}index.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          	<a href="#/" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
           	Społeczność
           	<i class="mainnav-caret"></i>
           	</a>
 
           	<ul class="dropdown-menu" role="menu">
               <li>
-                <a href="{{ STATIC_URL }}index.html">
+                <a href="#/">
                 <i class="fa fa-globe"></i>
                 &nbsp;&nbsp;Mapa absolwentów
                 </a>
@@ -301,7 +301,7 @@
                 </a>
               </li>
               <li>
-                <a href="{{ STATIC_URL }}dashboard-3.html">
+                <a href="#/">
                 <i class="fa fa-dashboard"></i> 
                 &nbsp;&nbsp;Zaawansowane wyszukiwanie
                 </a>
@@ -593,6 +593,8 @@
 <script src="{{ STATIC_URL }}js/handlebars.js"></script>
 
 
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
 <script src="{{ STATIC_URL }}js/config.js"></script>
 <script src="{{ STATIC_URL }}js/forms/editors/month.js"></script>
 
@@ -611,6 +613,7 @@
 <script src="{{ STATIC_URL }}js/forms/community.js"></script>
 
 <!-- Views -->
+<script src="{{ STATIC_URL }}js/views/basic/map.js"></script>
 <script src="{{ STATIC_URL }}js/views/layout/root.js"></script>
 <script src="{{ STATIC_URL }}js/views/layout/profile.js"></script>
 <script src="{{ STATIC_URL }}js/views/layout/community.js"></script>

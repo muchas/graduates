@@ -6,7 +6,9 @@ App.Command.Community =  App.Command.Base.extend({
         "community/group": "getGroup",
         "community/graduated-groups": "getGraduatedGroups",
         "community/student-groups": "getStudentGroups",
-        "community/send-invitation": "invitePerson"
+        "community/send-invitation": "invitePerson",
+        "community/cities": "getAllCities",
+        "community/city": "getCity"
     },
 
     getAllBranches: function(callback) {
@@ -31,5 +33,13 @@ App.Command.Community =  App.Command.Base.extend({
 
     invitePerson: function(id, data, callback, failure) {
         this.jsonRequest('POST', 'profile-invitation', { pk: id }, data, callback, failure);
+    },
+
+    getAllCities: function(callback) {
+        this.jsonRequest('GET', 'city-list', {}, {}, callback);
+    },
+
+    getCity: function(id, callback) {
+        this.jsonRequest('GET', 'city', { pk: id }, {}, callback);
     }
 });

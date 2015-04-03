@@ -9,9 +9,16 @@ from apps.community.validators import EmailValidator, IntegerValidator, UniqueVa
 
 
 class PersonSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.SerializerMethodField()
+
     class Meta:
         model = Person
-        fields = ('id', 'full_name', 'first_name', 'married_name', 'last_name', 'sex', 'picture')
+        fields = ('id', 'full_name', 'first_name', 'married_name', 'last_name', 'sex', 'picture', 'thumbnail')
+
+    def get_thumbnail(self, person):
+        if person.picture:
+            return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['thumbnail'].url)
+
 
 
 class PersonDescriptionSerializer(serializers.ModelSerializer):
@@ -40,10 +47,23 @@ class CitySerializer(serializers.ModelSerializer):
 
 class CityDetailSerializer(serializers.ModelSerializer):
     people = PersonSerializer(many=True)
+    people_count = serializers.SerializerMethodField('count_people')
+    university_count = serializers.SerializerMethodField('count_universities')
+    companies_count = serializers.SerializerMethodField('count_companies')
 
     class Meta:
         model = City
-        fields = ('id', 'name', 'latitude', 'longitude', 'people')
+        fields = ('id', 'name', 'latitude', 'longitude', 'people', 'people_count', 'university_count', 'companies_count')
+
+    def count_people(self, city):
+        return city.people.count()
+
+    def count_universities(self, city):
+        return city.universities.count()
+
+    def count_companies(self, city):
+        return 0
+
 
 class CityNameSerializer(serializers.ModelSerializer):
     class Meta:
@@ -253,7 +273,7 @@ class PersonProfileSerializer(serializers.ModelSerializer):
     teacher_learn_years = serializers.StringRelatedField(many=True)
     subjects = SubjectSerializer(many=True)
     personal_data = PersonalDataSerializer(source='public_personal_data', many=True)
-    thumbnail = serializers.SerializerMethodField('get_photo_thumbnail')
+    thumbnail = serializers.SerializerMethodField()
     is_owner = serializers.SerializerMethodField('check_ownership')
     is_male = serializers.SerializerMethodField('is_person_male')
     can_be_invited = serializers.SerializerMethodField('check_inviting_ability')
@@ -262,7 +282,7 @@ class PersonProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
 
-    def get_photo_thumbnail(self, person):
+    def get_thumbnail(self, person):
         if person.picture:
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
 

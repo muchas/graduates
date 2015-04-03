@@ -34,6 +34,8 @@ class Default(Configuration):
 
     ALLOWED_HOSTS = ['.lo5.bielsko.pl', '127.0.0.1', 'localhost']
 
+    INTERNAL_IPS = ('192.168.40.1',)
+
     AUTH_USER_MODEL = 'accounts.User'
 
     ACCOUNT_ACTIVATION_DAYS = 7
@@ -141,6 +143,11 @@ class Default(Configuration):
                 'quality': 100,
                 'crop': 'scale'
             },
+            'thumbnail': {
+                'size': (50, 50),
+                'quality': 85,
+                'crop': 'scale'
+            }
         },
     }
 
