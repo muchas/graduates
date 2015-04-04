@@ -1,9 +1,5 @@
-from django.core.cache import get_cache
-from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ungettext, ugettext as _
-from rest_framework import generics, views
-from django.utils.translation import ugettext as _
 from rest_framework import generics, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -13,27 +9,15 @@ from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsF
 from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
-    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer
+    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer, CityDetailSerializer
 from utils.mail import send_templated_email
+from utils.rest import RetrieveCachedAPIView
 
 
-class CityDetailView(views.APIView):
+class CityDetailView(RetrieveCachedAPIView):
+    queryset = City.objects.filter(is_verified=True)
+    serializer_class = CityDetailSerializer
     permission_classes = (IsAuthenticated,)
-
-    def get_object(self, pk):
-        cache = get_cache('default')
-        city = cache.get('city_' + pk)
-        if not city:
-            # case when city is not cached
-            # query city and people connected with that city
-            # serialize it and then save in cache
-            # return result
-            pass
-        return city
-
-    def get(self, request, pk, format=None):
-        city = self.get_object(pk)
-        return Response(city)
 
 
 class CityListView(generics.ListAPIView):
@@ -54,11 +38,11 @@ class TeacherListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-class GraduatedGroupListView(views.APIView):
+class GroupListView(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, *args, **kwargs):
-        groups = Group.objects.filter(is_graduated=True).order_by('last_year')
+        groups = Group.objects.filter(is_graduated=self.is_graduated).order_by('last_year')
         result = {}
         results = []
         for group in groups:
@@ -72,25 +56,15 @@ class GraduatedGroupListView(views.APIView):
         return Response(results)
 
 
-class StudentGroupListView(views.APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, *args, **kwargs):
-        groups = Group.objects.filter(is_graduated=False).order_by('last_year')
-        years = {}
-        results = []
-        for group in groups:
-            if not group.last_year in years:
-                years[group.last_year] = []
-            serializer = GroupSerializer(group)
-            years[group.last_year].append(serializer.data)
-
-        for year, groups in years.iteritems():
-            results.append({'year': year, 'groups': groups})
-        return Response(results)
+class GraduatedGroupListView(GroupListView):
+    is_graduated = True
 
 
-class GroupDetailView(generics.RetrieveAPIView):
+class StudentGroupListView(GroupListView):
+    is_graduated = False
+
+
+class GroupDetailView(RetrieveCachedAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupDetailsSerializer
     permission_classes = (IsAuthenticated,)
@@ -303,7 +277,6 @@ class PersonInvitationView(generics.CreateAPIView):
         }
 
         send_templated_email(subject, 'community/invite.html', context, [data['email']], self.request.user.email)
-
 
     def create(self, request, *args, **kwargs):
         person = self.get_object()

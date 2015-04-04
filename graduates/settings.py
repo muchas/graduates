@@ -34,6 +34,8 @@ class Default(Configuration):
 
     ALLOWED_HOSTS = ['.lo5.bielsko.pl', '127.0.0.1', 'localhost']
 
+    INTERNAL_IPS = ('192.168.40.1',)
+
     AUTH_USER_MODEL = 'accounts.User'
 
     ACCOUNT_ACTIVATION_DAYS = 7
@@ -73,6 +75,7 @@ class Default(Configuration):
         'apps.home',
         'apps.community',
         'apps.accounts',
+        'debug_toolbar',
     )
 
     TEMPLATE_CONTEXT_PROCESSORS = (
@@ -102,7 +105,8 @@ class Default(Configuration):
         'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'django.middleware.locale.LocaleMiddleware'
+        'django.middleware.locale.LocaleMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
 
     ROOT_URLCONF = 'graduates.urls'
@@ -139,8 +143,21 @@ class Default(Configuration):
                 'quality': 100,
                 'crop': 'scale'
             },
+            'thumbnail': {
+                'size': (50, 50),
+                'quality': 85,
+                'crop': 'scale'
+            }
         },
     }
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        }
+    }
+
 
 
 class Development(Default):

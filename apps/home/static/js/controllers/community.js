@@ -1,7 +1,14 @@
 
 App.Controller.CommunityController = {
     showDashboard: function() {
-        console.log('Show dashboard');
+        var layout = new App.Layouts.Dashboard();
+        App.layout.content.show(layout);
+        App.instance.execute('community/cities', function(response) {
+            var cities = new App.Collection.Cities(response);
+            var map = new App.View.Map({ collection: cities,  container: layout.city });
+            layout.map.show(map);
+            map.loadMap();
+        });
     },
 
     listTeachers: function() {
