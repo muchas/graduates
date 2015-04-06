@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ungettext, ugettext as _
+from haystack.query import EmptySearchQuerySet, SearchQuerySet
 from rest_framework import generics, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -9,7 +10,8 @@ from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsF
 from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
-    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer, CityDetailSerializer
+    PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer, CityDetailSerializer, \
+    PersonSearchSerializer
 from utils.mail import send_templated_email
 from utils.rest import RetrieveCachedAPIView
 
@@ -289,3 +291,15 @@ class PersonInvitationView(generics.CreateAPIView):
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class PersonSearchView(generics.ListAPIView):
+    serializer_class = PersonSearchSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        queryset = EmptySearchQuerySet()
+        query = self.request.GET.get('q', None)
+        if query:
+            queryset = SearchQuerySet().autocomplete(content_auto=query)
+        return queryset

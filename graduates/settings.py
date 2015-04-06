@@ -69,6 +69,7 @@ class Default(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'haystack',
         'rest_framework',
         'easy_thumbnails',
         'captcha',
@@ -126,6 +127,14 @@ class Default(Configuration):
             'HOST': '127.0.0.1',
             'PORT': '5432',
         }
+    }
+
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': 'http://127.0.0.1:9200/',
+            'INDEX_NAME': 'graduates',
+        },
     }
 
     REST_FRAMEWORK = {
