@@ -20,6 +20,17 @@ class PersonSerializer(serializers.ModelSerializer):
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['thumbnail'].url)
 
 
+class PersonSearchSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    married_name = serializers.CharField()
+    thumbnail = serializers.SerializerMethodField()
+
+    def get_thumbnail(self, person):
+        if person.picture:
+            return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['thumbnail'].url)
+
 
 class PersonDescriptionSerializer(serializers.ModelSerializer):
     class Meta:

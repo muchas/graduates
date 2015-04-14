@@ -38,6 +38,9 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
 
 //    App.instance.topBar.show(new App.Layouts.TopBar());
 
+    var searchResults = new App.Collection.PeopleSearchResults();
+    App.layout.search.show(new App.Form.Search({ collection: searchResults }));
+    App.layout.searchResults.show(new App.CollectionView.SearchResults({ collection: searchResults }));
 
     new App.Router.ProfileRouter();
     new App.Router.CommunityRouter();

@@ -16,3 +16,5 @@ Handlebars.registerHelper("avatar", function(picture) {
        return "media/unknown.png"
    }
 });
+
+String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
