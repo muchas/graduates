@@ -60,11 +60,6 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
     if (displayIntroductionWizard) {
         Backbone.history.navigate("/introduction", true);
     }
-
-    $(window).bind('hashchange', function(){
-        searchResults.reset();
-    });
-
 });
 
 App.instance.vent.trigger("sync/init");

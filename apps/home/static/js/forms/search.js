@@ -3,7 +3,11 @@ App.Form.Search = Marionette.ItemView.extend({
    template: Handlebars.templates.search_form,
 
     events: {
-        "input input": "search"
+        "input input": "search",
+        "keypress input": "press",
+        "blur input": "blur",
+        "focusin input": "focus",
+        "click input": "select"
     },
 
     ui: {
@@ -12,7 +16,22 @@ App.Form.Search = Marionette.ItemView.extend({
 
     initialize: function() {
         this.current = "";
-        this.previous = "";
+    },
+
+    select: function() {
+        this.ui.input.select();
+    },
+
+    focus: function() {
+       if(this.ui.input.val() != "") {
+           this.search();
+       }
+    },
+
+    press: function(e) {
+        if(e.which == 13) {
+            e.preventDefault();
+        }
     },
 
     search: function() {
@@ -31,7 +50,10 @@ App.Form.Search = Marionette.ItemView.extend({
 
     blur: function(e) {
         console.log(e);
-        this.collection.reset();
+        this.current = "";
+        setTimeout(function() {
+            this.collection.reset();
+        }.bind(this), 250);
     },
 
     clear: function() {

@@ -301,5 +301,5 @@ class PersonSearchView(generics.ListAPIView):
         queryset = EmptySearchQuerySet()
         query = self.request.GET.get('q', None)
         if query:
-            queryset = SearchQuerySet().autocomplete(content_auto=query)
+            queryset = SearchQuerySet().autocomplete(content_auto=query)[:6]
         return queryset
