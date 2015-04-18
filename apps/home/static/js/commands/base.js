@@ -31,6 +31,9 @@ App.Command.Base = Backbone.View.extend({
         }
         else if (jqXHR.status === 403) {
             this.show403();
+            location.reload();
+        }
+        else if (jqHX.status === 401) {
         }
         else {
             this.show500();

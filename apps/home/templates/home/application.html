@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -66,52 +67,27 @@
 
         <ul class="nav navbar-nav noticebar navbar-left">
           <li class="dropdown">
-            <a href="{{ STATIC_URL }}page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="javascript;;" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell"></i>
-              <span class="navbar-visible-collapsed">&nbsp;Notifications&nbsp;</span>
-              <span class="badge badge-primary">3</span>
+              <span class="navbar-visible-collapsed">&nbsp;Powiadomienia&nbsp;</span>
+{#              <span class="badge badge-primary">3</span>#}
             </a>
 
             <ul class="dropdown-menu noticebar-menu noticebar-hoverable" role="menu">
 
               <li class="nav-header">
                 <div class="pull-left">
-                  Notifications
+                  Powiadomienia
                 </div>
 
                 <div class="pull-right">
-                  <a href="javascript:;">Mark as Read</a>
+                  <a href="javascript:;">Oznacz jako przeczytane</a>
                 </div>
               </li>
 
-              <li>
-                <a href="{{ STATIC_URL }}page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <i class="fa fa-cloud-upload text-success"></i>
-                  </span>
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">Templates Synced</strong>
-                    <span class="noticebar-item-text">20 Templates have been synced to the Mashon Demo instance.</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 12 minutes ago</span>
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <i class="fa fa-ban text-danger"></i>
-                  </span>
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">Sync Error</strong>
-                    <span class="noticebar-item-text">5 Designs have been failed to be synced to the Mashon Demo instance.</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
-                  </span>
-                </a>
-              </li>
-
-              <li class="noticebar-menu-view-all">
-                <a href="{{ STATIC_URL }}page-notifications.html">View All Notifications</a>
+              <li class="noticebar-empty">
+                <h4 class="noticebar-empty-title">Brak powiadomień.</h4>
+                <p class="noticebar-empty-text">Sprawdź o czym dysktuje społeczność oraz odkrywaj co robią koledzy z czasów liceum!</p>
               </li>
             </ul>
           </li>
@@ -119,52 +95,20 @@
 
 
           <li class="dropdown">
-            <a href="{{ STATIC_URL }}page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
+            <a href=";javascript;;"class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope"></i>
-              <span class="navbar-visible-collapsed">&nbsp;Messages&nbsp;</span>
+              <span class="navbar-visible-collapsed">&nbsp;Wiadomości&nbsp;</span>
             </a>
 
             <ul class="dropdown-menu noticebar-menu noticebar-hoverable" role="menu">                
               <li class="nav-header">
                 <div class="pull-left">
-                  Messages
+                  Wiadomości
                 </div>
 
-                <div class="pull-right">
-                  <a href="javascript:;">New Message</a>
-                </div>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <img src="{{ STATIC_URL }}img/avatars/avatar-1-md.jpg" style="width: 50px" alt="">
-                  </span>
-
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">New Message</strong>
-                    <span class="noticebar-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <img src="{{ STATIC_URL }}img/avatars/avatar-2-md.jpg" style="width: 50px" alt="">
-                  </span>
-
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">New Message</strong>
-                    <span class="noticebar-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 5 hours ago</span>
-                  </span>
-                </a>
-              </li>
-
-              <li class="noticebar-menu-view-all">
-                <a href="{{ STATIC_URL }}page-notifications.html">View All Messages</a>
+              <li class="noticebar-empty">
+                <h4 class="noticebar-empty-title">Brak wiadomości.</h4>
+                <p class="noticebar-empty-text">Nie wysłałeś z nikim żadnej wiadomości.</p>
               </li>
             </ul>
           </li>
@@ -178,13 +122,13 @@
             <ul class="dropdown-menu noticebar-menu noticebar-hoverable" role="menu">                
               <li class="nav-header">
                 <div class="pull-left">
-                  Alerts
+                  Przypomnienia
                 </div>
               </li>
 
               <li class="noticebar-empty">                  
-                <h4 class="noticebar-empty-title">No alerts here.</h4>
-                <p class="noticebar-empty-text">Check out what other makers are doing on Explore!</p>                
+                <h4 class="noticebar-empty-title">Brak przypomnień.</h4>
+                <p class="noticebar-empty-text">Sprawdź o czym dysktuje społeczność oraz odkrywaj co robią koledzy z czasów liceum!</p>
               </li>
             </ul>
           </li>
@@ -199,15 +143,15 @@
 
           <li>
             <a href="javsacript:;">Twoja opinia</a>
-          </li>    
-
-          <li>
-            <a href="javascript:;">Resources</a>
-          </li>    
+          </li>
 
           <li class="dropdown navbar-profile">
             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-              <img src="{{ STATIC_URL }}img/avatars/avatar-1-xs.jpg" class="navbar-profile-avatar" alt="">
+              {% if request.user.person.picture %}
+              <img src="{{ request.user.person.picture|thumbnail_url:"thumbnail" }}" class="navbar-profile-avatar" alt="">
+                {% else %}
+              <img src="/media/unknown.png" class="navbar-profile-avatar" alt="avatar">
+                {% endif %}
               <span class="navbar-profile-label">rod@rod.me &nbsp;</span>
               <i class="fa fa-caret-down"></i>
             </a>
@@ -215,32 +159,25 @@
             <ul class="dropdown-menu" role="menu">
 
               <li>
-                <a href="#/profile">
+                <a href="#/person/{{ request.user.person.pk }}">
                   <i class="fa fa-user"></i> 
-                  &nbsp;&nbsp;My Profile
-                </a>
-              </li>
-
-              <li>
-                <a href="#/profile/edit">
-                  <i class="fa fa-dollar"></i> 
-                  &nbsp;&nbsp;Plans & Billing
+                  &nbsp;&nbsp;Mój profil
                 </a>
               </li>
 
               <li>
                 <a href="{{ STATIC_URL }}page-settings.html">
                   <i class="fa fa-cogs"></i> 
-                  &nbsp;&nbsp;Settings
+                  &nbsp;&nbsp;Ustawienia
                 </a>
               </li>
 
               <li class="divider"></li>
 
               <li>
-                <a href="{{ STATIC_URL }}account-login.html">
+                <a href="{% url 'logout' %}">
                   <i class="fa fa-sign-out"></i> 
-                  &nbsp;&nbsp;Logout
+                  &nbsp;&nbsp;Wyloguj
                 </a>
               </li>
 
@@ -296,104 +233,17 @@
                 &nbsp;&nbsp;Nauczyciele
                 </a>
               </li>
-              <li>
-                <a href="#/">
-                <i class="fa fa-dashboard"></i> 
-                &nbsp;&nbsp;Zaawansowane wyszukiwanie
-                </a>
-              </li>
           	</ul>
           </li>
 
 
           <li class="dropdown ">
-
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            Dyskusja
-            </a>
-
-            <ul class="dropdown-menu" role="menu">
-
-              <li>
-                <a href="{{ STATIC_URL }}components-tabs.html">
-                <i class="fa fa-bars"></i> 
-                &nbsp;&nbsp;Tabs &amp; Accordions
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}components-popups.html">
-                <i class="fa fa-calendar-o"></i> 
-                &nbsp;&nbsp;Popups &amp; Alerts
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}components-validation.html">
-                <i class="fa fa-check"></i> 
-                &nbsp;&nbsp;Validation
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}components-datatables.html">
-                <i class="fa fa-table"></i> 
-                &nbsp;&nbsp;Data Tables
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}components-gallery.html">
-                <i class="fa fa-picture-o"></i> 
-                &nbsp;&nbsp;Gallery
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}components-charts.html">
-                <i class="fa fa-bar-chart-o"></i> 
-                &nbsp;&nbsp;Charts
-                </a>
-              </li>		  
-            </ul>
+            <a href="javascript:;">Dyskusja</a>
           </li>
 
 
           <li class="dropdown ">
-
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            Moja klasa
-            </a>
-
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="{{ STATIC_URL }}page-pricing.html">
-                <i class="fa fa-money"></i> 
-                &nbsp;&nbsp;Plans & Billing
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}page-profile.html">
-                <i class="fa fa-user"></i> 
-                &nbsp;&nbsp;Profile
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}page-settings.html">
-                <i class="fa fa-cogs"></i> 
-                &nbsp;&nbsp;Settings
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ STATIC_URL }}page-faq.html">
-                <i class="fa fa-question"></i> 
-                &nbsp;&nbsp;FAQ
-                </a>
-              </li>
-            </ul>
+            <a href="#/group/{{ request.user.person.group.pk }}">Moja klasa</a>
           </li>
 
 
@@ -487,13 +337,13 @@
         </ul>
 
       </nav>
-        <h4 style="margin-top: 25px; float: right;">1031 zarejestrowanych</h4>
+        <h4 style="margin-top: 25px; float: right;">{{ members_count }} zarejestrowanych</h4>
 
     </div> <!-- /.container -->
 
   </div> <!-- /.mainnav -->
 
-  <div class="content">
+  <div class="content" style="min-height: 650px;">
 
     <div class="container" id="content">
 

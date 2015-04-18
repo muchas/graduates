@@ -5,7 +5,11 @@ App.Controller.CommunityController = {
         App.layout.content.show(layout);
         App.instance.execute('community/cities', function(response) {
             var cities = new App.Collection.Cities(response);
-            var map = new App.View.Map({ collection: cities,  container: layout.city });
+            var map = new App.View.Map({
+                collection: cities,
+                container: layout.city,
+                itemView: App.ItemView.City
+            });
             layout.map.show(map);
             map.loadMap();
         });

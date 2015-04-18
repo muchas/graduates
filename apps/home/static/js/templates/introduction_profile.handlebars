@@ -1,0 +1,62 @@
+<div>
+<div class="content" style="padding-bottom: 0">
+    <div class="intro" style="padding-bottom: 0; width: 800px; margin: 0 auto;">
+            <h2>
+                Uzupełnij swój profil!
+            </h2>
+
+            <h4 class="">Buduj społeczność razem z innymi, dodaj kilka informacji od siebie!</h4>
+
+          <div class="counter">
+
+          </div> <!-- /.counter -->
+         <div class="row">
+             <style>
+                 #personalData, #employments, #universities, #new-employment, #new-university {
+                     text-align: left;
+                     /*width: 1100px;*/
+                     margin: 15px auto;
+                 }
+
+                 #add-employment, #add-university {
+                     float: left;
+                 }
+
+                 h4.content-title {
+                     text-align: left;
+                     padding: 0;
+                     font-style: normal;
+                     font-size: 18px;
+                     font-family: Oswald,'Trebuchet MS','Open Sans',arial,sans-serif;
+                 }
+
+                 p.introduction {
+                     font-size: 13px;
+                     font-family: 'Open Sans', 'Trebuchet MS', arial, sans-serif;
+                     text-align: left;;
+                 }
+
+             </style>
+            <h4 class="content-title"><u>Dane kontaktowe</u></h4>
+             <p class="introduction">Pole ustawione jako <i>publiczne</i> widoczne jest dla wszystkich użytkowników portalu, zaś <i>prywatne</i> jedynie dla dyrekcji szkoły.</p>
+             <hr />
+            <div id="personalData"></div>
+         </div>
+        <div class="row" style="margin-bottom: 45px;">
+            <h4 class="content-title"><u>Edukacja</u></h4>
+            <div id="universities"></div>
+            <div id="new-university"></div>
+            <a id="add-university" class="btn btn-default"><i class="fa fa-plus-circle"></i> Dodaj uczelnię</a>
+        </div>
+        <div class="row">
+            <h4 class="content-title"><u>Zatrudnienie</u></h4>
+            <div id="employments"></div>
+            <div id="new-employment"></div>
+            <a id="add-employment" class="btn btn-default"><i class="fa fa-plus-circle"></i> Dodaj stanowisko</a>
+        </div>
+    </div>
+</div>
+    <form role="form" class="newsletter" method="post" action="./index.html">
+           <a href="/introduce" class="btn btn-primary" style="width: 350px">Przejdź do portalu</a>
+    </form> <!-- /.newsletter-form -->
+</div>

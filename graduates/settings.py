@@ -167,6 +167,7 @@ class Default(Configuration):
         }
     }
 
+    LOGIN_REDIRECT_URL = '/'
 
 
 class Development(Default):

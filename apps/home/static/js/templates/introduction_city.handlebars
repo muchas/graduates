@@ -1,0 +1,66 @@
+<div>
+<div class="col-md-8 col-sm-7">
+<div class="portlet">
+
+  <h3 class="portlet-title">
+    <u>{{ name }}</u>
+  </h3>
+
+  <div class="portlet-body">
+    <div class="row-fluid" style="max-height: 500px; overflow: scroll;">
+        {{#each people }}
+        <div class="col-md-4">
+          <div class="pull-left">
+              <img src="{{#avatar thumbnail}}{{ thumbnail }}{{/avatar}}" class="profile-avatar-img thumbnail" alt="Profile Image" style="width: 50px; height: 50px;">
+          </div>
+          <div class="pull-left" style="padding: 15px 0 15px 10px;">
+              {{ full_name }}
+          </div>
+        </div>
+        {{ else }}
+           <p>Aktualnie żaden absolwent nie jest powiązany z tym miastem.</p>
+        {{/each}}
+    </div>
+  </div> <!-- /.portlet-body -->
+
+</div> <!-- /.portlet -->
+
+</div> <!-- /.col -->
+
+<div class="col-md-4 col-sm-5">
+
+    <div class="portlet">
+
+      <h4 class="portlet-title">
+        <u>Informacje</u>
+      </h4>
+
+      <div class="portlet-body">
+
+        <p>Statystyki dotyczą wybranego miasta. Absolwenci są przypisani do miast na podstawie informacji o <span style="font-weight: bold">karierze zawodowej</span> oraz <span style="font-weight: bold">uczelniach</span>, na których studiowali.</p>
+
+        <hr>
+
+        <table class="table keyvalue-table">
+          <tbody>
+            <tr>
+              <td class="kv-key"><i class="fa fa-users kv-icon kv-icon-primary"></i> powiązani absolwenci</td>
+              <td class="kv-value">{{ people_count }} </td>
+            </tr>
+            <tr>
+              <td class="kv-key"><i class="fa fa-university kv-icon kv-icon-secondary"></i> uczelnie</td>
+              <td class="kv-value">{{ university_count }} </td>
+            </tr>
+            <tr>
+              <td class="kv-key"><i class="fa fa-suitcase kv-icon kv-icon-tertiary"></i>firmy</td>
+              <td class="kv-value">{{ companies_count }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div> <!-- /.portlet-body -->
+
+    </div> <!-- /.portlet -->
+
+  </div> <!-- /.col -->
+</div>

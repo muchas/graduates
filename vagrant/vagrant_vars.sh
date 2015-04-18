@@ -5,7 +5,7 @@ DB_DUMP_COMPRESSION="xz"; # leave blank for none
 
 VAGRANT_PATH="/vagrant";
 REPO_PATH=$VAGRANT_PATH"/graduates";
-PROVISIONING_PATH=$VAGRANT_PATH"/vagrant/provisioning";
+PROVISIONING_PATH=$VAGRANT_PATH"/provisioning";
 DUMPFILE_PATH=$VAGRANT_PATH"/vagrant/"$DUMPFILE;
 
 export LOCAL_DB_NAME="graduates";
