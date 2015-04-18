@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import ungettext, ugettext as _
 from haystack.query import EmptySearchQuerySet, SearchQuerySet
 from rest_framework import generics, views, status

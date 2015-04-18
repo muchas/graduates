@@ -7,3 +7,11 @@ App.Layouts.RootLayout = Marionette.LayoutView.extend({
         "content": "#content"
     }
 });
+
+App.Layouts.IntroductionRootLayout = Marionette.LayoutView.extend({
+   el: 'body',
+
+    regions: {
+        "content": "#content"
+    }
+});

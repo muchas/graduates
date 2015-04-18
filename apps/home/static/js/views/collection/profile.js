@@ -20,5 +20,11 @@ App.CollectionView.EditableUniversities = Marionette.CollectionView.extend({
 });
 
 App.CollectionView.EditableAttributes = Marionette.CollectionView.extend({
-   childView: App.ItemView.EditableAttribute
+   childView: App.ItemView.EditableAttribute,
+
+   edit: function() {
+       this.children.each(function(view) {
+          view.edit();
+       });
+   }
 });

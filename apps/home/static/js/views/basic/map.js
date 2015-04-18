@@ -3,6 +3,7 @@ App.View.Map = Backbone.View.extend({
 
     initialize: function(options) {
         this.container = options.container;
+        this.cityItemView = options.itemView;
         this.currentCity = null;
     },
 
@@ -39,7 +40,7 @@ App.View.Map = Backbone.View.extend({
             this.currentCity = pk;
             App.instance.execute('community/city', pk, function(response) {
                 var model = new App.Model.City(response);
-                this.container.show(new App.ItemView.City({ model: model }));
+                this.container.show(new this.cityItemView({ model: model }));
             }.bind(this));
         }
     }

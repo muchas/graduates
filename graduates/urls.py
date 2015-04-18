@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.home.views import HomePageView, FaqView
-from apps.accounts.views import LoginView, RegistrationWizard, ActivationView, ClaimView
+from apps.accounts.views import LoginView, RegistrationWizard, ActivationView, ClaimView, UserIntroduceView
 
 js_info_dict = {
     'packages': ('apps.community',)
@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', LoginView.as_view(), name='login'),
+    url(r'^introduce/$', UserIntroduceView.as_view(), name='introduce'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
     url(r'^register/$', RegistrationWizard.as_view(), name='registration'),
     url(r'^faq/$', FaqView.as_view(), name='faq'),

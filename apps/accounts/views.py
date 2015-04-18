@@ -24,6 +24,15 @@ class LoginView(View):
         return login(request, authentication_form=AuthenticationForm)
 
 
+class UserIntroduceView(View):
+    def get(self, request):
+        user = request.user
+        if user and user.is_authenticated():
+            user.is_introduced = True
+            user.save()
+        return redirect('home')
+
+
 class RegistrationWizard(SessionWizardView):
     TEMPLATES = {
         "person": "registration/wizard_person.html",
@@ -76,7 +85,7 @@ class ActivationView(TemplateView):
             signals.user_activated.send(sender=self.__class__,
                                         user=activated_user,
                                         request=request)
-            return redirect('community:introduction')
+            return redirect('home')
         return super(ActivationView, self).get(request, *args, **kwargs)
 
     def activate(self, request, activation_key):
@@ -109,3 +118,5 @@ class ClaimView(FormView):
         claim = Claim(person=person, email=cleaned_data.get('email'), contact_phone=cleaned_data.get('contact_phone'))
         claim.save()
         return redirect('login')
+
+

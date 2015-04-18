@@ -7,6 +7,9 @@ MODULE_PATH="$PROVISIONING_PATH/venv"
 GRADUATES_PATH="/srv/graduates"
 VENV_NAME="venv"
 
+sudo sh "$MODULE_PATH/"ElasticSearch.sh 1.5.0;
+
+apt-get -y install postgresql postgresql-contrib;
 apt-get -y install python-pip python-dev build-essential;
 apt-get -y install git;
 apt-get -y install nodejs npm;

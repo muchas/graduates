@@ -57,6 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     person = models.OneToOneField(Person, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    is_introduced = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -79,6 +80,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    @property
+    def is_community_member(self):
+        return self.person
+
+    @property
+    def is_guest(self):
+        return not self.person
 
 
 class RegistrationManager(models.Manager):
@@ -122,6 +131,7 @@ class RegistrationManager(models.Manager):
             return user
         return False
 
+    @transaction.atomic
     def create_inactive_user(self, email, password, person=None, send_email=True):
         """
         Create a new, inactive ``User``, generate a
@@ -146,7 +156,6 @@ class RegistrationManager(models.Manager):
             registration_profile.send_activation_email()
 
         return new_user
-    create_inactive_user = transaction.commit_on_success(create_inactive_user)
 
     def delete_expired_users(self):
         """
