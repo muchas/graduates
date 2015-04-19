@@ -225,7 +225,7 @@ class PersonPhotoView(generics.RetrieveUpdateAPIView):
 class PersonProfileView(generics.RetrieveAPIView):
     serializer_class = PersonProfileSerializer
     permission_classes = (IsAuthenticated,)
-    queryset = Person.objects.all()
+    queryset = Person.objects.all().prefetch_related("achievements__edition__contest")
 
 
 class PersonalDataUpdateView(generics.UpdateAPIView):

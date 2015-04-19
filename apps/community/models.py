@@ -130,7 +130,6 @@ class Person(models.Model):
     def find_common_universities_with(self, person):
         return University.objects.filter(person__in=[self.pk]).filter(person__in=[person.pk]).distinct()
 
-    # TODO: Fix bug with common university cities - people can study on different universities but in the same city
     def find_common_city_connections_with(self, person):
         university_cities = City.objects.filter(
             universities__in=self.universities.all()
@@ -234,3 +233,39 @@ class Invitation(models.Model):
 
     def is_expired(self):
         return hasattr(self.person, 'user')
+
+
+###### Contests/achievements models #####
+
+class ContestScope(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+
+class ContestResult(models.Model):
+    name = models.CharField(max_length=100)
+    weight = models.IntegerField()
+
+
+class Contest(models.Model):
+    name = models.CharField(max_length=100)
+    scope = models.ForeignKey(ContestScope, related_name="contests")
+
+    def __unicode__(self):
+        return self.name
+
+
+class ContestEdition(models.Model):
+    year = models.IntegerField()
+    edition = models.CharField(max_length=10)
+    contest = models.ForeignKey(Contest, related_name="editions")
+
+
+class Achievement(models.Model):
+    points = models.IntegerField(null=True, blank=True)
+    place = models.IntegerField(null=True, blank=True)
+    person = models.ForeignKey(Person, related_name="achievements")
+    edition = models.ForeignKey(ContestEdition)
+    result = models.ForeignKey(ContestResult, null=True, blank=True)

@@ -4,7 +4,7 @@ from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
 from apps.accounts.models import User
 from apps.community.models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
-    UniversityDepartment, PersonalData, Attribute, Invitation
+    UniversityDepartment, PersonalData, Attribute, Invitation, Achievement
 from apps.community.validators import EmailValidator, IntegerValidator, UniqueValidator
 
 
@@ -276,6 +276,17 @@ class AttributeSerializer(serializers.ModelSerializer):
         model = Attribute
 
 
+class AchievementSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source="edition.contest.name")
+    result = serializers.CharField(source="result.name")
+    year = serializers.IntegerField(source="edition.year")
+    edition = serializers.CharField(source="edition.edition")
+
+    class Meta:
+        model = Achievement
+        fields = ('name', 'points', 'place', 'result', 'year', 'edition')
+
+
 class PersonProfileSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField()
     group = ProfileGroupSerializer()
@@ -283,6 +294,7 @@ class PersonProfileSerializer(serializers.ModelSerializer):
     employments = EmploymentSerializer(many=True)
     teacher_learn_years = serializers.StringRelatedField(many=True)
     subjects = SubjectSerializer(many=True)
+    achievements = AchievementSerializer(many=True)
     personal_data = PersonalDataSerializer(source='public_personal_data', many=True)
     thumbnail = serializers.SerializerMethodField()
     is_owner = serializers.SerializerMethodField('check_ownership')
