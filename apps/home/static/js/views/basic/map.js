@@ -11,6 +11,12 @@ App.View.Map = Backbone.View.extend({
         this.$el.html(this.template());
     },
 
+    getRandomCity: function() {
+        var randomIndex = Math.floor(Math.random()*this.collection.length);
+        return this.collection.at(randomIndex);
+    },
+
+
     loadMap: function() {
         this.map = new LeafletMap({
             name: "map-area",
@@ -29,10 +35,8 @@ App.View.Map = Backbone.View.extend({
             this.map.addCity(city, city.get('latitude'), city.get('longitude'));
         }.bind(this));
 
-        var randomIndex = Math.floor(Math.random()*this.collection.length);
-        var randomizedCity = this.collection.at(randomIndex);
-
-        this.loadCity(randomizedCity.get('id'));
+        console.log(this.getRandomCity().toJSON());
+        this.loadCity(this.getRandomCity().get('id'));
     },
 
     loadCity: function(pk) {

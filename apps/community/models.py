@@ -14,6 +14,7 @@ class City(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     is_verified = models.BooleanField(default=False)
+    is_empty = models.BooleanField(default=True)
 
     def __unicode__(self):
         return u"%s" % self.name
