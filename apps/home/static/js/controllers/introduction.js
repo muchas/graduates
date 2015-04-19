@@ -28,23 +28,44 @@ App.Controller.IntroductionController = {
         this.showUniversities(layout);
         this.showEmployments(layout);
 
+       var loadedData = {
+           "universities": false,
+           "cities": false,
+           "departments": false,
+           "branches": false
+       };
+
+       App.instance.vent.on("formDataLoaded", function(key) {
+            loadedData[key] = true;
+            for(var index in loadedData) {
+                if(!loadedData[index]) return false;
+            }
+            console.log(key);
+            layout.addEmployment();
+            layout.addUniversity();
+       });
+
         App.instance.execute("university/buildings", function(response) {
             App.Data.universities = response;
+            App.instance.vent.trigger("formDataLoaded", "universities");
         });
 
         App.instance.execute("city/all", function(response) {
            App.Data.cities = response;
+            App.instance.vent.trigger("formDataLoaded", "cities");
         });
 
         App.instance.execute("university/departments", function(response) {
            App.Data.departmens = response;
+            App.instance.vent.trigger("formDataLoaded", "departments");
         });
 
         App.instance.execute("community/branches", function(response) {
            App.Data.branches = response;
-           layout.addEmployment();
-           layout.addUniversity();
+            App.instance.vent.trigger("formDataLoaded", "branches");
+
         });
+
 
         // Listeners
         App.instance.vent.on("employment-created", function() {

@@ -14,6 +14,7 @@ from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer
     PersonSearchSerializer
 from utils.mail import send_templated_email
 from utils.rest import RetrieveCachedAPIView
+import signals
 
 
 class CityDetailView(RetrieveCachedAPIView):
@@ -23,7 +24,7 @@ class CityDetailView(RetrieveCachedAPIView):
 
 
 class CityListView(generics.ListAPIView):
-    queryset = City.objects.filter(is_verified=True)
+    queryset = City.objects.filter(is_verified=True, is_empty=False)
     serializer_class = CitySerializer
     permission_classes = (IsAuthenticated,)
 

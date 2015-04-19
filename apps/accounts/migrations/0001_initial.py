@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('auth', '0001_initial'),
-        ('community', '__first__'),
+        ('community', '0001_initial'),
     ]
 
     operations = [
