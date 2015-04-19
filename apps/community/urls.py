@@ -3,7 +3,7 @@ from apps.community.views import TeacherListView, PersonGroupView, CityListView,
     StudentListView, EmploymentListView, StudentView, EmploymentView, PersonDescriptionView, \
     PersonProfileView, PersonalDataUpdateView, AttributeListView, UniversityListView, DepartmentListView, BranchListView, \
     PersonPhotoView, AuthenticatedPersonView, PersonMarriedNameView, GraduatedGroupListView, StudentGroupListView, \
-    PersonSimilarityView, PersonInvitationView, PersonSearchView
+    PersonSimilarityView, PersonInvitationView, PersonSearchView, NotEmptyCityListView
 
 urlpatterns = patterns('',
                        url(r'teachers/', TeacherListView.as_view(), name='teacher-list'),
@@ -11,6 +11,7 @@ urlpatterns = patterns('',
                        url(r'student-groups/', StudentGroupListView.as_view(), name='student-group-list'),
                        url(r'graduates/', GraduatedGroupListView.as_view(), name='graduated-group-list'),
                        url(r'group/(?P<pk>\d+)/', GroupDetailView.as_view(), name='group'),
+                       url(r'cities/not-empty/', NotEmptyCityListView.as_view(), name='connected-city-list'),
                        url(r'cities/', CityListView.as_view(), name='city-list'),
                        url(r'city/(?P<pk>\d+)/', CityDetailView.as_view(), name='city'),
                        url(r'students/', StudentListView.as_view(), name='student-list'),

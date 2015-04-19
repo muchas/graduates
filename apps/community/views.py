@@ -23,8 +23,14 @@ class CityDetailView(RetrieveCachedAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-class CityListView(generics.ListAPIView):
+class NotEmptyCityListView(generics.ListAPIView):
     queryset = City.objects.filter(is_verified=True, is_empty=False)
+    serializer_class = CitySerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class CityListView(generics.ListAPIView):
+    queryset = City.objects.filter(is_verified=True)
     serializer_class = CitySerializer
     permission_classes = (IsAuthenticated,)
 
