@@ -62,7 +62,18 @@
         <br>
 
       {{/if}}
-      <div id="universities"></div>
+        {{#if achievements.length }}
+            <h5>Osiągnięcia</h5>
+            <ul>
+            {{#each achievements }}
+                <li>
+                    {{ name }} - {{ result }}{{# if place }}, {{ place }} miejsce{{/if}}{{# if points }}, {{  points }} pkt{{/if}}
+                    , {{ year }} rok
+                </li>
+            {{/each}}
+            </ul>
+        {{/if}}
+      <div id="universities" style="margin-top: 25px;"></div>
 
       {{#if show_now_section }}
       <h4 class="content-title"><u>Obecnie</u></h4>
