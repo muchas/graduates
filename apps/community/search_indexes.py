@@ -7,7 +7,7 @@ class PersonIndex(indexes.SearchIndex, indexes.Indexable):
     id = indexes.IntegerField(model_attr='id')
     first_name = indexes.CharField(model_attr='first_name')
     last_name = indexes.CharField(model_attr='last_name')
-    married_name = indexes.CharField(model_attr='married_name')
+    married_name = indexes.CharField(model_attr='married_name', null=True)
     picture = indexes.CharField(model_attr='picture')
     content_auto = indexes.EdgeNgramField(model_attr='full_name')
 
