@@ -119,14 +119,17 @@ class RegistrationManager(models.Manager):
 
         """
         try:
+            value = UUID(activation_key)
             profile = self.get(activation_key=activation_key)
         except self.model.DoesNotExist:
+            return False
+        except ValueError:
             return False
         if not profile.activation_key_expired():
             user = profile.user
             user.is_active = True
             user.save()
-            profile.activation_key = self.model.ACTIVATED
+            profile.is_activated = True
             profile.save()
             return user
         return False
@@ -224,10 +227,9 @@ class RegistrationProfile(models.Model):
     account registration and activation.
 
     """
-    ACTIVATED = u"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-
     user = models.ForeignKey(User, unique=True, verbose_name=_('user'))
     activation_key = uuidfield.UUIDField(auto=True)
+    is_activated = models.BooleanField(default=False)
 
     objects = RegistrationManager()
 
@@ -261,8 +263,7 @@ class RegistrationProfile(models.Model):
 
         """
         expiration_date = datetime.timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
-        return self.activation_key == UUID(self.ACTIVATED) or \
-               (self.user.date_joined + expiration_date <= datetime_now())
+        return self.is_activated or (self.user.date_joined + expiration_date <= datetime_now())
     activation_key_expired.boolean = True
 
     def send_activation_email(self):

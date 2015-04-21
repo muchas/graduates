@@ -1,1 +1,27 @@
-FUCK YOU, KLUCZ NIEWAŻNY
+{% extends "front_base.html" %}
+
+{% block header %}
+{{ wizard.form.media }}
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>Nieprawidłowa aktywacja</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block headline %}
+<div id="headline">
+  <div class="container well">
+    <div class="row">
+      <div class="span12 txt-middle">
+        <p>Link pod którym się znajdujesz jest nieprawidłowy lub nieaktywny.</p>
+        <p>Jeżeli Twoja próba aktywacji konta się nie powiodła i nadal nie jesteś w stanie się zalogować, skontaktuj się z administratorem portalu.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

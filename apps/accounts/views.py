@@ -2,6 +2,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.views.generic.base import View
 from django.contrib.auth.views import login
+from django.contrib.auth import login as auth_login
 from django.contrib.formtools.wizard.views import SessionWizardView
 from rest_framework import views, generics
 from rest_framework.permissions import IsAuthenticated
@@ -85,6 +86,9 @@ class ActivationView(TemplateView):
             signals.user_activated.send(sender=self.__class__,
                                         user=activated_user,
                                         request=request)
+            # before logging in, authentication must be faked
+            activated_user.backend = "django.contrib.auth.backends.ModelBackend"
+            auth_login(request, activated_user)
             return redirect('home')
         return super(ActivationView, self).get(request, *args, **kwargs)
 
