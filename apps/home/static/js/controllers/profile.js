@@ -43,6 +43,14 @@ App.Controller.ProfileController = {
         });
     },
 
+    changePassword: function() {
+        var layout = new App.Layouts.ChangePasswordLayout();
+        App.layout.content.show(layout);
+
+        var password = new App.Model.Password();
+        layout.form.show(new App.Form.ChangePassword({ model: password }))
+    },
+
     showMyProfile: function() {
         //TODO get user id from sync manager
         this.showPerson(1);

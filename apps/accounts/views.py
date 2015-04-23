@@ -1,11 +1,14 @@
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.views.generic.base import View
 from django.contrib.auth.views import login
 from django.contrib.auth import login as auth_login
 from django.contrib.formtools.wizard.views import SessionWizardView
-from rest_framework import views, generics
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from apps.accounts import signals
 from apps.accounts.models import RegistrationProfile, Claim
 from apps.community.models import Person
@@ -23,6 +26,24 @@ class LoginView(View):
             #TODO move expiration time to SETTINGS
             request.session.set_expiry(3600*24*14)
         return login(request, authentication_form=AuthenticationForm)
+
+
+class PasswordChangeView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, format=None):
+        form = PasswordChangeForm(user=request.user, data=request.data)
+        if form.is_valid():
+            form.save()
+            # Updating the password logs out all other sessions for the user
+            # except the current one if
+            # django.contrib.auth.middleware.SessionAuthenticationMiddleware
+            # is enabled.
+            update_session_auth_hash(request, form.user)
+            response = Response({"success": True})
+        else:
+            response = Response(form.errors, status=400)
+        return response
 
 
 class UserIntroduceView(View):
@@ -122,5 +143,3 @@ class ClaimView(FormView):
         claim = Claim(person=person, email=cleaned_data.get('email'), contact_phone=cleaned_data.get('contact_phone'))
         claim.save()
         return redirect('login')
-
-

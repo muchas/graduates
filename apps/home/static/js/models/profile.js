@@ -12,8 +12,8 @@ App.Model.University = Backbone.DeepModel.extend({
         return this.get('name');
     }
 });
+App.Model.Password = Backbone.Model.extend({});
 App.Model.Description = Backbone.Model.extend({});
-
 
 App.Collection.PersonalData = Backbone.Collection.extend({
     model: App.Model.PersonalData

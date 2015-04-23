@@ -10,7 +10,8 @@ App.Command.Profile = App.Command.Base.extend({
         "profile/personal_data": "getPersonalData",
         "profile/photo": "getPhoto",
         "profile/uploadPhoto": "uploadPhoto",
-        "profile/removePhoto": "removePhoto"
+        "profile/removePhoto": "removePhoto",
+        "profile/changePassword": "changePassword"
     },
 
     getPersonInformation: function(id, callback) {
@@ -61,6 +62,10 @@ App.Command.Profile = App.Command.Base.extend({
 
     removePhoto: function(callback) {
         this.jsonRequest("PUT", "person-photo", {}, { picture: null }, callback);
+    },
+
+    changePassword: function(data, callback, failure) {
+        this.jsonRequest("POST", "password-change", {}, data, callback, failure);
     }
 });
 
