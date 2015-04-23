@@ -172,7 +172,7 @@ class RegistrationProfileTests(TestCase):
         self.assertTrue(activated.is_active)
 
         profile = RegistrationProfile.objects.get(user=new_user)
-        self.assertEqual(profile.activation_key, UUID(RegistrationProfile.ACTIVATED))
+        self.assertTrue(profile.is_activated)
 
     def test_expired_activation(self):
         """
@@ -194,7 +194,7 @@ class RegistrationProfileTests(TestCase):
         self.assertFalse(new_user.is_active)
 
         profile = RegistrationProfile.objects.get(user=new_user)
-        self.assertNotEqual(profile.activation_key, RegistrationProfile.ACTIVATED)
+        self.assertFalse(profile.is_activated)
 
     def test_activation_invalid_key(self):
         """
