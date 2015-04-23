@@ -49,3 +49,10 @@ App.Layouts.InvitationLayout = Marionette.LayoutView.extend({
         "form": "#invitation-form"
     }
 });
+
+App.Layouts.ChangePasswordLayout = Marionette.LayoutView.extend({
+   template: Handlebars.templates.change_password,
+    regions: {
+        "form": "#change-password-form"
+    }
+});

@@ -323,3 +323,70 @@ App.Form.Photo = Marionette.ItemView.extend({
         }.bind(this));
     }
 });
+
+
+App.Form.ChangePassword = Backbone.Form.extend({
+    template: Handlebars.templates.change_password_form,
+
+    schema: {
+        new_password1: { type: 'Password', editorClass: "form-control", validators: ['required'] },
+        new_password2: { type: 'Password', editorClass: "form-control", validators: ['required'] },
+        old_password: { type: 'Password', editorClass: "form-control", validators: ['required'] }
+    },
+
+    events: {
+      'click .send': 'save'
+    },
+
+    save: function() {
+       console.log('onSave');
+       var errors = this.commit();
+       if(_.isUndefined(errors)) {
+           this.onSave();
+       } else {
+           console.log(errors);
+           this.handleErrors(errors);
+       }
+    },
+
+    onSave: function() {
+        App.instance.execute('profile/changePassword', this.model.toJSON(),
+            function(response) {
+
+                var n = noty({
+                    text: 'Hasło zostało zmienione.',
+                    type: 'success'
+                });
+
+                setTimeout(function() {
+                    n.close();
+                }, 5000);
+
+                this.clear();
+            }.bind(this),
+            function(response) {
+                var errors = {};
+                // change errors structure
+                _.each(response, function(value, key) {
+                   errors[key] = { message: value[0] };
+                });
+                this.handleErrors(errors);
+            }.bind(this)
+        );
+    },
+
+    clear: function() {
+        _.each(this.fields, function(field) {
+            field.setValue('');
+        });
+    },
+
+    handleErrors: function(errors) {
+       this.$el.find('.form-error').empty();
+       _.each(errors, function(error, key) {
+           // '.' char has special meaning in CSS, so we replace it with '-'
+           key = key.replace(/\./g, '-');
+           this.$el.find('.'+ key + '-error').html(Handlebars.templates.form_error({ message: error.message }));
+       }.bind(this));
+    }
+});

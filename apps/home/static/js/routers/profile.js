@@ -4,6 +4,7 @@ App.Router.ProfileRouter = Marionette.AppRouter.extend({
         "person/:id": "showPerson",
         "person/:id/invite": "invitePerson",
         "profile": "showMyProfile",
-        "profile/edit": "editProfile"
+        "profile/edit": "editProfile",
+        "profile/change-password": "changePassword"
     }
 });
