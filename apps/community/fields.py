@@ -15,7 +15,7 @@ class FileField(BaseFileField):
 
     def __init__(self, *args, **kwargs):
         self.max_size = kwargs.pop('max_size', None)
-        super(FileField, self).__init__(args, kwargs)
+        super(FileField, self).__init__(*args, **kwargs)
 
     def to_internal_value(self, data):
         data = super(FileField, self).to_internal_value(data)

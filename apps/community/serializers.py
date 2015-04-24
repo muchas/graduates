@@ -45,7 +45,7 @@ class PersonDescriptionSerializer(serializers.ModelSerializer):
 
 
 class PersonPhotoSerializer(serializers.ModelSerializer):
-    picture = ImageField(max_size=2621440, required=False)  # max-size: 2.5 MB
+    picture = ImageField(max_size=2621440, allow_null=True)  # max-size: 2.5 MB
 
     class Meta:
         model = Person
