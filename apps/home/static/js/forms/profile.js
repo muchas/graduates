@@ -294,13 +294,30 @@ App.Form.Photo = Marionette.ItemView.extend({
     onChangeFileInput: function(event) {
         var files = event.target.files;
         console.log(event);
-        if(files && files[0]) {
+        if(files && files[0] && this.validateImage(files[0])) {
           this.file = files[0];
+        } else {
+           this.file = null;
         }
+    },
+
+    validateImage: function(file) {
+        if(file.size > 2621440) { // max-size 2.5 MB
+            this.handleErrors({
+               'picture': { message: 'Zbyt duży rozmiar pliku. Maksymalny rozmiar to 2.5 MB.' }
+            });
+            return false;
+        }
+        this.$el.find('.form-error').empty();
+        return true;
     },
 
     uploadImage: function() {
         if(!this.file) {
+            return null;
+        }
+
+        if(!this.validateImage(this.file)) {
             return null;
         }
 
@@ -311,6 +328,14 @@ App.Form.Photo = Marionette.ItemView.extend({
             this.model.set(response);
             App.instance.vent.trigger('profile-photo-uploaded');
             this.render();
+        }.bind(this),
+        function(response) {
+            var errors = {};
+            // change errors structure
+            _.each(response, function(value, key) {
+               errors[key] = { message: value[0] };
+            });
+            this.handleErrors(errors);
         }.bind(this));
     },
 
@@ -321,6 +346,15 @@ App.Form.Photo = Marionette.ItemView.extend({
             App.instance.vent.trigger('profile-photo-uploaded');
             this.render();
         }.bind(this));
+    },
+
+    handleErrors: function(errors) {
+       this.$el.find('.form-error').empty();
+       _.each(errors, function(error, key) {
+           // '.' char has special meaning in CSS, so we replace it with '-'
+           key = key.replace(/\./g, '-');
+           this.$el.find('.'+ key + '-error').html(Handlebars.templates.form_error({ message: error.message }));
+       }.bind(this));
     }
 });
 
