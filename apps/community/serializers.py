@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
 from apps.accounts.models import User
+from apps.community.fields import ImageField
 from apps.community.models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
     UniversityDepartment, PersonalData, Attribute, Invitation, Achievement
 from apps.community.validators import EmailValidator, IntegerValidator, UniqueValidator
@@ -10,6 +11,7 @@ from apps.community.validators import EmailValidator, IntegerValidator, UniqueVa
 
 class PersonSerializer(serializers.ModelSerializer):
     thumbnail = serializers.SerializerMethodField()
+    picture = serializers.SerializerMethodField()
 
     class Meta:
         model = Person
@@ -18,6 +20,10 @@ class PersonSerializer(serializers.ModelSerializer):
     def get_thumbnail(self, person):
         if person.picture:
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['thumbnail'].url)
+
+    def get_picture(self, person):
+        if person.picture:
+            return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
 
 
 class PersonSearchSerializer(serializers.Serializer):
@@ -39,6 +45,8 @@ class PersonDescriptionSerializer(serializers.ModelSerializer):
 
 
 class PersonPhotoSerializer(serializers.ModelSerializer):
+    picture = ImageField(max_size=2621440, required=False)  # max-size: 2.5 MB
+
     class Meta:
         model = Person
         fields = ('id', 'picture')

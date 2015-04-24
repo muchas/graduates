@@ -46,7 +46,8 @@ App.Command.Profile = App.Command.Base.extend({
         this.jsonRequest("GET", "personal-data-list", {}, {}, callback);
     },
 
-    uploadPhoto: function(data, callback) {
+    uploadPhoto: function(data, callback, failure) {
+        this.failureCallback = failure;
         $.ajax({
             url: Routing.generate('person-photo', {}),
             method: "PUT",
