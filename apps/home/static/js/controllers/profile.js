@@ -17,6 +17,12 @@ App.Controller.ProfileController = {
             layout.universities.show(new App.CollectionView.Universities({ collection: universities }));
             layout.employments.show(new App.CollectionView.Employments({ collection: employments }));
 
+            App.instance.execute("profile/connectedPages", id, function(response) {
+                var connectedPeople = new App.Collection.People(response);
+                var connectedPagesView = new App.CollectionView.ProfileConnectedPages({ collection: connectedPeople });
+                layout.connectedPages.show(connectedPagesView);
+            });
+
             if(!profile.get('is_owner')) {
                 App.instance.execute("profile/similarity", id, function(response) {
                     var similarity = new App.Model.ProfileSimilarity(response);

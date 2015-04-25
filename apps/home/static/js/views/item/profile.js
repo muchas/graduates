@@ -123,3 +123,14 @@ App.ItemView.EditableAttribute = Marionette.ItemView.extend({
 App.ItemView.ProfileEditHeader = Marionette.ItemView.extend({
    template: Handlebars.templates.edit_profile_header
 });
+
+App.ItemView.ProfileConnectedPage = Marionette.ItemView.extend({
+   tagName: 'a',
+   className: 'list-group-item',
+   template: Handlebars.templates.profile_connected_page,
+   attributes: function() {
+       return {
+           'href': '/#/person/' + this.model.get('id')
+       }
+   }
+});

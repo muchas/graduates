@@ -26,3 +26,7 @@ App.Collection.Employments = Backbone.Collection.extend({
 App.Collection.Universities = Backbone.Collection.extend({
    model: App.Model.University
 });
+
+App.Collection.People = Backbone.Collection.extend({
+   model: App.Model.Profile
+});

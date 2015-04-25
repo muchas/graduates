@@ -155,6 +155,25 @@ class PersonMarriedNameView(generics.RetrieveUpdateAPIView):
         return self.request.user.person
 
 
+class PersonConnectedPagesView(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get_connected_pages(self, person):
+        result = []
+        if person.is_student:
+            result = list(person.group.pupils.exclude(pk=person.pk).random(quantity=2))
+            result.append(person.group.tutor)
+        elif person.is_teacher:
+            result = list(Person.objects.exclude(teacher_learn_years=None).exclude(pk=person.pk).random(quantity=3))
+
+        serializer = PersonSerializer(result, many=True, context={'request': self.request})
+        return serializer.data
+
+    def get(self, *args, **kwargs):
+        person = get_object_or_404(Person, pk=kwargs.pop('pk'))
+        return Response(self.get_connected_pages(person))
+
+
 class PersonSimilarityView(views.APIView):
     permission_classes = (IsAuthenticated, IsCommunityMember)
 

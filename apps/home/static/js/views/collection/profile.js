@@ -28,3 +28,7 @@ App.CollectionView.EditableAttributes = Marionette.CollectionView.extend({
        });
    }
 });
+
+App.CollectionView.ProfileConnectedPages = Marionette.CollectionView.extend({
+    childView: App.ItemView.ProfileConnectedPage
+});

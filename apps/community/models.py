@@ -1,3 +1,4 @@
+from random import randint
 from django.db import models
 import datetime
 from model_utils.models import TimeStampedModel
@@ -65,6 +66,17 @@ class Group(models.Model):
         return u"%s" % self.symbol
 
 
+class PersonQuerySet(models.QuerySet):
+    def random(self, quantity=1):
+        queryset_list = list(self.all())
+        count = len(queryset_list)
+        results = set()
+        while len(results) < quantity:
+            random_index = randint(0, count-1)
+            results.add(queryset_list[random_index])
+        return results
+
+
 class PersonManager(models.Manager):
     def connected_with_city(self, city):
         people = self.filter(universities__city=city) | self.filter(employments__city=city)
@@ -98,7 +110,7 @@ class Person(models.Model):
     companies = models.ManyToManyField('Company', through='Employment')
     subjects = models.ManyToManyField(Subject, blank=True)
 
-    objects = PersonManager()
+    objects = PersonManager.from_queryset(PersonQuerySet)()
 
     class Meta:
         verbose_name_plural = 'people'
@@ -122,6 +134,14 @@ class Person(models.Model):
     @property
     def public_personal_data(self):
         return self.personaldata_set.filter(is_public=True)
+
+    @property
+    def is_teacher(self):
+        return self.teacher_learn_years.all().exists()
+
+    @property
+    def is_student(self):
+        return bool(self.group)
 
     def retrieve_common_tutor_with(self, person):
         if self.group and person.group and self.group.id == person.group.id:

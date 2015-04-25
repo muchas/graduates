@@ -18,11 +18,11 @@ class PersonSerializer(serializers.ModelSerializer):
         fields = ('id', 'full_name', 'first_name', 'married_name', 'last_name', 'sex', 'picture', 'thumbnail')
 
     def get_thumbnail(self, person):
-        if person.picture:
+        if person.picture and 'request' in self.context:
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['thumbnail'].url)
 
     def get_picture(self, person):
-        if person.picture:
+        if person.picture and 'request' in self.context:
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
 
 
@@ -34,7 +34,7 @@ class PersonSearchSerializer(serializers.Serializer):
     thumbnail = serializers.SerializerMethodField()
 
     def get_thumbnail(self, person):
-        if person.picture:
+        if person.picture and 'request' in self.context:
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['thumbnail'].url)
 
 
@@ -314,7 +314,7 @@ class PersonProfileSerializer(serializers.ModelSerializer):
         model = Person
 
     def get_thumbnail(self, person):
-        if person.picture:
+        if person.picture and 'request' in self.context:
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
 
     def check_inviting_ability(self, person):
@@ -327,4 +327,4 @@ class PersonProfileSerializer(serializers.ModelSerializer):
         return person.description or person.employments.all().exists()
 
     def check_ownership(self, person):
-        return person == self.context['request'].user.person
+        return 'request' in self.context and person == self.context['request'].user.person
