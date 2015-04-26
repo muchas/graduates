@@ -36,6 +36,8 @@ class Default(Configuration):
 
     INTERNAL_IPS = ('192.168.40.1',)
 
+    DEFAULT_FROM_EMAIL = 'absolwenci@lo5.bielsko.pl'
+
     AUTH_USER_MODEL = 'accounts.User'
 
     ACCOUNT_ACTIVATION_DAYS = 7
@@ -73,6 +75,7 @@ class Default(Configuration):
         'rest_framework',
         'easy_thumbnails',
         'captcha',
+        "djrill",
         'apps.home',
         'apps.community',
         'apps.accounts',
@@ -194,8 +197,10 @@ class Development(Default):
 
 
 class Staging(Default):
-    pass
+    EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+    MANDRILL_API_KEY = "-aUv8GibNMA58b69RhCSNw"
 
 
 class Production(Default):
-    pass
+    EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+    MANDRILL_API_KEY = "-aUv8GibNMA58b69RhCSNw"
