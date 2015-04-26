@@ -2,44 +2,48 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.utils.timezone
+import model_utils.fields
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('community', '0001_initial'),
+        ('community', '0004_auto_20150421_0046'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name='Comment',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, verbose_name='created', editable=False)),
+                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, verbose_name='modified', editable=False)),
                 ('content', models.TextField()),
-                ('datetime', models.DateTimeField(auto_now_add=True)),
+                ('author', models.ForeignKey(to='community.Person')),
             ],
             options={
+                'abstract': False,
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Comment',
+            name='Post',
             fields=[
-                ('post_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='posts.Post')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, verbose_name='created', editable=False)),
+                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, verbose_name='modified', editable=False)),
+                ('content', models.TextField()),
+                ('author', models.ForeignKey(to='community.Person')),
             ],
             options={
+                'abstract': False,
             },
-            bases=('posts.post',),
-        ),
-        migrations.AddField(
-            model_name='post',
-            name='author',
-            field=models.ForeignKey(to='community.Person'),
-            preserve_default=True,
+            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='comment',
-            name='related_post',
+            name='post',
             field=models.ForeignKey(related_name='comments', to='posts.Post'),
             preserve_default=True,
         ),

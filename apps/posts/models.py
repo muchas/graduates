@@ -1,12 +1,14 @@
 from django.db import models
+from model_utils.models import TimeStampedModel
 from apps.community.models import Person
 
 
-class Post(models.Model):
+class Post(TimeStampedModel):
     content = models.TextField()
-    datetime = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(Person)
 
 
-class Comment(Post):
-    related_post = models.ForeignKey(Post, related_name='comments')
+class Comment(TimeStampedModel):
+    content = models.TextField()
+    author = models.ForeignKey(Person)
+    post = models.ForeignKey(Post, related_name='comments')

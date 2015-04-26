@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from apps.community.permissions import IsCommunityMember
@@ -20,20 +20,12 @@ class PostListView(generics.ListCreateAPIView):
 
 
 class CommentListView(generics.ListCreateAPIView):
-    related_post = None
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated, IsCommunityMember)
 
-    def get_related_post(self):
-        try:
-            post = Post.objects.get(pk=self.kwargs['pk'])
-        except Post.DoesNotExist:
-            raise Http404("Post does not exist")
-        return post
-
     def get_queryset(self):
-        self.related_post = self.get_related_post()
-        return Comment.objects.filter(related_post=self.kwargs['pk'])
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        return Comment.objects.filter(post=post)
 
 
 class CommentView(generics.RetrieveUpdateDestroyAPIView):
