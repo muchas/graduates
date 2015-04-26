@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now as datetime_now
 from django.template.loader import render_to_string
 from django.db import models, transaction
-from apps.community.models import Person
+from apps.community.models import Person, Attribute, PersonalData
 
 
 class UserManager(BaseUserManager):
@@ -131,8 +131,18 @@ class RegistrationManager(models.Manager):
             user.save()
             profile.is_activated = True
             profile.save()
+            self.initialize_personal_data(user)
             return user
         return False
+
+    def initialize_personal_data(self, user):
+        attribute = Attribute.objects.filter(name=settings.PERSONAL_DATA_EMAIL_FIELD).first()
+        if attribute and hasattr(user, 'person'):
+            PersonalData.objects.create(
+                person=user.person,
+                attribute=attribute,
+                value=user.email
+            )
 
     @transaction.atomic
     def create_inactive_user(self, email, password, person=None, send_email=True):

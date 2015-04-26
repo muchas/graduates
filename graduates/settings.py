@@ -87,6 +87,7 @@ class Default(Configuration):
         "django.core.context_processors.static",
         "django.core.context_processors.tz",
         "django.core.context_processors.request",
+        "django.contrib.messages.context_processors.messages",
     )
 
     TEMPLATE_LOADERS = (
@@ -137,6 +138,8 @@ class Default(Configuration):
         },
     }
 
+    MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
     REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': (
             'rest_framework.permissions.IsAuthenticated',
@@ -168,6 +171,8 @@ class Default(Configuration):
     }
 
     LOGIN_REDIRECT_URL = '/'
+
+    PERSONAL_DATA_EMAIL_FIELD = 'E-mail'
 
 
 class Development(Default):
