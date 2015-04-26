@@ -63,6 +63,7 @@
 
       {{/if}}
         {{#if achievements.length }}
+            <div style="margin-bottom: 20px;">
             <h5>Osiągnięcia</h5>
             <ul>
             {{#each achievements }}
@@ -72,8 +73,9 @@
                 </li>
             {{/each}}
             </ul>
+            </div>
         {{/if}}
-      <div id="universities" style="margin-top: 25px;"></div>
+      <div id="universities" style="margin-top: 5px;"></div>
 
       {{#if show_now_section }}
       <h4 class="content-title"><u>Obecnie</u></h4>
@@ -100,27 +102,9 @@
         {{#if can_be_invited }}
         <a href="#/person/{{ id }}/invite" class="btn btn-primary btn-lg btn-block " style="margin-bottom: 20px">Zaproś do rejestracji</a>
         {{/if}}
-          <h5 class="content-title"><u>Social Stats</u></h5>
+          <h5 class="content-title"><u>Powiązane strony</u></h5>
 
-        <div class="list-group">
-
-          <a href="javascript:;" class="list-group-item">
-              <h3 class="pull-right"><i class="fa fa-eye text-primary"></i></h3>
-              <h4 class="list-group-item-heading">38,847</h4>
-              <p class="list-group-item-text">Profile Views</p>
-            </a>
-
-          <a href="javascript:;" class="list-group-item">
-            <h3 class="pull-right"><i class="fa fa-facebook-square  text-primary"></i></h3>
-            <h4 class="list-group-item-heading">3,482</h4>
-            <p class="list-group-item-text">Facebook Likes</p>
-          </a>
-
-          <a href="javascript:;" class="list-group-item">
-            <h3 class="pull-right"><i class="fa fa-twitter-square  text-primary"></i></h3>
-            <h4 class="list-group-item-heading">5,845</h4>
-            <p class="list-group-item-text">Twitter Followers</p>
-          </a>
+        <div class="list-group" id="connectedPages">
         </div> <!-- /.list-group -->
 
         <br>
