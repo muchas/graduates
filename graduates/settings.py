@@ -76,6 +76,7 @@ class Default(Configuration):
         'apps.home',
         'apps.community',
         'apps.accounts',
+        'apps.posts',
         'debug_toolbar',
     )
 
