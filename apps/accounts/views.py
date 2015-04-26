@@ -1,11 +1,14 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.views.generic.base import View
+from django.contrib import messages
 from django.contrib.auth.views import login
 from django.contrib.auth import login as auth_login
 from django.contrib.formtools.wizard.views import SessionWizardView
+from django.utils.translation import ugettext as _
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -91,6 +94,8 @@ class RegistrationWizard(SessionWizardView):
             last_name=form_data.get('last_name')
         ).first()
         new_user = RegistrationProfile.objects.create_inactive_user(email, password, person)
+        messages.success(self.request, _(u"Registration successful. A confirmation email has been sent to you. Please "
+                                         u"click on the activation link to activate your account."))
         signals.user_registered.send(sender=self.__class__,
                                      user=new_user,
                                      request=self.request)
