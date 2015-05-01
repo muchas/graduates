@@ -1,3 +1,4 @@
+{% load absolute %}
 <h3>Witaj {{ person.first_name }}!</h3>
 
 <p>
@@ -9,5 +10,5 @@
     {{ message }}
     {% endif %}
 
-    Aby się zarejestrować, kliknij następujący link: {% url 'registration' %}
+    Aby się zarejestrować, kliknij następujący link: {% site 'registration' %}
 </p>
