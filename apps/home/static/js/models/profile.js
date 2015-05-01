@@ -28,5 +28,8 @@ App.Collection.Universities = Backbone.Collection.extend({
 });
 
 App.Collection.People = Backbone.Collection.extend({
-   model: App.Model.Profile
+   model: App.Model.Profile,
+   comparator: function(item) {
+        return item.get('last_name');
+   }
 });
