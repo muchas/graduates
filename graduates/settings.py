@@ -71,6 +71,8 @@ class Default(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'django.contrib.sites',
+        'absolute',
         'haystack',
         'rest_framework',
         'easy_thumbnails',
@@ -91,6 +93,7 @@ class Default(Configuration):
         "django.core.context_processors.static",
         "django.core.context_processors.tz",
         "django.core.context_processors.request",
+        "absolute.context_processors.absolute",
         "django.contrib.messages.context_processors.messages",
     )
 
@@ -179,9 +182,13 @@ class Default(Configuration):
 
     PERSONAL_DATA_EMAIL_FIELD = 'E-mail'
 
+    SITE_ID = 1
+
 
 class Development(Default):
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+    MANDRILL_API_KEY = "-aUv8GibNMA58b69RhCSNw"
 
     WSGI_APPLICATION = 'graduates.wsgi.application'
 

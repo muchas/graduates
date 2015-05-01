@@ -14,6 +14,7 @@ from django.utils.timezone import now as datetime_now
 from django.template.loader import render_to_string
 from django.db import models, transaction
 from apps.community.models import Person, Attribute, PersonalData
+from utils.mail import send_templated_email
 
 
 class UserManager(BaseUserManager):
@@ -79,7 +80,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         """
         Sends an email to this User.
         """
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+        if isinstance(message, dict) and 'context' in message and 'template' in message:
+            send_templated_email(subject, message['template'], message['context'], self.email, from_email)
+        else:
+            send_mail(subject, message, from_email, [self.email], **kwargs)
 
     @property
     def is_community_member(self):
@@ -310,8 +314,10 @@ class RegistrationProfile(models.Model):
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
 
-        message = render_to_string('registration/activation_email.txt',
-                                   ctx_dict)
+        message = {
+            'template': 'registration/activation_email.html',
+            'context': ctx_dict
+        }
 
         self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
 
