@@ -81,7 +81,8 @@ class CityDetailSerializer(serializers.ModelSerializer):
         return city.universities.count()
 
     def count_companies(self, city):
-        return 0
+        employments = Employment.objects.filter(city=city)
+        return Company.objects.filter(employment__in=employments).count()
 
 
 class CityNameSerializer(serializers.ModelSerializer):
@@ -144,7 +145,7 @@ class GroupDetailsSerializer(serializers.ModelSerializer):
 
 
 class GroupSerializer(serializers.ModelSerializer):
-    tutor = TeacherSerializer()
+    tutor = PersonSerializer()
 
     class Meta:
         model = Group

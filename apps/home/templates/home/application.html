@@ -40,6 +40,9 @@
 <script id="profile-template" type="text/template">
 
 </script>
+<style>
+    .top-buffer { margin-top:20px; }
+</style>
 </head>
 
 <body>
@@ -249,89 +252,9 @@
 
           <li class="dropdown ">
 
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            <a href="#/gallery/">
             Galeria
-            <i class="mainnav-caret"></i>
             </a>
-
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="{{ STATIC_URL }}page-notifications.html">
-                <i class="fa fa-bell"></i> 
-                &nbsp;&nbsp;Notifications
-                </a>
-              </li>			
-
-              <li>
-                <a href="{{ STATIC_URL }}extras-icons.html">
-                <i class="fa fa-smile-o"></i> 
-                &nbsp;&nbsp;Font Icons
-                </a>
-              </li> 
-
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">
-                <i class="fa fa-ban"></i> 
-                &nbsp;&nbsp;Error Pages
-                </a>
-
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="{{ STATIC_URL }}page-404.html">
-                    <i class="fa fa-ban"></i> 
-                    &nbsp;&nbsp;404 Error
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="{{ STATIC_URL }}page-500.html">
-                    <i class="fa fa-ban"></i> 
-                    &nbsp;&nbsp;500 Error
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown-submenu">
-
-                <a tabindex="-1" href="#">
-                <i class="fa fa-lock"></i> 
-                &nbsp;&nbsp;Login Pages
-                </a>
-
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="{{ STATIC_URL }}account-login.html">
-                    <i class="fa fa-unlock"></i> 
-                    &nbsp;&nbsp;Login
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="{{ STATIC_URL }}account-login-social.html">
-                    <i class="fa fa-unlock"></i> 
-                    &nbsp;&nbsp;Login Social
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="{{ STATIC_URL }}account-signup.html">
-                    <i class="fa fa-star"></i> 
-                    &nbsp;&nbsp;Signup
-                    </a>
-                    </li>
-
-                  <li>
-                    <a href="{{ STATIC_URL }}account-forgot.html">
-                    <i class="fa fa-envelope"></i> 
-                    &nbsp;&nbsp;Forgot Password
-                    </a>
-                  </li>
-                </ul>
-              </li> 
-
-
-            </ul>
 
           </li>
         </ul>
@@ -356,7 +279,7 @@
 
 <footer class="footer">
   <div class="container">
-    <p class="pull-left">Copyright &copy; 2013 MVP Ready.</p>
+    <p class="pull-left">Copyright &copy; 2015 V Liceum Ogólnokształcące.</p>
   </div>
 </footer>
 
@@ -472,6 +395,7 @@
 <script src="{{ STATIC_URL }}js/views/layout/community.js"></script>
 <script src="{{ STATIC_URL }}js/views/layout/exception.js"></script>
 <script src="{{ STATIC_URL }}js/views/layout/posts.js"></script>
+<script src="{{ STATIC_URL }}js/views/layout/gallery.js"></script>
 <script src="{{ STATIC_URL }}js/views/item/posts.js"></script>
 <script src="{{ STATIC_URL }}js/views/item/profile.js"></script>
 <script src="{{ STATIC_URL }}js/views/item/community.js"></script>
@@ -486,11 +410,14 @@
 <script src="{{ STATIC_URL }}js/controllers/profile.js"></script>
 <script src="{{ STATIC_URL }}js/controllers/community.js"></script>
 <script src="{{ STATIC_URL }}js/controllers/posts.js"></script>
+<script src="{{ STATIC_URL }}js/controllers/gallery.js"></script>
+
 
 <!-- Routers -->
 <script src="{{ STATIC_URL }}js/routers/profile.js"></script>
 <script src="{{ STATIC_URL }}js/routers/community.js"></script>
 <script src="{{ STATIC_URL }}js/routers/posts.js"></script>
+<script src="{{ STATIC_URL }}js/routers/gallery.js"></script>
 <script src="{{ STATIC_URL }}js/routers/common.js"></script>
 
 <script src="{{ STATIC_URL }}js/app.js"></script>

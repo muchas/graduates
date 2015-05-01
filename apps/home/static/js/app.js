@@ -45,6 +45,7 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
     new App.Router.ProfileRouter();
     new App.Router.CommunityRouter();
     new App.Router.PostsRouter();
+    new App.Router.GalleryRouter();
 
     new App.Command.Profile();
     new App.Command.Posts();

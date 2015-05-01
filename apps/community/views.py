@@ -42,7 +42,7 @@ class BranchListView(generics.ListAPIView):
 
 
 class TeacherListView(generics.ListAPIView):
-    queryset = Person.objects.exclude(teacher_learn_years=None)
+    queryset = Person.objects.exclude(teacher_learn_years=None).prefetch_related('teacher_learn_years', 'subjects')
     serializer_class = TeacherSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -51,7 +51,7 @@ class GroupListView(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, *args, **kwargs):
-        groups = Group.objects.filter(is_graduated=self.is_graduated).order_by('last_year')
+        groups = Group.objects.filter(is_graduated=self.is_graduated).select_related('tutor').order_by('symbol')
         result = {}
         results = []
         for group in groups:
@@ -59,10 +59,10 @@ class GroupListView(views.APIView):
                 result[group.last_year] = []
             serializer = GroupSerializer(group)
             result[group.last_year].append(serializer.data)
-
         for year, groups in result.iteritems():
             results.append({'year': year, 'groups': groups})
-        return Response(results)
+
+        return Response(reversed(results))
 
 
 class GraduatedGroupListView(GroupListView):
