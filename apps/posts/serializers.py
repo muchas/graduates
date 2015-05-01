@@ -6,6 +6,7 @@ from apps.posts.models import Post, Comment
 
 class PostSerializer(serializers.ModelSerializer):
     author = PersonSerializer(read_only=True)
+    is_owner = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -16,9 +17,14 @@ class PostSerializer(serializers.ModelSerializer):
             **validated_data
         )
 
+    def get_is_owner(self, post):
+        user = self.context['request'].user
+        return hasattr(user, 'person') and user.person == post.author
+
 
 class CommentSerializer(serializers.ModelSerializer):
     author = PersonSerializer(read_only=True)
+
     class Meta:
         model = Comment
         read_only_fields = ('post',)

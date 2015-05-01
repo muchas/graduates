@@ -3,6 +3,11 @@ Handlebars.registerHelper("beautifydate", function (datetime) {
     return datetime.format("MMMM YYYY");
 });
 
+Handlebars.registerHelper("datefromnow", function (datetime) {
+    datetime = moment(datetime);
+    return datetime.fromNow();
+});
+
 Handlebars.registerHelper('trans',
   function(str){
     return (gettext != undefined ? gettext(str) : str);

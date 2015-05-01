@@ -34,7 +34,7 @@ class Default(Configuration):
 
     ALLOWED_HOSTS = ['.lo5.bielsko.pl', '127.0.0.1', 'localhost']
 
-    INTERNAL_IPS = ('192.168.40.1',)
+    INTERNAL_IPS = ('192.168.40.1', '127.0.0.1')
 
     DEFAULT_FROM_EMAIL = 'absolwenci@lo5.bielsko.pl'
 
@@ -150,7 +150,8 @@ class Default(Configuration):
         )
     }
 
-    URLS_JS_GENERATED_FILE='/srv/graduates/static/js/routes.js'
+    # URLS_JS_GENERATED_FILE='/srv/graduates/static/js/routes.js'
+    URLS_JS_GENERATED_FILE = '/Users/smucha/Workspace/graduates/static/js/routes.js'
 
     THUMBNAIL_ALIASES = {
         '': {
@@ -187,12 +188,14 @@ class Development(Default):
     RECAPTCHA_PUBLIC_KEY = '6Leypf8SAAAAAP8M7JlGB9xDw3Ohw9w7n6LY4Rn9'
     RECAPTCHA_PRIVATE_KEY= '6Leypf8SAAAAAC1h9vEWSwvOzyTr-vpRmYOsGz3a'
 
-    MEDIA_ROOT = '/srv/graduates/media'
+    #MEDIA_ROOT = '/srv/graduates/media'
+    MEDIA_ROOT = '/Users/smucha/Workspace/graduates/media'
 
     MEDIA_URL = '/media/'
 
     LOCALE_PATHS = (
-        '/srv/graduates/locale',
+        # '/srv/graduates/locale',
+        '/Users/smucha/Workspace/graduates/locale'
     )
 
 

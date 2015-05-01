@@ -7,6 +7,9 @@ class Post(TimeStampedModel):
     content = models.TextField()
     author = models.ForeignKey(Person)
 
+    class Meta:
+        ordering=['-created',]
+
 
 class Comment(TimeStampedModel):
     content = models.TextField()
