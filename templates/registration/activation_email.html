@@ -1,0 +1,10 @@
+{% load absolute  %}
+Witaj!
+<br />
+<br />
+Aby aktywować konto kliknij w link, który będzie aktywny przez {{ expiration_days }} najbliższe dni: <a href="{% site 'registration_activate' activation_key=activation_key %}">{% site 'registration_activate' activation_key=activation_key %}</a>
+<br />
+<br />
+<br />
+Życzymy udanego korzystania z portalu,<br />
+Zespół bazy absolwentów V LO
