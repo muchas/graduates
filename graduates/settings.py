@@ -34,7 +34,7 @@ class Default(Configuration):
 
     ALLOWED_HOSTS = ['.lo5.bielsko.pl', '127.0.0.1', 'localhost']
 
-    INTERNAL_IPS = ('192.168.40.1', '127.0.0.1')
+    INTERNAL_IPS = ('127.0.0.1',)
 
     DEFAULT_FROM_EMAIL = 'absolwenci@lo5.bielsko.pl'
 
@@ -153,8 +153,7 @@ class Default(Configuration):
         )
     }
 
-    # URLS_JS_GENERATED_FILE='/srv/graduates/static/js/routes.js'
-    URLS_JS_GENERATED_FILE = '/Users/smucha/Workspace/graduates/static/js/routes.js'
+    URLS_JS_GENERATED_FILE = '/var/www/graduates/static/js/routes.js'
 
     THUMBNAIL_ALIASES = {
         '': {
@@ -186,23 +185,19 @@ class Default(Configuration):
 
 
 class Development(Default):
-    # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
-    MANDRILL_API_KEY = "-aUv8GibNMA58b69RhCSNw"
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
     WSGI_APPLICATION = 'graduates.wsgi.application'
 
     RECAPTCHA_PUBLIC_KEY = '6Leypf8SAAAAAP8M7JlGB9xDw3Ohw9w7n6LY4Rn9'
     RECAPTCHA_PRIVATE_KEY= '6Leypf8SAAAAAC1h9vEWSwvOzyTr-vpRmYOsGz3a'
 
-    #MEDIA_ROOT = '/srv/graduates/media'
-    MEDIA_ROOT = '/Users/smucha/Workspace/graduates/media'
+    MEDIA_ROOT = '/var/www/graduates/media'
 
     MEDIA_URL = '/media/'
 
     LOCALE_PATHS = (
-        # '/srv/graduates/locale',
-        '/Users/smucha/Workspace/graduates/locale'
+        '/var/www/graduates/locale'
     )
 
 
@@ -214,3 +209,5 @@ class Staging(Default):
 class Production(Default):
     EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
     MANDRILL_API_KEY = "-aUv8GibNMA58b69RhCSNw"
+    DEBUG = False
+
