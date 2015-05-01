@@ -166,7 +166,7 @@
               </li>
 
               <li>
-                <a href="{{ STATIC_URL }}page-settings.html">
+                <a href="#/profile/edit">
                   <i class="fa fa-cogs"></i> 
                   &nbsp;&nbsp;Ustawienia
                 </a>
@@ -238,7 +238,7 @@
 
 
           <li class="dropdown ">
-            <a href="javascript:;">Dyskusja</a>
+            <a href="/#/posts/">Dyskusja</a>
           </li>
 
 
@@ -449,17 +449,21 @@
 <script src="{{ STATIC_URL }}js/commands/profile.js"></script>
 <script src="{{ STATIC_URL }}js/commands/city.js"></script>
 <script src="{{ STATIC_URL }}js/commands/community.js"></script>
+<script src="{{ STATIC_URL }}js/commands/posts.js"></script>
 
 
 <!-- Models -->
 <script src="{{ STATIC_URL }}js/models/profile.js"></script>
 <script src="{{ STATIC_URL }}js/models/community.js"></script>
+<script src="{{ STATIC_URL }}js/models/posts.js"></script>
 <script src="{{ STATIC_URL }}js/models/search.js"></script>
 
 <!-- Forms -->
+<script src="{{ STATIC_URL }}js/forms/base.js"></script>
 <script src="{{ STATIC_URL }}js/forms/profile.js"></script>
 <script src="{{ STATIC_URL }}js/forms/community.js"></script>
 <script src="{{ STATIC_URL }}js/forms/search.js"></script>
+<script src="{{ STATIC_URL }}js/forms/posts.js"></script>
 
 <!-- Views -->
 <script src="{{ STATIC_URL }}js/views/basic/map.js"></script>
@@ -467,9 +471,12 @@
 <script src="{{ STATIC_URL }}js/views/layout/profile.js"></script>
 <script src="{{ STATIC_URL }}js/views/layout/community.js"></script>
 <script src="{{ STATIC_URL }}js/views/layout/exception.js"></script>
+<script src="{{ STATIC_URL }}js/views/layout/posts.js"></script>
+<script src="{{ STATIC_URL }}js/views/item/posts.js"></script>
 <script src="{{ STATIC_URL }}js/views/item/profile.js"></script>
 <script src="{{ STATIC_URL }}js/views/item/community.js"></script>
 <script src="{{ STATIC_URL }}js/views/item/search.js"></script>
+<script src="{{ STATIC_URL }}js/views/collection/posts.js"></script>
 <script src="{{ STATIC_URL }}js/views/collection/profile.js"></script>
 <script src="{{ STATIC_URL }}js/views/collection/community.js"></script>
 <script src="{{ STATIC_URL }}js/views/collection/search.js"></script>
@@ -478,11 +485,12 @@
 <!-- Controllers -->
 <script src="{{ STATIC_URL }}js/controllers/profile.js"></script>
 <script src="{{ STATIC_URL }}js/controllers/community.js"></script>
+<script src="{{ STATIC_URL }}js/controllers/posts.js"></script>
 
 <!-- Routers -->
 <script src="{{ STATIC_URL }}js/routers/profile.js"></script>
 <script src="{{ STATIC_URL }}js/routers/community.js"></script>
-<script src="{{ STATIC_URL }}js/routers/discussion.js"></script>
+<script src="{{ STATIC_URL }}js/routers/posts.js"></script>
 <script src="{{ STATIC_URL }}js/routers/common.js"></script>
 
 <script src="{{ STATIC_URL }}js/app.js"></script>

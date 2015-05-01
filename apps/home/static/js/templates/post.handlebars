@@ -1,0 +1,30 @@
+<div>
+<div class="feed-item feed-item-idea">
+
+
+  <div class="feed-subject">
+    <img src="{{#avatar author.thumbnail }}{{ author.thumbnail }}{{/avatar}}" style="width: 50px; height: 50px;">
+    <div class="pull-left" style="padding-left: 10px;">
+        <p><a href="javascript:;">{{ author.full_name }}</a></p>
+        <p>absolwent V LO</p>
+    </div>
+    {{#if is_owner }}
+        <a href="javascript:;" class="pull-right feed-control remove" style="margin-left: 10px;"><i class="fa fa-times"></i> Usuń</a>
+        <a href="javascript:;" class="pull-right edit feed-control"><i class="fa fa-edit"></i> Edytuj</a>
+    {{/if}}
+  </div> <!-- /.feed-subject -->
+
+  <div class="feed-content">
+    {{ content }}
+  </div> <!-- /.feed-content -->
+
+  <div class="feed-actions">
+    <!--<a href="javascript:;" class="pull-left"><i class="fa fa-thumbs-up"></i> 0</a>-->
+    <!--<a href="javascript:;" class="comments pull-left"><i class="fa fa-comment-o"></i> 0</a>-->
+
+    <a href="javascript:;" class="pull-right"><i class="fa fa-clock-o"></i> {{#datefromnow created}}{{ created }}{{/datefromnow}}</a>
+  </div> <!-- /.feed-actions -->
+
+</div> <!-- /.feed-item -->
+<div class="comments-container"></div>
+</div>
