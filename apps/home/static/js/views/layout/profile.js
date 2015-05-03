@@ -40,6 +40,7 @@ App.Layouts.EditProfile = Marionette.LayoutView.extend({
         if(!this.newUniversity.hasView()) {
             this.universityForm = new App.Form.University({ model: new App.Model.University() });
             this.newUniversity.show(this.universityForm);
+            this.universityForm.initializeSelect2();
         }
     }
 });

@@ -171,6 +171,10 @@ App.Form.University = App.Form.Base.extend({
         }.bind(this));
     },
 
+    initializeSelect2: function() {
+      this.$el.find('select').select2();
+    },
+
     shiftForm: function() {
         var form = new App.Form.UniversityExtended({ model: this.model });
         form.parent = this.parent;
@@ -254,6 +258,7 @@ App.Form.UniversityExtended = App.Form.Base.extend({
             if(this.region) {
                 this.region.show(form);
             }
+            form.initializeSelect2();
             this.remove();
         }.bind(this));
     }
