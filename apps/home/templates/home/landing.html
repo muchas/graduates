@@ -1,7 +1,7 @@
 {% extends 'front_base.html' %}
 
         {% block header %}
-            	<div id="landing">
+    <div id="landing">
 	  <div class="container">
 	    <div class="row">
 		  <div class="span5">
@@ -10,12 +10,27 @@
 		    <p><a href="{% url 'registration' %}" class="btn btn-primary btn-action">Dołącz już dziś</a></p>
 		  </div>
 		  <div class="span7">
-		    <div class="js-video">
-			  <iframe src="http://player.vimeo.com/video/38498748?title=0&amp;byline=0&amp;portrait=0&amp;color=38e8ae" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-		    </div>
+            <div id="graduatesCarousel" class="carousel slide">
+              <!-- Carousel items -->
+              <div class="carousel-inner">
+                <div class="active item">
+                  <img src="{{ STATIC_URL }}img/slide1.jpeg" alt="...">
+                </div>
+                <div class="item">
+                  <img src="{{ STATIC_URL }}img/slide2.jpeg" alt="...">
+                </div>
+                <div class="item">
+                  <img src="{{ STATIC_URL }}img/slide3.jpeg" alt="...">
+                </div>
+              </div>
+              <!-- Carousel nav -->
+              <a class="carousel-control left" href="#graduatesCarousel" data-slide="prev">&lsaquo;</a>
+              <a class="carousel-control right" href="#graduatesCarousel" data-slide="next">&rsaquo;</a>
+            </div>
 		  </div>
 		</div>
-            </div></div>
+      </div>
+    </div>
           {% endblock %}
 
 {% block content %}
@@ -61,14 +76,14 @@
   </div>
   <div class="span4">
     <a class="thumbnail" href="">
-      <img alt="image" src="http://quickimage.it/400x200">
+      <img alt="image" src="{{ STATIC_URL }}img/third.jpeg">
     </a>
     <h2>Image 2</h2>
     <p>Optional subtext to help better explain the image above can go here.</p>
   </div>
   <div class="span4">
     <a class="thumbnail" href="">
-      <img alt="image" src="http://quickimage.it/400x200">
+      <img alt="image" src="{{ STATIC_URL }}img/second.jpeg">
     </a>
     <h2>Image 3</h2>
     <p>Optional subtext to help better explain the image above can go here.</p>

@@ -110,12 +110,13 @@
       </div>	  
     </div>
 {% endblock %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+    <script src="{{ STATIC_URL }}js/jquery-1.11.2.min.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 	<script src="{{ STATIC_URL }}js/jquery.fitvids.js"></script>
 	<script src="{{ STATIC_URL }}js/jqBootstrapValidation.js"></script>
 	<script src="{{ STATIC_URL }}js/bounce.js"></script>
-
+    <script type="text/javascript">
+        $('.carousel').carousel();
+    </script>
   </body>
 </html>

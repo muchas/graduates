@@ -41,12 +41,12 @@
 #landing p {
     color: #394755;
 }
-#landing .carousel-control {
-    color: #0088CC;
-}
-#landing .carousel-control:hover {
-    color: #17405E;
-}
+/*#landing .carousel-control {*/
+    /*color: #0088CC;*/
+/*}*/
+/*#landing .carousel-control:hover {*/
+    /*color: #17405E;*/
+/*}*/
 #landingSlide {
     background: url("../img/landing.png") no-repeat scroll center 200px #F1F1F1;
 }
