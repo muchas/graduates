@@ -61,3 +61,67 @@ App.Form.Invitation = Backbone.Form.extend({
        }.bind(this));
     }
 });
+
+
+App.Form.Support = Backbone.Form.extend({
+    template: Handlebars.templates.support_form,
+
+    schema: {
+        content: { type: 'TextArea', editorClass: "form-control", validators:['required'], editorAttrs: { rows: 4 } }
+    },
+
+    events: {
+      'click .send': 'save'
+    },
+
+    save: function() {
+       var errors = this.commit();
+       if(_.isUndefined(errors)) {
+           this.onSave();
+       } else {
+           console.log(errors);
+           this.handleErrors(errors);
+       }
+    },
+
+    onSave: function() {
+        App.instance.execute('community/feedback', this.model.toJSON(),
+            function(response) {
+
+                var n = noty({
+                    text: 'Twoja opinia została wysłana. Dziękujemy!',
+                    type: 'success'
+                });
+
+                setTimeout(function() {
+                    n.close();
+                }, 5000);
+
+                this.clear();
+            }.bind(this),
+            function(response) {
+                var errors = {};
+                // change errors structure
+                _.each(response, function(value, key) {
+                   errors[key] = { message: value[0] };
+                });
+                this.handleErrors(errors);
+            }.bind(this)
+        );
+    },
+
+    clear: function() {
+        _.each(this.fields, function(field) {
+            field.setValue('');
+        });
+    },
+
+    handleErrors: function(errors) {
+       this.$el.find('.form-error').empty();
+       _.each(errors, function(error, key) {
+           // '.' char has special meaning in CSS, so we replace it with '-'
+           key = key.replace(/\./g, '-');
+           this.$el.find('.'+ key + '-error').html(Handlebars.templates.form_error({ message: error.message }));
+       }.bind(this));
+    }
+});

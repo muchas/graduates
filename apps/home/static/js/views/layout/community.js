@@ -20,3 +20,10 @@ App.Layouts.Dashboard = Marionette.LayoutView.extend({
         'city': '#city'
     }
 });
+
+App.Layouts.Support = Marionette.LayoutView.extend({
+   template: Handlebars.templates.support,
+   regions: {
+       'form': "#support-form"
+   }
+});

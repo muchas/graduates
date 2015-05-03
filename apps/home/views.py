@@ -1,5 +1,9 @@
 from django.views.generic.base import TemplateView
+from rest_framework import generics, views, status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from apps.accounts.models import User
+from apps.home.serializers import FeedbackSerializer
 
 
 class HomePageView(TemplateView):
@@ -21,3 +25,9 @@ class HomePageView(TemplateView):
 
 class FaqView(TemplateView):
     template_name = "home/faq.html"
+
+
+class FeedbackView(generics.CreateAPIView):
+    serializer_class = FeedbackSerializer
+    permission_classes = (IsAuthenticated,)
+

@@ -9,7 +9,8 @@ App.Command.Community =  App.Command.Base.extend({
         "community/send-invitation": "invitePerson",
         "community/cities": "getAllCities",
         "community/not-empty-cities": "getNotEmptyCities",
-        "community/city": "getCity"
+        "community/city": "getCity",
+        "community/feedback": "postFeedback"
     },
 
     getAllBranches: function(callback) {
@@ -46,5 +47,9 @@ App.Command.Community =  App.Command.Base.extend({
 
     getCity: function(id, callback) {
         this.jsonRequest('GET', 'city', { pk: id }, {}, callback);
+    },
+
+    postFeedback: function(data, callback)  {
+        this.jsonRequest('POST', 'feedback', {}, data, callback);
     }
 });

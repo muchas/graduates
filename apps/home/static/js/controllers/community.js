@@ -15,6 +15,16 @@ App.Controller.CommunityController = {
         });
     },
 
+    showSupport: function() {
+        var layout = new App.Layouts.Support();
+        App.layout.content.show(layout);
+
+        var support = new App.Model.Support();
+        layout.form.show(new App.Form.Support({
+            model: support
+        }));
+    },
+
     listTeachers: function() {
         var layout = new App.Layouts.Teachers();
         App.layout.content.show(layout);

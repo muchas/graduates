@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.home.views import HomePageView, FaqView
+from apps.home.views import HomePageView, FaqView, FeedbackView
 from apps.accounts.views import LoginView, RegistrationWizard, ActivationView, ClaimView, UserIntroduceView, \
     PasswordChangeView
 
@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^claim/$', ClaimView.as_view(), name='claim'),
     url(r'^community/', include('apps.community.urls')),
     url(r'^stream/', include('apps.posts.urls')),
+    url(r'^feedback/$', FeedbackView.as_view(), name='feedback'),
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
     url(r'', include('django.contrib.auth.urls')),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
