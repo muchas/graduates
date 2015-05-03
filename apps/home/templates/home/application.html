@@ -97,7 +97,7 @@
 
 
           <li class="dropdown">
-            <a href=";javascript;;"class="dropdown-toggle" data-toggle="dropdown">
+            <a href=";javascript;;" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope"></i>
               <span class="navbar-visible-collapsed">&nbsp;Wiadomości&nbsp;</span>
             </a>
@@ -266,13 +266,7 @@
   </div> <!-- /.mainnav -->
 
   <div class="content" style="min-height: 650px;">
-
-    <div class="container" id="content">
-
-
-    </div> <!-- /.container -->
-
-
+    <div class="container" id="content"></div>
   </div> <!-- .content -->
 </div> <!-- /#wrapper -->
 
@@ -282,145 +276,13 @@
   </div>
 </footer>
 
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script type="text/javascript">
-{#  function LeafletMap(options) {#}
-{#    this.markers = [];#}
-{#    this.onMarkerClick = options.onMarkerClick;#}
-{#    this.map = new L.Map(options.name);#}
-{#    this.osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';#}
-{#    this.mbUrl = 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';#}
-{#    this.mblayer = new L.TileLayer(this.mbUrl, {id: 'examples.map-i875mjb7'});#}
-{##}
-{#    this.osm = new L.TileLayer(this.osmUrl, { minZoom: options.minZoom, maxZoom: options.maxZoom });#}
-{#    this.map.setView(new L.LatLng(options.x, options.y), options.zoom);#}
-{#    this.map.addLayer(this.mblayer);#}
-{#  }#}
-{##}
-{#  LeafletMap.prototype.addCity = function(city) {#}
-{#    var marker = L.marker([city.get('x'), city.get('y')]).addTo(this.map);#}
-{#    marker.on('click', function() { #}
-{#      this.onMarkerClick(city);#}
-{#    }.bind(this));#}
-{#    this.markers.push(marker);#}
-{#  }#}
-{##}
-{#  var map = new LeafletMap({#}
-{#    name: "map",#}
-{#    minZoom: 2,#}
-{#    maxZoom: 12,#}
-{#    x: 51.8,#}
-{#    y: 19.3,#}
-{#    zoom: 5,#}
-{##}
-{#    onMarkerClick: function(city) {#}
-{#      App.cityArea.show(new City.Views.Element({ model: city }));#}
-{#    }#}
-{#  });#}
-
-</script>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
 <!-- Core JS -->
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
-<script src="{{ STATIC_URL }}js/libs/jquery-1.11.2.min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/noty/packaged/jquery.noty.packaged.min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
 
 <!--[if lt IE 9]>
 <script src="{{ STATIC_URL }}js/libs/excanvas.compiled.js"></script>
 <![endif]-->
-
-<!-- Plugin JS -->
-<script src="{{ STATIC_URL }}js/plugins/flot/jquery.flot.js"></script>
-<script src="{{ STATIC_URL }}js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-<script src="{{ STATIC_URL }}js/plugins/flot/jquery.flot.pie.js"></script>
-<script src="{{ STATIC_URL }}js/plugins/flot/jquery.flot.resize.js"></script>
-
-<!-- App JS -->
-<script src="{{ STATIC_URL }}js/mvpready-core.js"></script>
-<script src="{{ STATIC_URL }}js/mvpready-admin.js"></script>
-
-<!-- Core JS -->
-<script src="{{ STATIC_URL }}js/libs/bootstrap-datepicker.js"></script>
-<script src="{{ STATIC_URL }}js/libs/jquery.cookie.js"></script>
-<script src="{{ STATIC_URL }}js/libs/underscore-min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/handlebars-v3.0.0.js"></script>
-<script src="{{ STATIC_URL }}js/libs/backbone-min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/deep-model.min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/backbone-forms.min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/backbone.wreqr.min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/backbone.babysitter.min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/backbone.marionette.min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/moment-with-locales.min.js"></script>
-<script src="{{ STATIC_URL }}js/libs/bootstrap3-typeahead.min.js"></script>
-
-<script src="{{ STATIC_URL }}js/routing.js"></script>
-<script src="{{ STATIC_URL }}js/routes.js"></script>
-<script src="{{ STATIC_URL }}js/utils.js"></script>
-<script src="{{ STATIC_URL }}js/handlebars.js"></script>
-
-
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-
-<script src="{{ STATIC_URL }}js/config.js"></script>
-<script src="{{ STATIC_URL }}js/forms/editors/month.js"></script>
-
-<script src="{{ STATIC_URL }}js/commands/base.js"></script>
-<script src="{{ STATIC_URL }}js/commands/profile.js"></script>
-<script src="{{ STATIC_URL }}js/commands/city.js"></script>
-<script src="{{ STATIC_URL }}js/commands/community.js"></script>
-<script src="{{ STATIC_URL }}js/commands/posts.js"></script>
-
-
-<!-- Models -->
-<script src="{{ STATIC_URL }}js/models/profile.js"></script>
-<script src="{{ STATIC_URL }}js/models/community.js"></script>
-<script src="{{ STATIC_URL }}js/models/posts.js"></script>
-<script src="{{ STATIC_URL }}js/models/search.js"></script>
-
-<!-- Forms -->
-<script src="{{ STATIC_URL }}js/forms/base.js"></script>
-<script src="{{ STATIC_URL }}js/forms/profile.js"></script>
-<script src="{{ STATIC_URL }}js/forms/community.js"></script>
-<script src="{{ STATIC_URL }}js/forms/search.js"></script>
-<script src="{{ STATIC_URL }}js/forms/posts.js"></script>
-
-<!-- Views -->
-<script src="{{ STATIC_URL }}js/views/basic/map.js"></script>
-<script src="{{ STATIC_URL }}js/views/layout/root.js"></script>
-<script src="{{ STATIC_URL }}js/views/layout/profile.js"></script>
-<script src="{{ STATIC_URL }}js/views/layout/community.js"></script>
-<script src="{{ STATIC_URL }}js/views/layout/exception.js"></script>
-<script src="{{ STATIC_URL }}js/views/layout/posts.js"></script>
-<script src="{{ STATIC_URL }}js/views/layout/gallery.js"></script>
-<script src="{{ STATIC_URL }}js/views/item/posts.js"></script>
-<script src="{{ STATIC_URL }}js/views/item/profile.js"></script>
-<script src="{{ STATIC_URL }}js/views/item/community.js"></script>
-<script src="{{ STATIC_URL }}js/views/item/search.js"></script>
-<script src="{{ STATIC_URL }}js/views/collection/posts.js"></script>
-<script src="{{ STATIC_URL }}js/views/collection/profile.js"></script>
-<script src="{{ STATIC_URL }}js/views/collection/community.js"></script>
-<script src="{{ STATIC_URL }}js/views/collection/search.js"></script>
-
-
-<!-- Controllers -->
-<script src="{{ STATIC_URL }}js/controllers/profile.js"></script>
-<script src="{{ STATIC_URL }}js/controllers/community.js"></script>
-<script src="{{ STATIC_URL }}js/controllers/posts.js"></script>
-<script src="{{ STATIC_URL }}js/controllers/gallery.js"></script>
-
-
-<!-- Routers -->
-<script src="{{ STATIC_URL }}js/routers/profile.js"></script>
-<script src="{{ STATIC_URL }}js/routers/community.js"></script>
-<script src="{{ STATIC_URL }}js/routers/posts.js"></script>
-<script src="{{ STATIC_URL }}js/routers/gallery.js"></script>
-<script src="{{ STATIC_URL }}js/routers/common.js"></script>
-
-<script src="{{ STATIC_URL }}js/app.js"></script>
-
-
+<script src="{{ STATIC_URL }}js/app.min.js"></script>
 </body>
 </html>
