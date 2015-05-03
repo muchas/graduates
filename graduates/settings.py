@@ -16,7 +16,6 @@ from django.utils.translation import ugettext_lazy as _
 from configurations import Configuration
 
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
@@ -37,6 +36,8 @@ class Default(Configuration):
     INTERNAL_IPS = ('127.0.0.1',)
 
     DEFAULT_FROM_EMAIL = 'absolwenci@lo5.bielsko.pl'
+
+    SERVER_EMAIL = 'absolwenci@lo5.bielsko.pl'
 
     AUTH_USER_MODEL = 'accounts.User'
 
@@ -126,6 +127,16 @@ class Default(Configuration):
 
     STATIC_URL = '/static/'
 
+    STATIC_ROOT = os.path.join(BASE_DIR + "/../", 'static')
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+    MEDIA_URL = '/media/'
+
+    LOCALE_PATHS = (
+        os.path.join(BASE_DIR, 'locale')
+    )
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -153,7 +164,7 @@ class Default(Configuration):
         )
     }
 
-    URLS_JS_GENERATED_FILE = '/var/www/graduates/static/js/routes.js'
+    URLS_JS_GENERATED_FILE = BASE_DIR + '/static/js/routes.js'
 
     THUMBNAIL_ALIASES = {
         '': {
@@ -183,22 +194,13 @@ class Default(Configuration):
 
     SITE_ID = 1
 
-
-class Development(Default):
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-    WSGI_APPLICATION = 'graduates.wsgi.application'
-
     RECAPTCHA_PUBLIC_KEY = '6Leypf8SAAAAAP8M7JlGB9xDw3Ohw9w7n6LY4Rn9'
     RECAPTCHA_PRIVATE_KEY= '6Leypf8SAAAAAC1h9vEWSwvOzyTr-vpRmYOsGz3a'
 
-    MEDIA_ROOT = '/var/www/graduates/media'
 
-    MEDIA_URL = '/media/'
-
-    LOCALE_PATHS = (
-        '/var/www/graduates/locale'
-    )
+class Development(Default):
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    WSGI_APPLICATION = 'graduates.wsgi.application'
 
 
 class Staging(Default):
@@ -207,7 +209,8 @@ class Staging(Default):
 
 
 class Production(Default):
+    DEBUG = False
+
     EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
     MANDRILL_API_KEY = "-aUv8GibNMA58b69RhCSNw"
-    DEBUG = False
 
