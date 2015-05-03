@@ -58,6 +58,11 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
     new App.Command.MarriedName();
 
     Backbone.history.start();
+    Backbone.history.on("route", function (route, router) {
+        if(_.has(window, 'Intercom')) {
+            window.Intercom('update');
+        }
+    });
 
     if (displayIntroductionWizard) {
         Backbone.history.navigate("/introduction", true);

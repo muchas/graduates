@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load tracking %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -37,12 +38,10 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
   <![endif]-->
-<script id="profile-template" type="text/template">
-
-</script>
 <style>
     .top-buffer { margin-top:20px; }
 </style>
+    {% intercom request.user %}
 </head>
 
 <body>

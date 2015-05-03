@@ -83,6 +83,7 @@ class Default(Configuration):
         'apps.community',
         'apps.accounts',
         'apps.posts',
+        'apps.tracking',
         'debug_toolbar',
     )
 
@@ -214,3 +215,4 @@ class Production(Default):
     EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
     MANDRILL_API_KEY = "-aUv8GibNMA58b69RhCSNw"
 
+    INTERCOM_APP_ID = "im1t13q0"
