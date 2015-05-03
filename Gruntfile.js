@@ -33,7 +33,7 @@ module.exports = function (grunt) {
                      'apps/home/static/js/*/*/*.js',
                      'apps/home/static/js/templates/*.handlebars'
                  ],
-                 tasks: ['handlebars', 'concat']
+                 tasks: ['handlebars']
              }
         },
 
@@ -111,36 +111,36 @@ module.exports = function (grunt) {
             }
         },
 
-        concat: {
-             dist: {
-                 src: [
-                     "apps/home/static/js/libs/jquery-1.11.2.min.js",
-                     "apps/home/static/js/libs/underscore-min.js",
-                     "apps/home/static/js/libs/backbone-min.js",
-                     "apps/home/static/js/libs/backbone-forms.min.js",
-                     "apps/home/static/js/libs/backbone.wreqr.min.js",
-                     "apps/home/static/js/libs/backbone.babysitter.min.js",
-                     "apps/home/static/js/libs/backbone.marionette.min.js",
-                     "apps/home/static/js/libs/handlebars-v3.0.0.js",
-                     "apps/home/static/js/libs/moment-with-locales.min.js",
-                     "static/js/handlebars.js",
-
-                     "app/home/static/js/config.js",
-                     "app/home/static/js/commands/base.js",
-                     "app/home/static/js/commands/*.js",
-                     "app/home/static/js/form/*.js",
-                     "app/home/static/js/views/item/*.js",
-                     "app/home/static/js/views/collection/*.js",
-                     "app/home/static/js/views/layout/*.js",
-                     "app/home/static/js/models/*.js",
-                     "app/home/static/js/controllers/*.js",
-                     "app/home/static/js/routers/*.js",
-
-                     "app/home/static/js/app.js"
-                 ],
-                 dest: 'static/js/app.min.js'
-             }
-        },
+//        concat: {
+//             dist: {
+//                 src: [
+//                     "apps/home/static/js/libs/jquery-1.11.2.min.js",
+//                     "apps/home/static/js/libs/underscore-min.js",
+//                     "apps/home/static/js/libs/backbone-min.js",
+//                     "apps/home/static/js/libs/backbone-forms.min.js",
+//                     "apps/home/static/js/libs/backbone.wreqr.min.js",
+//                     "apps/home/static/js/libs/backbone.babysitter.min.js",
+//                     "apps/home/static/js/libs/backbone.marionette.min.js",
+//                     "apps/home/static/js/libs/handlebars-v3.0.0.js",
+//                     "apps/home/static/js/libs/moment-with-locales.min.js",
+//                     "static/js/handlebars.js",
+//
+//                     "app/home/static/js/config.js",
+//                     "app/home/static/js/commands/base.js",
+//                     "app/home/static/js/commands/*.js",
+//                     "app/home/static/js/form/*.js",
+//                     "app/home/static/js/views/item/*.js",
+//                     "app/home/static/js/views/collection/*.js",
+//                     "app/home/static/js/views/layout/*.js",
+//                     "app/home/static/js/models/*.js",
+//                     "app/home/static/js/controllers/*.js",
+//                     "app/home/static/js/routers/*.js",
+//
+//                     "app/home/static/js/app.js"
+//                 ],
+//                 dest: 'static/js/app.min.js'
+//             }
+//        },
 
         uglify: {
              //css: {
@@ -160,28 +160,47 @@ module.exports = function (grunt) {
                      'static/js/app.min.js': [
                          "apps/home/static/js/libs/jquery-1.11.2.min.js",
                          "apps/home/static/js/libs/underscore-min.js",
+                         "apps/home/static/js/libs/noty/packaged/jquery.noty.packaged.min.js",
+                         "static/js/plugins/flot/jquery.flot.js",
+                         "static/js/plugins/flot/jquery.flot.tooltip.min.js",
+                         "static/js/plugins/flot/jquery.flot.pie.js",
+                         "static/js/plugins/flot/jquery.flot.resize.js",
+                         "static/js/libs/bootstrap.min.js",
+                         "apps/home/static/js/libs/bootstrap-datepicker.js",
+                         "apps/home/static/js/libs/bootstrap3-typeahead.min.js",
+                         "apps/home/static/js/libs/jquery.cookie.js",
                          "apps/home/static/js/libs/backbone-min.js",
+                         "apps/home/static/js/libs/deep-model.min.js",
                          "apps/home/static/js/libs/backbone-forms.min.js",
                          "apps/home/static/js/libs/backbone.wreqr.min.js",
                          "apps/home/static/js/libs/backbone.babysitter.min.js",
                          "apps/home/static/js/libs/backbone.marionette.min.js",
                          "apps/home/static/js/libs/handlebars-v3.0.0.js",
                          "apps/home/static/js/libs/moment-with-locales.min.js",
+
+                         "apps/home/static/js/routing.js",
                          "static/js/handlebars.js",
+                         "static/js/routes.js",
+//
+                         "apps/home/static/js/config.js",
+                         "apps/home/static/js/utils.js",
+                         "apps/home/static/js/models/*.js",
+                         "apps/home/static/js/commands/base.js",
+                         "apps/home/static/js/commands/*.js",
+                         "apps/home/static/js/forms/base.js",
+                         "apps/home/static/js/forms/editors/*.js",
+                         "apps/home/static/js/forms/*.js",
+                         "apps/home/static/js/views/basic/*.js",
+                         "apps/home/static/js/views/item/*.js",
+                         "apps/home/static/js/views/collection/*.js",
+                         "apps/home/static/js/views/layout/*.js",
+                         "apps/home/static/js/controllers/*.js",
+                         "apps/home/static/js/routers/*.js",
 
-                         "app/home/static/js/config.js",
-                         "app/home/static/js/commands/base.js",
-                         "app/home/static/js/commands/*.js",
-                         "app/home/static/js/form/*.js",
-                         "app/home/static/js/views/item/*.js",
-                         "app/home/static/js/views/collection/*.js",
-                         "app/home/static/js/views/layout/*.js",
-                         "app/home/static/js/models/*.js",
-                         "app/home/static/js/controllers/*.js",
-                         "app/home/static/js/routers/*.js",
+                         "apps/home/static/js/app.js",
 
-                         "app/home/static/js/app.js"
-
+                         "static/js/mvpready-core.js",
+                         "static/js/mvpready-admin.js"
                      ]
                  }
              }
@@ -198,6 +217,6 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['handlebars', 'uglify']);
     grunt.registerTask('livecss', ['watch:css']);
     grunt.registerTask('livejs', ['watch:js']);
-    grunt.registerTask('concatjs', ['concat']);
+//    grunt.registerTask('concatjs', ['concat']);
 
 };
