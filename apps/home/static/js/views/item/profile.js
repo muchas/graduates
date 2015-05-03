@@ -86,6 +86,7 @@ App.ItemView.EditableUniversity = Marionette.ItemView.extend({
         this.form.parent = this;
         this.$el.fadeOut(300, function() {
             this.$el.html(this.form.render().$el);
+            this.form.initializeSelect2();
         }.bind(this));
         this.$el.fadeIn(400);
     },

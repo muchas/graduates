@@ -161,6 +161,7 @@ module.exports = function (grunt) {
                          "apps/home/static/js/libs/jquery-1.11.2.min.js",
                          "apps/home/static/js/libs/underscore-min.js",
                          "apps/home/static/js/libs/noty/packaged/jquery.noty.packaged.min.js",
+                         "static/js/libs/select2.min.js",
                          "static/js/plugins/flot/jquery.flot.js",
                          "static/js/plugins/flot/jquery.flot.tooltip.min.js",
                          "static/js/plugins/flot/jquery.flot.pie.js",
