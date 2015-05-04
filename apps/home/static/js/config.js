@@ -26,7 +26,7 @@ moment.locale('pl-PL');
 Marionette.Region.prototype.attachHtml = function(view){
   this.$el.hide();
   this.$el.html(view.el);
-  this.$el.slideDown("fast");
+  this.$el.fadeIn("fast");
 };
 
 
