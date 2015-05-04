@@ -21,6 +21,10 @@ App.ItemView.EditableEmployment = Marionette.ItemView.extend({
        'click .remove': 'remove_entry'
     },
 
+    initialize: function() {
+        this.hasOpenedForm = false;
+    },
+
     edit: function() {
         this.form = new App.Form.Employment({ model: this.model });
         this.form.parent = this;
@@ -29,6 +33,15 @@ App.ItemView.EditableEmployment = Marionette.ItemView.extend({
             this.form.initializeTypeahead();
         }.bind(this));
         this.$el.fadeIn(400);
+        this.hasOpenedForm = true;
+    },
+
+    isOpen: function() {
+        return this.hasOpenedForm;
+    },
+
+    closeForm: function() {
+        this.hasOpenedForm = false;
     },
 
     remove_entry: function() {
@@ -83,6 +96,10 @@ App.ItemView.EditableUniversity = Marionette.ItemView.extend({
        'click .remove': 'remove_entry'
     },
 
+    initialize: function() {
+        this.hasOpenedForm = false;
+    },
+
     edit: function() {
         this.form = new App.Form.University({ model: this.model });
         this.form.parent = this;
@@ -91,6 +108,15 @@ App.ItemView.EditableUniversity = Marionette.ItemView.extend({
             this.form.initializeSelect2();
         }.bind(this));
         this.$el.fadeIn(400);
+        this.hasOpenedForm = true;
+    },
+
+     isOpen: function() {
+        return this.hasOpenedForm;
+    },
+
+    closeForm: function() {
+        this.hasOpenedForm = false;
     },
 
     remove_entry: function() {
@@ -111,6 +137,18 @@ App.ItemView.EditableAttribute = Marionette.ItemView.extend({
        'click .edit': 'edit'
     },
 
+    initialize: function() {
+        this.hasOpenedForm = false;
+    },
+
+    isOpen: function() {
+        return this.hasOpenedForm;
+    },
+
+    closeForm: function() {
+        this.hasOpenedForm = false;
+    },
+
     edit: function() {
         this.form = new App.Form.Attribute({
             model: this.model,
@@ -121,6 +159,7 @@ App.ItemView.EditableAttribute = Marionette.ItemView.extend({
             this.$el.html(this.form.render().$el);
         }.bind(this));
         this.$el.fadeIn(400);
+        this.hasOpenedForm = true;
     }
 });
 

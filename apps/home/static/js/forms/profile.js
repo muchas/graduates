@@ -23,6 +23,7 @@ App.Form.Base = Backbone.Form.extend({
         this.$el.fadeOut(300, function(){
             if(this.parent) {
                 this.parent.render();
+                this.parent.closeForm();
             }
             if(this.region) {
                 this.region.empty();

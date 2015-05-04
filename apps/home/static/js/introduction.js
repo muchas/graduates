@@ -6,6 +6,17 @@ App.Application = Marionette.Application.extend({
     initialize: function (options) {}
 });
 
+
+App.loader = {
+  init: function(el) {
+    this.$el = $(el);
+    this.$el.hide();
+  },
+
+  show: function() {},
+  hide: function() {}
+};
+
 App.layout = new App.Layouts.IntroductionRootLayout();
 App.instance = new App.Application();
 App.instance.start();

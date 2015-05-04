@@ -21,6 +21,7 @@ App.Controller.IntroductionController = {
         App.instance.execute("profile/personal_data", function(response) {
             var personal_data = new App.Collection.PersonalData(response);
             var attributes = new App.CollectionView.EditableAttributes({ collection: personal_data });
+            layout.addEditableView(attributes);
             layout.personalData.show(attributes);
             attributes.edit();
         });
@@ -87,15 +88,19 @@ App.Controller.IntroductionController = {
 
     showUniversities: function(layout) {
         App.instance.execute("profile/universities", function(response) {
-           var universities = new App.Collection.Universities(response);
-            layout.universities.show(new App.CollectionView.EditableUniversities({ collection: universities }));
+            var universities = new App.Collection.Universities(response);
+            var editableUniversities = new App.CollectionView.EditableUniversities({ collection: universities });
+            layout.addEditableView(editableUniversities);
+            layout.universities.show(editableUniversities);
         });
     },
 
     showEmployments: function(layout) {
          App.instance.execute("profile/employments", function(response) {
-           var employments = new App.Collection.Employments(response);
-            layout.employments.show(new App.CollectionView.EditableEmployments({ collection: employments }));
+            var employments = new App.Collection.Employments(response);
+            var editableEmployments = new App.CollectionView.EditableEmployments({ collection: employments });
+            layout.addEditableView(editableEmployments);
+            layout.employments.show(editableEmployments);
         });
 
     }
