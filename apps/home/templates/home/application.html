@@ -31,6 +31,7 @@
   <!-- App CSS -->
   <link rel="stylesheet" href="{{ STATIC_URL }}css/mvpready-admin.css">
   <link rel="stylesheet" href="{{ STATIC_URL }}css/mvpready-flat.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
   <!-- <link href="{{ STATIC_URL }}css/custom.css" rel="stylesheet">-->
 
   <!-- Favicon -->
@@ -61,7 +62,7 @@
           <i class="fa fa-cog"></i>
         </button>
 
-        <a href="{{ STATIC_URL }}" class="navbar-brand" style="font-weight: 200; margin-top: 4px;font-size:20px;">
+        <a href="#/" class="navbar-brand" style="font-weight: 200; margin-top: 4px;font-size:20px;">
             <i class="fa fa-book" style="margin-right: 5px;"></i> 
             Absolwenci V LO
         </a>
@@ -278,6 +279,8 @@
     <p class="pull-left">Copyright &copy; 2015 V Liceum Ogólnokształcące.</p>
   </div>
 </footer>
+<div id="loader"></div>
+
 
 <!-- Core JS -->
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>

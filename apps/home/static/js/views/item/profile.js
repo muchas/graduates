@@ -32,10 +32,12 @@ App.ItemView.EditableEmployment = Marionette.ItemView.extend({
     },
 
     remove_entry: function() {
+        App.loader.show();
         App.instance.execute('employment/remove', this.model.id, function(response) {
             this.$el.fadeOut(300, function() {
                 this.remove();
             }.bind(this));
+            App.loader.hide();
         }.bind(this));
     }
 });
@@ -92,10 +94,12 @@ App.ItemView.EditableUniversity = Marionette.ItemView.extend({
     },
 
     remove_entry: function() {
+        App.loader.show();
         App.instance.execute('university/remove', this.model.id, function(response) {
             this.$el.fadeOut(300, function() {
                 this.remove();
             }.bind(this));
+            App.loader.hide();
         }.bind(this));
     }
 });

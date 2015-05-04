@@ -4,6 +4,7 @@ App.Controller.ProfileController = {
         var profile = new App.Model.Profile();
         var layout = new App.Layouts.ProfileLayout({ model: profile });
 
+        App.loader.show();
         App.instance.execute("profile/person", id, function(response) {
             var personal_data = new App.Collection.PersonalData(response.personal_data);
             var universities = new App.Collection.Universities(response.universities);
@@ -30,11 +31,13 @@ App.Controller.ProfileController = {
                     layout.profileSimilarity.show(similarityView);
                 });
             }
+            App.loader.hide();
         });
 
     },
 
     invitePerson: function(id) {
+        App.loader.show();
         App.instance.execute("profile/person", id, function(response) {
              var profile = new App.Model.Profile(response);
 
@@ -46,6 +49,7 @@ App.Controller.ProfileController = {
                 model: invitation,
                 templateData: profile.toJSON()
             }));
+            App.loader.hide();
         });
     },
 

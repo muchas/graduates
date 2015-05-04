@@ -28,6 +28,22 @@ App.Application = Marionette.Application.extend({
 App.user = {
 
 };
+
+App.loader = {
+  init: function(el) {
+    this.$el = $(el);
+    this.$el.hide();
+  },
+
+  show: function() {
+    this.$el.show();
+  },
+
+  hide: function() {
+    this.$el.hide();
+  }
+};
+
 App.layout = new App.Layouts.RootLayout();
 App.instance = new App.Application();
 App.instance.start();
@@ -37,6 +53,8 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
 //    $("#app").show();
 
 //    App.instance.topBar.show(new App.Layouts.TopBar());
+
+    App.loader.init('#loader');
 
     var searchResults = new App.Collection.PeopleSearchResults();
     App.layout.search.show(new App.Form.Search({ collection: searchResults }));

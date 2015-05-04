@@ -22,6 +22,7 @@ App.Form.Invitation = Backbone.Form.extend({
     },
 
     onSave: function() {
+        App.loader.show();
         App.instance.execute('community/send-invitation', this.model.get('person'), this.model.toJSON(),
             function(response) {
 
@@ -35,6 +36,7 @@ App.Form.Invitation = Backbone.Form.extend({
                 }, 5000);
 
                 this.hide();
+                App.loader.hide();
             }.bind(this),
             function(response) {
                 var errors = {};
@@ -43,6 +45,7 @@ App.Form.Invitation = Backbone.Form.extend({
                    errors[key] = { message: value[0] };
                 });
                 this.handleErrors(errors);
+                App.loader.hide();
             }.bind(this)
         );
     },
@@ -85,6 +88,7 @@ App.Form.Support = Backbone.Form.extend({
     },
 
     onSave: function() {
+        App.loader.show();
         App.instance.execute('community/feedback', this.model.toJSON(),
             function(response) {
 
@@ -98,6 +102,7 @@ App.Form.Support = Backbone.Form.extend({
                 }, 5000);
 
                 this.clear();
+                App.loader.hide();
             }.bind(this),
             function(response) {
                 var errors = {};
@@ -106,6 +111,7 @@ App.Form.Support = Backbone.Form.extend({
                    errors[key] = { message: value[0] };
                 });
                 this.handleErrors(errors);
+                App.loader.hide();
             }.bind(this)
         );
     },
