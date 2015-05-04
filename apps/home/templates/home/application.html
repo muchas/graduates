@@ -56,21 +56,24 @@
 
     <div class="container">
 
-      <div class="navbar-header">
+
+      <div class="navbar-header" role="navigation">
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
           <i class="fa fa-cog"></i>
         </button>
-
-        <a href="#/" class="navbar-brand" style="font-weight: 200; margin-top: 4px;font-size:20px;">
-            <i class="fa fa-book" style="margin-right: 5px;"></i> 
-            Absolwenci V LO
-        </a>
       </div> <!-- /.navbar-header -->
 
 
       <nav class="collapse navbar-collapse" role="navigation" style="position: relative">
-
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a href="/#" class="navbar-brand" style="font-weight: 200; font-size:20px; font-family: Oswald, 'Trebuchet MS', 'Open Sans', arial, sans-serif;">
+                    <i class="fa fa-users" style="margin-right: 5px;"></i>
+                    Absolwenci V LO
+                </a>
+            </li>
+        </ul>
         <ul class="nav navbar-nav noticebar navbar-left">
           <li class="dropdown">
             <a href="javascript;;" class="dropdown-toggle" data-toggle="dropdown">
@@ -101,7 +104,7 @@
 
 
           <li class="dropdown">
-            <a href=";javascript;;" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="javascript;;" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope"></i>
               <span class="navbar-visible-collapsed">&nbsp;Wiadomości&nbsp;</span>
             </a>
@@ -141,9 +144,7 @@
 
         </ul>
 
-      <form class="navbar-form navbar-left" id="search" role="search" style="margin-top:12px;margin-left:5px;">
-
-      </form>
+      <form class="navbar-form navbar-left" id="search" role="search" style="margin-top:12px;margin-left:5px;"></form>
 
         <ul class="nav navbar-nav navbar-right">    
 
