@@ -74,15 +74,19 @@ App.Form.Employment = App.Form.Base.extend({
     },
 
     updateEmployment: function() {
+        App.loader.show();
         App.instance.execute('employment/update', this.model.id, this.model.toJSON(), function(response) {
             this.hide();
+            App.loader.hide();
         }.bind(this));
     },
 
     createEmployment: function() {
+        App.loader.show();
         App.instance.execute('employment/create', this.model.toJSON(), function(response) {
             App.instance.vent.trigger('employment-created');
             this.hide();
+            App.loader.hide();
         }.bind(this));
     }
 });
@@ -95,10 +99,10 @@ App.Form.Description = App.Form.Base.extend({
    },
 
    onSave: function() {
-       // todo show loader on $el
+       App.loader.show();
        App.instance.execute('description/edit', this.model.toJSON(), function(response) {
-            // todo hide loader
            this.hide();
+           App.loader.hide();
        }.bind(this));
    }
 });
@@ -112,11 +116,11 @@ App.Form.MarriedName = App.Form.Base.extend({
    },
 
    onSave: function() {
-       // todo show loader on $el
+       App.loader.show();
        App.instance.execute('married-name/edit', this.model.toJSON(), function(response) {
-            // todo hide loader
            App.instance.vent.trigger('married-name-changed');
            this.hide();
+           App.loader.hide();
        }.bind(this));
    }
 });
@@ -157,17 +161,21 @@ App.Form.University = App.Form.Base.extend({
     },
 
     createUniversity: function() {
+        App.loader.show();
         App.instance.execute('university/create', this.model.toJSON(), function(response) {
             App.instance.vent.trigger('student-created');
             this.model.set(response);
             this.hide();
+            App.loader.hide();
         }.bind(this));
     },
 
     updateUniversity: function() {
+        App.loader.show();
         App.instance.execute('university/update', this.model.id, this.model.toJSON(), function(response) {
             this.model.set(response);
             this.hide();
+            App.loader.hide();
         }.bind(this));
     },
 
@@ -233,17 +241,21 @@ App.Form.UniversityExtended = App.Form.Base.extend({
     },
 
     createUniversity: function() {
+        App.loader.show();
         App.instance.execute('university/create', this.model.toJSON(), function(response) {
             this.model.set(response);
             App.instance.vent.trigger('student-created');
             this.hide();
+            App.loader.hide();
         }.bind(this));
     },
 
     updateUniversity: function() {
+        App.loader.show();
         App.instance.execute('university/update', this.model.id, this.model.toJSON(), function(response) {
             this.model.set(response);
             this.hide();
+            App.loader.hide();
         }.bind(this));
     },
 
@@ -273,13 +285,13 @@ App.Form.Attribute = App.Form.Base.extend({
     },
 
     onSave: function() {
-        // todo show loader
+        App.loader.show();
         App.instance.execute('attribute/edit', this.model.id, this.model.toJSON(), function(response) {
-            // todo remove loader
             // this.commit() sets 'is_public' value to string "false" or string "true"
             // which is always boolean true for select - we fix this by setting boolean value from response
             this.model.set('is_public', response.is_public);
             this.hide();
+            App.loader.hide();
         }.bind(this));
     }
 });
@@ -329,10 +341,12 @@ App.Form.Photo = Marionette.ItemView.extend({
         var data = new FormData();
         data.append('picture', this.file);
 
+        App.loader.show();
         App.instance.execute("profile/uploadPhoto", data, function(response) {
             this.model.set(response);
             App.instance.vent.trigger('profile-photo-uploaded');
             this.render();
+            App.loader.hide();
         }.bind(this),
         function(response) {
             var errors = {};
@@ -345,11 +359,12 @@ App.Form.Photo = Marionette.ItemView.extend({
     },
 
     removeImage: function() {
+        App.loader.show();
         App.instance.execute("profile/removePhoto", function(response) {
-            console.log(response);
             this.model.set(response);
             App.instance.vent.trigger('profile-photo-uploaded');
             this.render();
+            App.loader.hide();
         }.bind(this));
     },
 
@@ -389,6 +404,7 @@ App.Form.ChangePassword = Backbone.Form.extend({
     },
 
     onSave: function() {
+        App.loader.show();
         App.instance.execute('profile/changePassword', this.model.toJSON(),
             function(response) {
 
@@ -402,6 +418,7 @@ App.Form.ChangePassword = Backbone.Form.extend({
                 }, 5000);
 
                 this.clear();
+                App.loader.hide();
             }.bind(this),
             function(response) {
                 var errors = {};
@@ -410,6 +427,7 @@ App.Form.ChangePassword = Backbone.Form.extend({
                    errors[key] = { message: value[0] };
                 });
                 this.handleErrors(errors);
+                App.loader.hide();
             }.bind(this)
         );
     },

@@ -1,0 +1,9 @@
+#loader {
+    position: fixed; /* forces the element to stay fixed in relation to the viewport */
+    top: 78px; /* sets the top of the image 50% of the page height */
+    left: 93%; /* sets the left side of the image 50% across the page */
+    width: 32px;
+    height: 32px;
+    background: transparent url('ajax-loader.gif');
+    display: none;
+}

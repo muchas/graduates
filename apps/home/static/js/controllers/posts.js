@@ -13,9 +13,11 @@ App.Controller.PostsController = {
     },
 
     showPostList: function(layout) {
+        App.loader.show();
         App.instance.execute("posts/list", function(response) {
             var posts = new App.Collection.Posts(response);
             layout.posts.show(new App.CollectionView.Posts({ collection: posts }));
+            App.loader.hide();
         });
     }
 };

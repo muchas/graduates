@@ -21,10 +21,12 @@ App.Form.SharePost = App.Form.Base.extend({
     },
 
     onSave: function() {
+        App.loader.show();
         App.instance.execute('posts/newPost', this.model.toJSON(),
             function(response) {
                 App.instance.vent.trigger('post:new');
                 this.clear();
+                App.loader.hide();
             }.bind(this),
             function(response) {
                 var errors = {};
@@ -33,6 +35,7 @@ App.Form.SharePost = App.Form.Base.extend({
                    errors[key] = { message: value[0] };
                 });
                 this.handleErrors(errors);
+                App.loader.hide();
             }.bind(this)
         );
     },
@@ -67,10 +70,12 @@ App.Form.EditPost = App.Form.Base.extend({
     },
 
     onSave: function() {
+        App.loader.show();
         App.instance.execute('posts/editPost', this.model.get('id'), this.model.toJSON(),
             function(response) {
                 this.parent.renderContent();
                 this.remove();
+                App.loader.hide();
             }.bind(this),
             function(response) {
                 var errors = {};
@@ -79,6 +84,7 @@ App.Form.EditPost = App.Form.Base.extend({
                    errors[key] = { message: value[0] };
                 });
                 this.handleErrors(errors);
+                App.loader.hide();
             }.bind(this)
         );
     },
