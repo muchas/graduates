@@ -14,27 +14,12 @@ App.ItemView.ProfileSimilarity = Marionette.ItemView.extend({
    template: Handlebars.templates.profile_similarity
 });
 
-App.ItemView.EditableEmployment = Marionette.ItemView.extend({
-    template: Handlebars.templates.edit_employment,
+App.ItemView.Editable = Marionette.ItemView.extend({
     events: {
-       'click .edit': 'edit',
-       'click .remove': 'remove_entry'
+       'click .edit': 'edit'
     },
 
-    initialize: function() {
-        this.hasOpenedForm = false;
-    },
-
-    edit: function() {
-        this.form = new App.Form.Employment({ model: this.model });
-        this.form.parent = this;
-        this.$el.fadeOut(300, function() {
-            this.$el.html(this.form.render().$el);
-            this.form.initializeTypeahead();
-        }.bind(this));
-        this.$el.fadeIn(400);
-        this.hasOpenedForm = true;
-    },
+    hasOpenedForm: false,
 
     isOpen: function() {
         return this.hasOpenedForm;
@@ -44,7 +29,36 @@ App.ItemView.EditableEmployment = Marionette.ItemView.extend({
         this.hasOpenedForm = false;
     },
 
-    remove_entry: function() {
+    edit: function() {
+        this.form = this.getForm();
+        this.form.parent = this;
+        this.$el.fadeOut(300, function() {
+            this.$el.html(this.form.render().$el);
+            this.trigger('afterFormRender', this.form);
+        }.bind(this));
+        this.$el.fadeIn(400);
+        this.hasOpenedForm = true;
+    }
+});
+
+App.ItemView.EditableEmployment = App.ItemView.Editable.extend({
+    template: Handlebars.templates.edit_employment,
+    events: {
+       'click .edit': 'edit',
+       'click .remove': 'removeEntry'
+    },
+
+    initialize: function() {
+        this.on('afterFormRender', function(form) {
+            form.initializeTypeahead();
+        });
+    },
+
+    getForm: function() {
+        return new App.Form.Employment({ model: this.model });
+    },
+
+    removeEntry: function() {
         App.loader.show();
         App.instance.execute('employment/remove', this.model.id, function(response) {
             this.$el.fadeOut(300, function() {
@@ -55,71 +69,40 @@ App.ItemView.EditableEmployment = Marionette.ItemView.extend({
     }
 });
 
-App.ItemView.EditableDescription = Marionette.ItemView.extend({
-   template: Handlebars.templates.edit_description,
-   events: {
-       'click .edit': 'edit'
-   },
-
-    edit: function() {
-        this.form = new App.Form.Description({ model: this.model });
-        this.form.parent = this;
-        this.$el.fadeOut(300, function() {
-            this.$el.html(this.form.render().$el);
-        }.bind(this));
-        this.$el.fadeIn(400);
+App.ItemView.EditableDescription = App.ItemView.Editable.extend({
+    template: Handlebars.templates.edit_description,
+    getForm: function() {
+        return new App.Form.Description({ model: this.model });
     }
 });
 
 
-App.ItemView.EditableMarriedName = Marionette.ItemView.extend({
+App.ItemView.EditableMarriedName = App.ItemView.Editable.extend({
    template: Handlebars.templates.edit_married_name,
-   events: {
-       'click .edit': 'edit'
-   },
-
-    edit: function() {
-        this.form = new App.Form.MarriedName({ model: this.model });
-        this.form.parent = this;
-        this.$el.fadeOut(300, function() {
-            this.$el.html(this.form.render().$el);
-        }.bind(this));
-        this.$el.fadeIn(400);
-    }
+   getForm: function() {
+       return new App.Form.MarriedName({ model: this.model });
+   }
 });
 
 
-App.ItemView.EditableUniversity = Marionette.ItemView.extend({
+App.ItemView.EditableUniversity = App.ItemView.Editable.extend({
     template: Handlebars.templates.edit_university,
     events: {
        'click .edit': 'edit',
-       'click .remove': 'remove_entry'
+       'click .remove': 'removeEntry'
     },
 
     initialize: function() {
-        this.hasOpenedForm = false;
+        this.on('afterFormRender', function(form) {
+            form.initializeSelect2();
+        });
     },
 
-    edit: function() {
-        this.form = new App.Form.University({ model: this.model });
-        this.form.parent = this;
-        this.$el.fadeOut(300, function() {
-            this.$el.html(this.form.render().$el);
-            this.form.initializeSelect2();
-        }.bind(this));
-        this.$el.fadeIn(400);
-        this.hasOpenedForm = true;
+    getForm: function() {
+        return new App.Form.University({ model: this.model });
     },
 
-     isOpen: function() {
-        return this.hasOpenedForm;
-    },
-
-    closeForm: function() {
-        this.hasOpenedForm = false;
-    },
-
-    remove_entry: function() {
+    removeEntry: function() {
         App.loader.show();
         App.instance.execute('university/remove', this.model.id, function(response) {
             this.$el.fadeOut(300, function() {
@@ -130,36 +113,13 @@ App.ItemView.EditableUniversity = Marionette.ItemView.extend({
     }
 });
 
-App.ItemView.EditableAttribute = Marionette.ItemView.extend({
+App.ItemView.EditableAttribute = App.ItemView.Editable.extend({
     template: Handlebars.templates.edit_attribute,
-
-    events: {
-       'click .edit': 'edit'
-    },
-
-    initialize: function() {
-        this.hasOpenedForm = false;
-    },
-
-    isOpen: function() {
-        return this.hasOpenedForm;
-    },
-
-    closeForm: function() {
-        this.hasOpenedForm = false;
-    },
-
-    edit: function() {
-        this.form = new App.Form.Attribute({
+    getForm: function() {
+        return new App.Form.Attribute({
             model: this.model,
             templateData: { name: this.model.get('name') }
         });
-        this.form.parent = this;
-        this.$el.fadeOut(300, function() {
-            this.$el.html(this.form.render().$el);
-        }.bind(this));
-        this.$el.fadeIn(400);
-        this.hasOpenedForm = true;
     }
 });
 

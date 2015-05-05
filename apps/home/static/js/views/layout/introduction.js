@@ -58,7 +58,7 @@ App.Layouts.PersonalData = Marionette.LayoutView.extend({
             e.preventDefault();
             if(!this.notification){
                 this.notification = noty({
-                    text: 'Pozostawiłeś niezapisane dane. Aby kontynuować, zapisz lub anuluj otwarte formularze.',
+                    text: 'Pozostawiono niezapisane dane. Aby kontynuować, zapisz lub anuluj otwarte formularze.',
                     type: 'error'
                 });
 
