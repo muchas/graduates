@@ -137,6 +137,10 @@ class Person(models.Model):
         return self.personaldata_set.filter(is_public=True)
 
     @property
+    def is_male(self):
+        return self.sex == Person.MALE
+
+    @property
     def is_teacher(self):
         return self.teacher_learn_years.all().exists()
 

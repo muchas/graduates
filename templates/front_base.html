@@ -1,15 +1,14 @@
 {% load staticfiles %}
 {% load current from navigation %}
+{% load subscription from guests %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bounce | Home</title>
+    <title>Absolwenci V Liceum Ogólnokształcącego</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Evan Clemente">
-	
+
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
 	<link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="{{ STATIC_URL }}css/glyphicons.css" rel="stylesheet">
@@ -21,11 +20,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 	
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
   </head>  
 
   <body>
@@ -64,37 +59,32 @@
 	  <div class="container">
 	    <div class="row">
 		  <div class="span3">
-			<h3>Quick Links</h3>
+			<h3>Menu</h3>
 			<ul class="animated">
-			  <li><a href="#">Home</a></li>
-			  <li><a href="#">About Us</a></li>
-			  <li><a href="#">Features</a></li>
-			  <li><a href="#">Pricing</a></li>
-			</ul>			
+			  <li><a href="/">Start</a></li>
+			  <li><a href="{% url 'login' %}">Logowanie</a></li>
+			  <li><a href="{% url 'registration' %}">Rejestracja</a></li>
+			  <li><a href="{% url 'faq' %}">FAQ</a></li>
+			  <li><a href="#">Kontakt</a></li>
+			</ul>
 		  </div>
 		  <div class="span3">		
-			<h3>Company</h3>
+			<h3>V LO</h3>
 			<ul class="animated">
-			  <li><a href="#">Privacy Policy</a></li>
-			  <li><a href="#">Terms of Use</a></li>
-			  <li><a href="#">FAQ</a></li>
-			</ul>	
+			  <li><a href="http://lo5.bielsko.pl">Strona szkoły</a></li>
+			</ul>
 		  </div>
 		  <div class="span3">
-			<h3>We're Social</h3>
+			<h3>Media</h3>
 			<ul class="animated">
-			  <li><a href="#">Facebook</a></li>
-			  <li><a href="#">Twitter</a></li>
-			  <li><a href="#">Google &#43;</a></li>
-			</ul>		  
+			  <li><a href="https://www.facebook.com/vlo.bielsko?fref=ts">Facebook</a></li>
+			  <li><a href="https://www.facebook.com/25latVLO?fref=ts">XXV-lecie liceum</a></li>
+			</ul>
 		  </div>
 		  <div class="span3">
-			<h3>Subscribe</h3>
-			<p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>			
-		    <form>
-              <input class="span3" type="text" placeholder="Your Email" name="subscribe">
-			  <button class="btn btn-primary">Subscribe</button>
-			</form>
+			<h3>Sympatycy</h3>
+			<p>Jeżeli jesteś symatykiem V LO, wpisz swój email aby otrzymywać informacje od szkoły.</p>
+            {% subscription %}
 		  </div>		  
 		</div>	  
       </div>	  

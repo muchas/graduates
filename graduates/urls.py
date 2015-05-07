@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.home.views import HomePageView, FaqView, FeedbackView
+from apps.home.views import HomePageView, FaqView, FeedbackView, GuestView
 from apps.accounts.views import LoginView, RegistrationWizard, ActivationView, ClaimView, UserIntroduceView, \
     PasswordChangeView
 
@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^activate/(?P<activation_key>\w+)/$',
                            ActivationView.as_view(),
                            name='registration_activate'),
+    url(r'^guest/$', GuestView.as_view(), name='guests'),
     url(r'^claim/$', ClaimView.as_view(), name='claim'),
     url(r'^community/', include('apps.community.urls')),
     url(r'^stream/', include('apps.posts.urls')),
