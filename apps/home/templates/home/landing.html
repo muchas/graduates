@@ -6,8 +6,10 @@
 	    <div class="row">
 		  <div class="span5">
 		    <h1 style="font-size: 35px">Witaj w portalu absolwentów!</h1>	
-			<p style="line-height: 22px; text-indent: 4%">V Liceum już od ponad 25 lat przyciąga wyjątkowe osoby, które wspólnie tworzą niezwykłą mozaikę doświadczeń i ścieżek życia, utkaną z miast, uniwersytetów, instytucji, firm i osiągnięć na różnorodnych polach. Portal absolwentów to wirtualne miejsce spotkań tej społeczności, dzięki któremu absolwenci mogą utrzymywać kontakt ze szkołą, dzielić się swoimi doświadczeniami oraz poznać losy innych - osób, z którymi mają tak wiele wspólnego.</p>
-		    <p><a href="{% url 'registration' %}" class="btn btn-primary btn-action">Dołącz już dziś</a></p>
+			<p style="line-height: 25px; text-indent: 4%">
+                Zarejestruj się, żeby pozostać w kontakcie z "Piątką". Przez portal możesz otrzymywać informacje o tym, co dzieje się w szkole, odnaleźć innych "Piątkowiczów" na mapie, oraz "dać się odnaleźć" i potencjalnie służyć wiedzą i doświadczeniem dyrekcji, absolwentom, oraz kolejnym pokoleniom uczniów.
+			</p>
+		    <p><a href="{% url 'registration' %}" class="btn btn-primary btn-action">Zarejestruj się</a></p>
 		  </div>
 		  <div class="span7">
             <div id="graduatesCarousel" class="carousel slide">
@@ -20,7 +22,13 @@
                   <img src="{{ STATIC_URL }}img/slide2.jpeg" alt="...">
                 </div>
                 <div class="item">
+                  <img src="{{ STATIC_URL }}img/slide4.jpg" alt="...">
+                </div>
+                <div class="item">
                   <img src="{{ STATIC_URL }}img/slide3.jpeg" alt="...">
+                </div>
+                <div class="item">
+                  <img src="{{ STATIC_URL }}img/slide5.jpg" alt="...">
                 </div>
               </div>
               <!-- Carousel nav -->
@@ -38,7 +46,7 @@
 	  <div class="container">
 <div class="row">
   <div class="span12">
-    <h2>Wirtualne miejsce spotkań wyjątkowych osób</h2>
+    <h2>Wirtualna społeczność Piątki</h2>
     <hr class="dashed">
   </div>
 </div>
@@ -48,21 +56,25 @@
       <i class="glyphicons-globe animated"></i>
     </div>
     <h2>Idea portalu</h2>
-    <p>Portal powstał z myślą o potencjalnych owocach spotkań: wspólnie napisanych artykułach naukowych; projektach biznesowych zrealizowanych z przyjaciółmi z liceum, których cenimy i którym ufamy; cennym radom przekazywanym kolejnym pokoleniom absolwentów V LO; oraz najzwyczajniej ciekawych i stymulujących rozmowach w dobrym towarzystwie.</p>
+    <p>
+        Zarówno szkoła, jak i każdy z nas z osobna może więcej będąc w aktywnej społeczności absolwentów. W odróżnieniu od powszechnych mediów społecznościowych, Portal absolwentów jest prywatny, nieskomplikowany i skupiony wyłącznie wokół naszej szkoły.
+    </p>
   </div>
   <div class="span4 bouncy">
     <div class="icon_wrapper">
       <i class="glyphicons-envelope animated"></i>
     </div>
     <h2>Kontakt ze szkołą</h2>
-    <p>Jeżeli Twoje konto nie jest jeszcze aktywne, zarejestruj się. Jeżeli jesteś sympatykiem V LO, zarejestruj się jako Sympatyk V LO aby otrzymywać informacje o działalności szkoły..</p>
+    <p>
+        Jeżeli Twoje konto nie jest jeszcze aktywne, zarejestruj się aby pozostać w kontakcie ze szkołą. Jeżeli jesteś sympatykiem V LO, <a href="#sympatyk">zarejestruj się jako Sympatyk V LO</a> aby otrzymywać informacje o działalności szkoły.
+    </p>
   </div>
   <div class="span4 bouncy">
     <div class="icon_wrapper">
       <i class="glyphicons-lock animated"></i>
     </div>
     <h2>Bezpieczeństwo</h2>
-    <p>Bezpieczeństwo Twoich danych jest priorytetem Portalu. Wszystkie dane, które wprowadzasz, dostępne są jedynie dla absolwentów oraz nauczycieli V LO zarejestrowanych w serwisie. Żadna ze stron zawierających Twoje dane nie jest indeksowana przez silniki wyszukiwania. Strona wykorzystuje pliki cookies.</p>
+    <p> Bezpieczeństwo jest priorytetem Portalu: nikt spoza Portalu nie ma wglądu w Twoje dane, sam/a decydujesz czy chcesz się dzielić nimi z kimś poza dyrekcją, a żadna z podstron nie jest indeksowana przez silniki wyszukiwania. Strona wykorzystuje pliki cookies.</p>
   </div>
 </div>
 <hr class="dashed">
@@ -71,22 +83,17 @@
     <a class="thumbnail" href="">
       <img alt="image" src="{{ STATIC_URL }}img/first.jpg">
     </a>
-    <h2>Image 1</h2>
-    <p>Optional subtext to help better explain the image above can go here.</p>
   </div>
   <div class="span4">
     <a class="thumbnail" href="">
       <img alt="image" src="{{ STATIC_URL }}img/third.jpeg">
     </a>
-    <h2>Image 2</h2>
-    <p>Optional subtext to help better explain the image above can go here.</p>
+
   </div>
   <div class="span4">
     <a class="thumbnail" href="">
       <img alt="image" src="{{ STATIC_URL }}img/second.jpeg">
     </a>
-    <h2>Image 3</h2>
-    <p>Optional subtext to help better explain the image above can go here.</p>
   </div>
 
 </div>

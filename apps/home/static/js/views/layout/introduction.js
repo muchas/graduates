@@ -22,15 +22,6 @@ App.Layouts.PersonalData = Marionette.LayoutView.extend({
         'click #finish-introduction': 'finish'
     },
 
-    initialize: function() {
-        this.editableViews = [];
-        this.notification = null;
-    },
-
-    addEditableView: function(view) {
-        this.editableViews.push(view);
-    },
-
     addEmployment: function() {
         if(!this.newEmployment.hasView()) {
             this.employmentForm = new App.Form.Employment({ model: new App.Model.Employment() });
@@ -47,26 +38,12 @@ App.Layouts.PersonalData = Marionette.LayoutView.extend({
         }
     },
 
+    hasOpenedForms: function() {
+        return this.newEmployment.hasView() || this.newUniversity.hasView();
+    },
+
     finish: function(e) {
-        var hasOpenedForms = false;
-        // check if user saved/canceled all forms
-        _.each(this.editableViews, function(view) {
-            if(view.isOpen()) hasOpenedForms = true;
-        }.bind(this));
-
-        if(hasOpenedForms || this.newEmployment.hasView() || this.newUniversity.hasView()) {
-            e.preventDefault();
-            if(!this.notification){
-                this.notification = noty({
-                    text: 'Pozostawiono niezapisane dane. Aby kontynuować, zapisz lub anuluj otwarte formularze.',
-                    type: 'error'
-                });
-
-                setTimeout(function() {
-                    this.notification.close();
-                    this.notification = null;
-                }.bind(this), 5000);
-            }
-        }
+        e.preventDefault();
+        this.trigger('finish:introduction', e);
     }
 });

@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Launch - MVP Ready</title>
+<title>Wprowadzenie - Absolwenci V LO</title>
 
 <!-- Google Font: Open Sans -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
@@ -60,6 +60,38 @@
 
 </div> <!-- /.wrapper -->
 
+<div id="reasonModal" class="modal modal-styled fade" aria-hidden="true" style="display: none;">
+
+        <div class="modal-dialog">
+
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 class="modal-title">Uzupełnij dane o edukacji i pracy</h3>
+            </div> <!-- /.modal-header -->
+
+            <div class="modal-body">
+            <strong>To wszystko?</strong> Gorąco zachęcamy do podania informacji o swojej edukacji i pracy.<br />
+            <br />
+            <strong>Dlaczego?</strong> Czy są rzeczy, o których wiesz teraz, a o których {% if request.user.person.is_male %}chciałbyś{% else %}chciałabyś{% endif %} wiedzieć, kiedy {% if request.user.person.is_male %}wybierałeś{% else %}wybierałaś{% endif %} uczelnię i kierunek studiów, lub kiedy {% if request.user.person.is_male %}myślałeś{% else %}myślałaś{% endif %} o wyborze przyszłego zawodu? Podając te dane dajesz szkole możliwość podjęcia inicjatyw, które ubogacą młodsze pokolenia uczniów i absolwentów V LO.
+            <br />
+            <br />
+            <strong>Mówiąc prosto:</strong> ktoś może zyskać, a Tobie co szkodzi? Wszystkie dane na Portalu są bezpieczne i nikt nie będzie niepotrzebnie zawracał Ci głowy. Obiecujemy.
+            <br />
+            <br />
+            <strong>Dodatkowo</strong> ta fajna duża mapa będzie dzięki Tobie jeszcze fajniejsza!
+            </div> <!-- /.modal-body -->
+
+            <div class="modal-footer">
+              <a type="button" class="btn btn-default" href="{% url 'introduce' %}">Kontynuuj do portalu</a>
+              <button type="button" class="btn btn-success" data-dismiss="modal">Uzupełnij</button>
+            </div> <!-- /.modal-footer -->
+
+          </div> <!-- /.modal-content -->
+
+        </div><!-- /.modal-dialog -->
+</div>
 <!-- Core JS -->
 <script src="{{ STATIC_URL }}js/libs/jquery-1.11.2.min.js"></script>
 <script src="{{ STATIC_URL }}js/libs/noty/packaged/jquery.noty.packaged.min.js"></script>

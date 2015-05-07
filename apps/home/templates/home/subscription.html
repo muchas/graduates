@@ -1,0 +1,6 @@
+<form action="{% url 'guests' %}" method="post">
+    {% csrf_token %}
+    {{ form.email.errors }}
+    <input class="span3" type="text" placeholder="Twój email" name="{{ form.email.html_name }}" id="sympatyk">
+    <input type="submit" class="btn btn-primary" value="Subskrybuj">
+</form>

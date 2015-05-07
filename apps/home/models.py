@@ -10,3 +10,10 @@ class Feedback(TimeStampedModel):
 
     def __unicode__(self):
         return "%s" % self.user.email
+
+
+class Guest(TimeStampedModel):
+    email = models.EmailField(unique=True)
+
+    def __unicode__(self):
+        return "%s" % self.email
