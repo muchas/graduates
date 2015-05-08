@@ -22,9 +22,9 @@ App.View.Map = Backbone.View.extend({
             name: "map-area",
             minZoom: 2,
             maxZoom: 12,
-            x: 51.8,
-            y: 19.3,
-            zoom: 5,
+            x: 26.39,
+            y: 30,
+            zoom: 2,
 
             onMarkerClick: function(city) {
                 this.loadCity(city.get('id'));
