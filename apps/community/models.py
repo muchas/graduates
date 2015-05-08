@@ -122,10 +122,9 @@ class Person(models.Model):
     @property
     def full_name(self):
         if self.married_name:
-            return "%s %s (%s)" % (
+            return "%s %s" % (
                 self.first_name,
                 self.married_name,
-                self.last_name
             )
         return "%s %s" % (
             self.first_name,

@@ -24,7 +24,11 @@
     </div> <!-- /.col -->
 
     <div class="col-md-6 col-sm-7">
-      <h3>{{ full_name }}</h3>
+      {{# if married_name }}
+          <h3>{{ first_name }} {{ married_name }} ({{ last_name }})</h3>
+      {{ else }}
+          <h3>{{ full_name }}</h3>
+      {{/if}}
       <h5>
       {{#if teacher_learn_years.length }}
           {{#if is_male }}Nauczyciel{{ else }}Nauczycielka{{/if}}
