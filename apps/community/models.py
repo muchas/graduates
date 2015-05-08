@@ -194,6 +194,9 @@ class Employment(models.Model):
     start = models.DateField()
     end = models.DateField(null=True, blank=True)
 
+    class Meta:
+        ordering = ['-start', '-end']
+
 
 class Student(models.Model):
     university = models.ForeignKey(University)
@@ -202,6 +205,9 @@ class Student(models.Model):
     start = models.DateField()
     end = models.DateField()
     school = models.CharField(max_length=255)
+
+    class Meta:
+        ordering = ['-start', '-end']
 
 
 class TeacherLearnYears(models.Model):
