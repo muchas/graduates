@@ -96,7 +96,7 @@ App.Controller.IntroductionController = {
                         notification = null;
                     }.bind(this), 5000);
                 }
-           } else if(modalDisplays < modalDisplaysMax && (employments.length == 0 || universities.length == 0)) {
+           } else if(employments.length == 0 || universities.length == 0) {
                $modal.modal();
                modalDisplays++;
            } else {
