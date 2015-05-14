@@ -70,6 +70,11 @@ App.Controller.ProfileController = {
         var layout = new App.Layouts.EditProfile();
         App.layout.content.show(layout);
 
+        $('[data-toggle="popover"]').popover({
+            "html": true,
+            "container": "body"
+        });
+
         this.showProfileHeader(layout);
 
         App.instance.execute("profile/photo", function(response) {
