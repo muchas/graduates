@@ -95,7 +95,8 @@ class CityDetailSerializer(serializers.ModelSerializer):
                   'years')
 
     def get_years(self, city):
-        years = Group.objects.filter(pupils__in=city.people).distinct('last_year').values('last_year')
+        years = Group.objects.filter(pupils__in=city.people).distinct('last_year')\
+            .order_by('-last_year').values('last_year')
         return [obj.get('last_year') for obj in years]
 
     def count_people(self, city):
