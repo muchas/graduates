@@ -26,6 +26,24 @@ class PersonSerializer(serializers.ModelSerializer):
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
 
 
+class GraduateSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.SerializerMethodField()
+    picture = serializers.SerializerMethodField()
+    year = serializers.IntegerField(source="group.last_year")
+
+    class Meta:
+        model = Person
+        fields = ('id', 'full_name', 'first_name', 'married_name', 'last_name', 'sex', 'picture', 'thumbnail', 'year')
+
+    def get_thumbnail(self, person):
+        if person.picture and 'request' in self.context:
+            return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['thumbnail'].url)
+
+    def get_picture(self, person):
+        if person.picture and 'request' in self.context:
+            return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
+
+
 class PersonSearchSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     first_name = serializers.CharField()
@@ -65,14 +83,20 @@ class CitySerializer(serializers.ModelSerializer):
 
 
 class CityDetailSerializer(serializers.ModelSerializer):
-    people = PersonSerializer(many=True)
+    people = GraduateSerializer(many=True)
     people_count = serializers.SerializerMethodField('count_people')
     university_count = serializers.SerializerMethodField('count_universities')
     companies_count = serializers.SerializerMethodField('count_companies')
+    years = serializers.SerializerMethodField()
 
     class Meta:
         model = City
-        fields = ('id', 'name', 'latitude', 'longitude', 'people', 'people_count', 'university_count', 'companies_count')
+        fields = ('id', 'name', 'latitude', 'longitude', 'people', 'people_count', 'university_count', 'companies_count',
+                  'years')
+
+    def get_years(self, city):
+        years = Group.objects.filter(pupils__in=city.people).distinct('last_year').values('last_year')
+        return [obj.get('last_year') for obj in years]
 
     def count_people(self, city):
         return city.people.count()

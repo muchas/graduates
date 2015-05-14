@@ -22,7 +22,7 @@ class City(models.Model):
 
     @property
     def people(self):
-        return Person.objects.connected_with_city(self)
+        return Person.objects.connected_with_city(self).select_related('group')
 
 
 class University(models.Model):
