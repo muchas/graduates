@@ -1,3 +1,3 @@
-App.ItemView.IntroductionCity = Marionette.ItemView.extend({
+App.ItemView.IntroductionCity = App.ItemView.City.extend({
    template: Handlebars.templates.introduction_city
 });

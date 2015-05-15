@@ -4,23 +4,19 @@
 
   <h3 class="portlet-title">
     <u>{{ name }}</u>
+    <span style="display: block" class="pull-right">
+        <select class="form-control year" style="color: #555">
+            <option>dowolny</option>
+            {{#each years }}
+            <option>{{this}}</option>
+            {{/each}}
+        </select>
+    </span>
+    <span style="display:block; font-size: 16px; color: #555; padding-top: 8px; margin-right: 7px;" class="pull-right">Rocznik</span>
   </h3>
 
   <div class="portlet-body">
-    <div class="row-fluid" style="max-height: 500px; overflow: scroll;">
-        {{#each people }}
-        <div class="col-md-4">
-          <div class="pull-left">
-              <img src="{{#avatar thumbnail}}{{ thumbnail }}{{/avatar}}" class="profile-avatar-img thumbnail" alt="Profile Image" style="width: 50px; height: 50px;">
-          </div>
-          <div class="pull-left" style="padding: 15px 0 15px 10px;">
-              {{ full_name }}
-          </div>
-        </div>
-        {{ else }}
-           <p>Aktualnie żaden absolwent nie jest powiązany z tym miastem.</p>
-        {{/each}}
-    </div>
+    <div class="row-fluid" style="max-height: 500px; overflow: scroll;" id="people"></div>
   </div> <!-- /.portlet-body -->
 
 </div> <!-- /.portlet -->

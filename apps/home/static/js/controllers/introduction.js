@@ -26,6 +26,13 @@ App.Controller.IntroductionController = {
 
         App.layout.content.show(layout);
 
+        $('[data-toggle="popover"]').popover({
+            "html": true,
+            "container": "body",
+            "trigger": "hover"
+        });
+
+
         App.instance.execute("profile/personal_data", function(response) {
             var personal_data = new App.Collection.PersonalData(response);
             var attributes = new App.CollectionView.EditableAttributes({ collection: personal_data });
