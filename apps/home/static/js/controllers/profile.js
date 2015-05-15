@@ -72,7 +72,8 @@ App.Controller.ProfileController = {
 
         $('[data-toggle="popover"]').popover({
             "html": true,
-            "container": "body"
+            "container": "body",
+            "trigger": "hover"
         });
 
         this.showProfileHeader(layout);
