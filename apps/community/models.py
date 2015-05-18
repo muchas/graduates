@@ -147,6 +147,10 @@ class Person(models.Model):
     def is_student(self):
         return bool(self.group)
 
+    @property
+    def is_registered(self):
+        return hasattr(self, 'user')
+
     def retrieve_common_tutor_with(self, person):
         if self.group and person.group and self.group.id == person.group.id:
             return self.group.tutor

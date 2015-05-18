@@ -26,22 +26,18 @@ class PersonSerializer(serializers.ModelSerializer):
             return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
 
 
-class GraduateSerializer(serializers.ModelSerializer):
-    thumbnail = serializers.SerializerMethodField()
-    picture = serializers.SerializerMethodField()
+class GroupPersonSerializer(PersonSerializer):
+    class Meta:
+        model = Person
+        fields = ('id', 'full_name', 'first_name', 'married_name', 'last_name', 'sex', 'picture', 'thumbnail', 'is_registered')
+
+
+class GraduateSerializer(PersonSerializer):
     year = serializers.IntegerField(source="group.last_year")
 
     class Meta:
         model = Person
         fields = ('id', 'full_name', 'first_name', 'married_name', 'last_name', 'sex', 'picture', 'thumbnail', 'year')
-
-    def get_thumbnail(self, person):
-        if person.picture and 'request' in self.context:
-            return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['thumbnail'].url)
-
-    def get_picture(self, person):
-        if person.picture and 'request' in self.context:
-            return self.context['request'].build_absolute_uri(get_thumbnailer(person.picture)['photo'].url)
 
 
 class PersonSearchSerializer(serializers.Serializer):
@@ -162,7 +158,7 @@ class TeacherSerializer(serializers.ModelSerializer):
 
 class GroupDetailsSerializer(serializers.ModelSerializer):
     tutor = TeacherSerializer()
-    pupils = PersonSerializer(many=True)
+    pupils = GroupPersonSerializer(many=True)
 
     class Meta:
         model = Group

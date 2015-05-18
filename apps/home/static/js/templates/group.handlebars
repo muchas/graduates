@@ -28,9 +28,13 @@
                 {{#if picture }}
                 <img src="{{ picture }}" class="thumbnail pupil-thumbnail">
                 {{else}}
-                <img src="media/unknown.png" class="thumbnail pupil-thumbnail">
+                    {{#if is_registered }}
+                    <img src="media/unknown2.jpg" class="thumbnail pupil-thumbnail">
+                    {{else}}
+                    <img src="media/unknown3.png" class="thumbnail pupil-thumbnail">
+                    {{/if}}
                 {{/if}}
-                <h5><a href="#/person/{{ id }}" style="color: black">{{ full_name }}</a></h5>
+                <h5><a href="#/person/{{ id }}" style="color: black;{{#unless is_registered}}font-weight:100;{{/unless}}">{{ full_name }}</a></h5>
             </div>
         {{/each}}
     </div> <!-- /.portlet-body -->

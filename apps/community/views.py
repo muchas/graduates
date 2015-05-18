@@ -74,7 +74,7 @@ class StudentGroupListView(GroupListView):
 
 
 class GroupDetailView(RetrieveCachedAPIView):
-    queryset = Group.objects.all()
+    queryset = Group.objects.all().prefetch_related('pupils__user')
     serializer_class = GroupDetailsSerializer
     permission_classes = (IsAuthenticated,)
 
