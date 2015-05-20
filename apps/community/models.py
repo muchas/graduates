@@ -4,10 +4,15 @@ import datetime
 from model_utils.models import TimeStampedModel
 import uuidfield
 
+CURRENT_YEAR = datetime.datetime.now().year+1
 
 YEAR_CHOICES = []
-for r in range(1989, (datetime.datetime.now().year+1)):
+for r in range(1989, CURRENT_YEAR):
     YEAR_CHOICES.append((r, r))
+
+GROUP_YEAR_CHOICES = list(YEAR_CHOICES)
+for r in range(CURRENT_YEAR, CURRENT_YEAR + 10):
+    GROUP_YEAR_CHOICES.append((r, r))
 
 
 class City(models.Model):
@@ -60,8 +65,8 @@ class Subject(models.Model):
 
 class Group(models.Model):
     tutor = models.ForeignKey('Person', related_name='groups')
-    first_year = models.IntegerField(max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    last_year = models.IntegerField(max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    first_year = models.IntegerField(max_length=4, choices=GROUP_YEAR_CHOICES, default=datetime.datetime.now().year)
+    last_year = models.IntegerField(max_length=4, choices=GROUP_YEAR_CHOICES, default=datetime.datetime.now().year)
     symbol = models.CharField(max_length=4)
     is_graduated = models.BooleanField(default=True)
 
