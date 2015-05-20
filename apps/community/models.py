@@ -17,6 +17,9 @@ class City(models.Model):
     is_verified = models.BooleanField(default=False)
     is_empty = models.BooleanField(default=True)
 
+    class Meta:
+        verbose_name_plural = 'cities'
+
     def __unicode__(self):
         return u"%s" % self.name
 
@@ -122,11 +125,11 @@ class Person(models.Model):
     @property
     def full_name(self):
         if self.married_name:
-            return "%s %s" % (
+            return u"%s %s" % (
                 self.first_name,
                 self.married_name,
             )
-        return "%s %s" % (
+        return u"%s %s" % (
             self.first_name,
             self.last_name
         )
@@ -200,6 +203,9 @@ class Employment(models.Model):
     class Meta:
         ordering = ['-start', '-end']
 
+    def __unicode__(self):
+        return u"%s - %s" % (self.company, self.name)
+
 
 class Student(models.Model):
     university = models.ForeignKey(University)
@@ -225,11 +231,11 @@ class TeacherLearnYears(models.Model):
 
     def __unicode__(self):
         if self.from_year == self.to_year:
-            return "%s" % self.from_year
+            return u"%s" % self.from_year
         elif not self.to_year:
-            return "%s - obecnie" % self.from_year
+            return u"%s - obecnie" % self.from_year
         else:
-            return "%s-%s" % (self.from_year, self.to_year)
+            return u"%s-%s" % (self.from_year, self.to_year)
 
 
 class Attribute(models.Model):
@@ -255,6 +261,9 @@ class PersonalData(TimeStampedModel):
 
     class Meta:
         unique_together=(('person', 'attribute'),)
+
+    def __unicode__(self):
+        return u"%s" % (self.value,)
 
 
 class Invitation(models.Model):
@@ -282,13 +291,16 @@ class ContestResult(models.Model):
     name = models.CharField(max_length=100)
     weight = models.IntegerField()
 
+    def __unicode__(self):
+        return u"%s - %s" % (self.name, self.weight)
+
 
 class Contest(models.Model):
     name = models.CharField(max_length=100)
     scope = models.ForeignKey(ContestScope, related_name="contests")
 
     def __unicode__(self):
-        return self.name
+        return u"%s" % (self.name,)
 
 
 class ContestEdition(models.Model):
@@ -303,3 +315,6 @@ class Achievement(models.Model):
     person = models.ForeignKey(Person, related_name="achievements")
     edition = models.ForeignKey(ContestEdition)
     result = models.ForeignKey(ContestResult, null=True, blank=True)
+
+    def __unicode__(self):
+        return u"%s - %s" % (self.person, self.edition.contest)
