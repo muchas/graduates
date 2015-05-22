@@ -217,7 +217,7 @@ class Student(models.Model):
     person = models.ForeignKey(Person)
     department = models.ForeignKey(UniversityDepartment, null=True, blank=True)
     start = models.DateField()
-    end = models.DateField()
+    end = models.DateField(null=True, blank=True)
     school = models.CharField(max_length=255)
 
     class Meta:

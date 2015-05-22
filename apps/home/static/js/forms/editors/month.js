@@ -41,11 +41,14 @@ App.Form.Editor.Month = Backbone.Form.editors.Base.extend({
 
     getValue: function() {
         var value = this.$el.val();
-        if(value) {
+        if(!value) {
+            return null;
+        }
+        if(/^((0[1-9])|(1[0-2]))\/(\d{4})$/.test(value)) {
             value = value.split("/");
             return value[1] + "-" + value[0] + "-" + "01";
         }
-        return null;
+        return value;
     },
 
     setValue: function(value) {

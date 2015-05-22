@@ -4,7 +4,7 @@
         {{#if department }}
         <h6 class="text-muted">Wydział: {{ department.name }}</h6>
         {{/if}}
-        <h6 class="text-muted">{{#beautifydate start}}{{ start }}{{/beautifydate}} - {{#beautifydate end }}{{ end }}{{/beautifydate}}</h6>
+        <h6 class="text-muted">{{#beautifydate start}}{{ start }}{{/beautifydate}} - {{#if end }}{{#beautifydate end }}{{ end }}{{/beautifydate}}{{ else }}obecnie{{/if}}</h6>
         <br>
     </div>
     <div class="col-md-3">

@@ -46,8 +46,13 @@ App.Form.Employment = App.Form.Base.extend({
         'company.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'city.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'branch.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
-        start: { type: App.Form.Editor.Month, validators: ['required'] },
-        end: { type: App.Form.Editor.Month }
+        start: { type: App.Form.Editor.Month, validators: [
+            'required',
+            { 'type': 'regexp', match: true, message: "Błędny format daty. Poprawny to MM/YYYY.", regexp: /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/ }
+        ] },
+        end: { type: App.Form.Editor.Month, validators: [
+            { 'type': 'regexp', match: true, message: "Błędny format daty. Poprawny to MM/YYYY.", regexp: /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/ }
+        ] }
     },
 
     onSave: function() {
@@ -138,8 +143,23 @@ App.Form.University = App.Form.Base.extend({
             }
         },
         'department.name': { type: 'Text', editorClass: "form-control" },
-        start: { type: App.Form.Editor.Month, validators: ['required'] },
-        end: { type: App.Form.Editor.Month, validators: ['required'] }
+        start: { type: App.Form.Editor.Month, validators: ['required',
+                    {
+                        'type': 'regexp',
+                        match: true,
+                        message: "Błędny format daty. Poprawny to MM/YYYY.",
+                        regexp: /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
+                    }
+
+        ] },
+        end: { type: App.Form.Editor.Month, validators: [
+                {
+                    'type': 'regexp',
+                    match: true,
+                    message: "Błędny format daty. Poprawny to MM/YYYY.",
+                    regexp: /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
+                }
+        ] }
     },
 
     events: {
@@ -208,8 +228,23 @@ App.Form.UniversityExtended = App.Form.Base.extend({
         'university.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'university.city.name': { type: 'Text', editorClass: "form-control", validators: ['required'] },
         'department.name': { type: 'Text', editorClass: "form-control" },
-        start: { type: App.Form.Editor.Month, validators: ['required'] },
-        end: { type: App.Form.Editor.Month, validators: ['required'] }
+        start: { type: App.Form.Editor.Month, validators: ['required',
+                    {
+                        'type': 'regexp',
+                        match: true,
+                        message: "Błędny format daty. Poprawny to MM/YYYY.",
+                        regexp: /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
+                    }
+
+        ] },
+        end: { type: App.Form.Editor.Month, validators: [
+                {
+                    'type': 'regexp',
+                    match: true,
+                    message: "Błędny format daty. Poprawny to MM/YYYY.",
+                    regexp: /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
+                }
+        ] }
     },
 
     events: {
