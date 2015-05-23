@@ -8,6 +8,29 @@ Handlebars.registerHelper("datefromnow", function (datetime) {
     return datetime.fromNow();
 });
 
+Handlebars.registerHelper('breaklines', function(text) {
+    text = Handlebars.Utils.escapeExpression(text);
+    text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+    return new Handlebars.SafeString(text);
+});
+
+Handlebars.registerHelper('wrapURL', function(str) {
+    str = Handlebars.Utils.escapeExpression(str);
+
+    var matches = str.match(/http\S+/);
+    if(matches) {
+        var wrapped = matches.map(function(v, i, a) {
+            return '<a href="' + v + '">' + v + '</a>';
+        });
+
+        for (var i = 0; i < matches.length; i++) {
+            str = str.replace(matches[i], wrapped[i]);
+        }
+    }
+
+    return new Handlebars.SafeString(str)
+});
+
 Handlebars.registerHelper('trans',
   function(str){
     return (gettext != undefined ? gettext(str) : str);

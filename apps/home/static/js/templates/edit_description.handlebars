@@ -2,7 +2,7 @@
     <div class="col-md-10">
         <p>
             {{#if description }}
-            {{ description }}
+            {{ wrapURL (breaklines description) }}
             {{else}}
                 Brak opisu.
             {{/if}}
