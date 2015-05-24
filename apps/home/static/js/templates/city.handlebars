@@ -6,20 +6,21 @@
     <u>
         {{ name }}
     </u>
-
-    <span style="display: block" class="pull-right">
-        <select class="form-control year" style="color: #555">
-            <option>dowolny</option>
-            {{#each years }}
-            <option>{{this}}</option>
-            {{/each}}
-        </select>
+    <span class="filter-box">
+        <span style="display: block" class="pull-right">
+            <select class="form-control year" style="color: #555">
+                <option>dowolny</option>
+                {{#each years }}
+                <option>{{this}}</option>
+                {{/each}}
+            </select>
+        </span>
+        <span style="display:block; font-size: 16px; color: #555; padding-top: 8px; margin-right: 7px;" class="pull-right">Rocznik</span>
     </span>
-    <span style="display:block; font-size: 16px; color: #555; padding-top: 8px; margin-right: 7px;" class="pull-right">Rocznik</span>
   </h3>
 
   <div class="portlet-body">
-    <div class="row-fluid" id="people"></div>
+    <div class="row-fluid city-container"></div>
   </div> <!-- /.portlet-body -->
 
 </div> <!-- /.portlet -->
@@ -43,15 +44,15 @@
         <table class="table keyvalue-table">
           <tbody>
             <tr>
-              <td class="kv-key"><i class="fa fa-users kv-icon kv-icon-primary"></i> powiązani absolwenci</td>
+              <td class="kv-key"><i class="fa fa-users kv-icon kv-icon-primary"></i> <a href="javascript:;" class="people" style="color: #555">powiązani absolwenci</a></td>
               <td class="kv-value">{{ people_count }} </td>
             </tr>
             <tr>
-              <td class="kv-key"><i class="fa fa-university kv-icon kv-icon-secondary"></i> uczelnie</td>
+              <td class="kv-key"><i class="fa fa-university kv-icon kv-icon-secondary"></i> <a href="javascript:;" class="universities" style="color: #555; ">uczelnie</a></td>
               <td class="kv-value">{{ university_count }} </td>
             </tr>
             <tr>
-              <td class="kv-key"><i class="fa fa-suitcase kv-icon kv-icon-tertiary"></i>firmy</td>
+              <td class="kv-key"><i class="fa fa-suitcase kv-icon kv-icon-tertiary"></i><a href="javascript:;" class="companies" style="color: #555">firmy</a></td>
               <td class="kv-value">{{ companies_count }}</td>
             </tr>
           </tbody>

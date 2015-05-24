@@ -9,6 +9,31 @@ from apps.community.models import Person, Subject, Group, City, Student, Employm
 from apps.community.validators import EmailValidator, IntegerValidator, UniqueValidator
 
 
+class CityNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = ('pk', 'name')
+
+
+class UniversitySerializer(serializers.ModelSerializer):
+    city = CityNameSerializer()
+
+    class Meta:
+        model = University
+        exclude = ('is_verified',)
+
+
+class PlainUniversitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = University
+        exclude = ('is_verified', 'city')
+
+
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+
+
 class PersonSerializer(serializers.ModelSerializer):
     thumbnail = serializers.SerializerMethodField()
     picture = serializers.SerializerMethodField()
@@ -80,6 +105,8 @@ class CitySerializer(serializers.ModelSerializer):
 
 class CityDetailSerializer(serializers.ModelSerializer):
     people = GraduateSerializer(many=True)
+    companies = CompanySerializer(many=True)
+    universities = PlainUniversitySerializer(many=True)
     people_count = serializers.SerializerMethodField('count_people')
     university_count = serializers.SerializerMethodField('count_universities')
     companies_count = serializers.SerializerMethodField('count_companies')
@@ -88,7 +115,7 @@ class CityDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = City
         fields = ('id', 'name', 'latitude', 'longitude', 'people', 'people_count', 'university_count', 'companies_count',
-                  'years')
+                  'years', 'companies', 'universities')
 
     def get_years(self, city):
         years = Group.objects.filter(pupils__in=city.people).distinct('last_year')\
@@ -102,14 +129,7 @@ class CityDetailSerializer(serializers.ModelSerializer):
         return city.universities.count()
 
     def count_companies(self, city):
-        employments = Employment.objects.filter(city=city)
-        return Company.objects.filter(employment__in=employments).count()
-
-
-class CityNameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = City
-        fields = ('pk', 'name')
+        return city.companies.count()
 
 
 class SubjectSerializer(serializers.ModelSerializer):
@@ -173,14 +193,6 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = ('id', 'first_year', 'last_year', 'symbol', 'tutor')
 
 
-class UniversitySerializer(serializers.ModelSerializer):
-    city = CityNameSerializer()
-
-    class Meta:
-        model = University
-        exclude = ('is_verified',)
-
-
 class UniversityDepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = UniversityDepartment
@@ -230,11 +242,6 @@ class StudentSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         validated_data.update(self.update_related(validated_data))
         return super(StudentSerializer, self).update(instance, validated_data)
-
-
-class CompanySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Company
 
 
 class BranchSerializer(serializers.ModelSerializer):

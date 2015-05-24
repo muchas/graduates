@@ -32,6 +32,10 @@ class City(models.Model):
     def people(self):
         return Person.objects.connected_with_city(self).select_related('group')
 
+    @property
+    def companies(self):
+        return Company.objects.filter(employment__in=self.employments.all())
+
 
 class University(models.Model):
     name = models.CharField(max_length=255)
