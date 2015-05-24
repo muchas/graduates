@@ -5,3 +5,6 @@ node_modules/
 .idea/
 venv/
 vagrant/.vagrant/
+static/js/app.min.js
+static/js/handlebars.js
+static/js/routes.js

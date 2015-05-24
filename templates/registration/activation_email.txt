@@ -1,7 +1,7 @@
+{% load absolute  %}
 Witaj!
 
-Aby aktywować konto kliknij w link, który będzie aktywny przez {{ expiration_days }} najbliższe dni: {% url 'registration_activate' activation_key=activation_key %}
+Aby aktywować konto kliknij w link, który będzie aktywny przez {{ expiration_days }} najbliższych dni: {% site 'registration_activate' activation_key=activation_key %}
 
-
-Miłego dnia,
-zespół bazy absolwentów V LO
+Życzymy udanego korzystania z portalu,
+Zespół bazy absolwentów V L
