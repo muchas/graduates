@@ -335,9 +335,21 @@ App.Form.Attribute = App.Form.Base.extend({
 App.Form.Photo = Marionette.ItemView.extend({
     template: Handlebars.templates.photo_form,
 
+    ui: {
+        'modal': '#photo-crop-modal',
+        'image': '#photo-crop-modal img',
+        'area': '#profile-photo-cropper > img',
+        'zoomIn': '.zoom-in',
+        'zoomOut': '.zoom-out'
+    },
+
     events: {
         'click .upload': 'uploadImage',
-        'click .remove': 'removeImage'
+        'click .remove': 'removeImage',
+        'show.bs.modal @ui.modal': 'onShowModal',
+        'hidden.bs.modal @ui.modal': 'onHideModal',
+        'click @ui.zoomIn': 'zoomIn',
+        'click @ui.zoomOut': 'zoomOut'
     },
 
     onRender: function() {
@@ -352,6 +364,45 @@ App.Form.Photo = Marionette.ItemView.extend({
         } else {
            this.file = null;
         }
+    },
+
+    onShowModal: function() {
+       var cropBoxData, canvasData;
+       this.ui.area.cropper({
+        aspectRatio: 1,
+        autoCropArea: 0.8,
+        dragCrop: false,
+        movable: false,
+        resizable: false,
+        guides: false,
+        minContainerWidth: 550,
+        minContainerHeight: 450,
+        built: function () {
+          // Strict mode: set crop box data first
+          this.ui.image.cropper('setCropBoxData', cropBoxData);
+          this.ui.image.cropper('setCanvasData', canvasData);
+        }.bind(this)
+       });
+    },
+
+    onHideModal: function() {
+        var data = this.ui.image.cropper('getData');
+        this.ui.image.cropper('destroy');
+        this.ui.image.attr('src', '');
+        App.loader.show();
+        App.instance.execute("profile/cropPhoto", data, function(response) {
+            App.instance.vent.trigger('profile-photo-uploaded');
+            this.render();
+            App.loader.hide();
+        }.bind(this));
+    },
+
+    zoomIn: function() {
+        this.ui.image.cropper('zoom', 0.1);
+    },
+
+    zoomOut: function() {
+        this.ui.image.cropper('zoom', -0.1);
     },
 
     validateImage: function(file) {
@@ -380,8 +431,10 @@ App.Form.Photo = Marionette.ItemView.extend({
         App.loader.show();
         App.instance.execute("profile/uploadPhoto", data, function(response) {
             this.model.set(response);
-            App.instance.vent.trigger('profile-photo-uploaded');
-            this.render();
+            this.ui.image.attr('src', this.model.get('picture'));
+            this.ui.modal.modal();
+//            App.instance.vent.trigger('profile-photo-uploaded');
+//            this.render();
             App.loader.hide();
         }.bind(this),
         function(response) {

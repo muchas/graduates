@@ -269,7 +269,7 @@ class PersonPhotoCropView(views.APIView):
         finally:
             f.close()
 
-        return Response(status=status.HTTP_200_OK)
+        return Response({ 'success': True }, status=status.HTTP_200_OK)
 
 
 class PersonProfileView(generics.RetrieveAPIView):
