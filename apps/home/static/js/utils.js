@@ -31,6 +31,10 @@ Handlebars.registerHelper('wrapURL', function(str) {
     return new Handlebars.SafeString(str)
 });
 
+Handlebars.registerHelper('toUpperCase', function(value) {
+   return (value && typeof value === 'string') ? value.toUpperCase() : '';
+});
+
 Handlebars.registerHelper('trans',
   function(str){
     return (gettext != undefined ? gettext(str) : str);

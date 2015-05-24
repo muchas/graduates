@@ -2,7 +2,7 @@
     <h4>Rocznik {{ year }}</h4>
     <ul>
       {{#each groups }}
-      <li><a href="#/group/{{ id }}">Klasa {{ symbol }}</a> - wych. <a href="#/person/{{ tutor.id }}">{{ tutor.full_name }}</a></li>
+      <li><a href="#/group/{{ id }}">Klasa {{ toUpperCase symbol }}</a> - wych. <a href="#/person/{{ tutor.id }}">{{ tutor.full_name }}</a></li>
       {{/each}}
     </ul>
 </div>
