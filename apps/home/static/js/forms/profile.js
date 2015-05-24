@@ -432,7 +432,10 @@ App.Form.Photo = Marionette.ItemView.extend({
         App.instance.execute("profile/uploadPhoto", data, function(response) {
             this.model.set(response);
             this.ui.image.attr('src', this.model.get('picture'));
-            this.ui.modal.modal();
+            this.ui.modal.modal({
+                backdrop: false,
+                keyboard: false
+            });
 //            App.instance.vent.trigger('profile-photo-uploaded');
 //            this.render();
             App.loader.hide();
