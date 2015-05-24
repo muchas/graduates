@@ -167,6 +167,7 @@ module.exports = function (grunt) {
                          "static/js/plugins/flot/jquery.flot.pie.js",
                          "static/js/plugins/flot/jquery.flot.resize.js",
                          "static/js/libs/bootstrap.min.js",
+                         "apps/home/static/js/libs/cropper.min.js",
                          "apps/home/static/js/libs/bootstrap-datepicker.js",
                          "apps/home/static/js/libs/bootstrap3-typeahead.min.js",
                          "apps/home/static/js/libs/jquery.cookie.js",
