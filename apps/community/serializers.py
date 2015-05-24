@@ -91,6 +91,21 @@ class PersonPhotoSerializer(serializers.ModelSerializer):
         fields = ('id', 'picture')
 
 
+class ImageCropSerializer(serializers.Serializer):
+    x = serializers.IntegerField(min_value=0)
+    y = serializers.IntegerField(min_value=0)
+    width = serializers.IntegerField(min_value=0)
+    height = serializers.IntegerField(min_value=0)
+
+    def validate(self, data):
+        picture = self.context['picture']
+        if data['x'] + data['width'] > picture.width:
+            raise serializers.ValidationError(_("Cropped width is bigger than image width."))
+        if data['y'] + data['height'] > picture.height:
+            raise serializers.ValidationError(_("Cropped height is bigger than image height."))
+        return data
+
+
 class PersonMarriedNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person

@@ -12,7 +12,8 @@ App.Command.Profile = App.Command.Base.extend({
         "profile/uploadPhoto": "uploadPhoto",
         "profile/removePhoto": "removePhoto",
         "profile/changePassword": "changePassword",
-        "profile/connectedPages": "getConnectedPages"
+        "profile/connectedPages": "getConnectedPages",
+        "profile/cropPhoto": "cropPhoto"
     },
 
     getPersonInformation: function(id, callback) {
@@ -21,6 +22,10 @@ App.Command.Profile = App.Command.Base.extend({
 
     getPhoto: function(callback) {
         this.jsonRequest("GET", "person-photo", {}, {}, callback);
+    },
+
+    cropPhoto: function(data, callback) {
+        this.jsonRequest("PUT", "person-photo-crop", {}, data, callback);
     },
 
     getAuthenticatedPersonInformation: function(callback) {

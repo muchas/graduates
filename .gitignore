@@ -8,3 +8,4 @@ vagrant/.vagrant/
 static/js/app.min.js
 static/js/handlebars.js
 static/js/routes.js
+media/pictures/

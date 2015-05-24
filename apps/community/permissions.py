@@ -31,6 +31,11 @@ class IsFemale(permissions.BasePermission):
         return request.user.person.sex == Person.FEMALE
 
 
+class HasProfilePhoto(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.person and request.user.person.picture
+
+
 class IsAllowedToBeInvited(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Obj is instance of InvitationModel

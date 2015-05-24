@@ -3,7 +3,8 @@ from apps.community.views import TeacherListView, PersonGroupView, CityListView,
     StudentListView, EmploymentListView, StudentView, EmploymentView, PersonDescriptionView, \
     PersonProfileView, PersonalDataUpdateView, AttributeListView, UniversityListView, DepartmentListView, BranchListView, \
     PersonPhotoView, AuthenticatedPersonView, PersonMarriedNameView, GraduatedGroupListView, StudentGroupListView, \
-    PersonSimilarityView, PersonInvitationView, PersonSearchView, NotEmptyCityListView, PersonConnectedPagesView
+    PersonSimilarityView, PersonInvitationView, PersonSearchView, NotEmptyCityListView, PersonConnectedPagesView, \
+    PersonPhotoCropView
 
 urlpatterns = patterns('',
                        url(r'teachers/', TeacherListView.as_view(), name='teacher-list'),
@@ -19,7 +20,8 @@ urlpatterns = patterns('',
                        url(r'employments/', EmploymentListView.as_view(), name='employment-list'),
                        url(r'employment/(?P<pk>\d+)/', EmploymentView.as_view(), name='employment'),
                        url(r'description/', PersonDescriptionView.as_view(), name='person-description'),
-                       url(r'photo/', PersonPhotoView.as_view(), name='person-photo'),
+                       url(r'photo/crop/$', PersonPhotoCropView.as_view(), name='person-photo-crop'),
+                       url(r'photo/$', PersonPhotoView.as_view(), name='person-photo'),
                        url(r'person/(?P<pk>\d+)/', PersonProfileView.as_view(), name='person-card'),
                        url(r'attributes/', AttributeListView.as_view(), name='personal-data-list'),
                        url(r'attribute/(?P<pk>\d+)/', PersonalDataUpdateView.as_view(), name='personal-data'),

@@ -6,14 +6,18 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University, \
     UniversityDepartment, Branch
-from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale, IsAllowedToBeInvited
+from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale, IsAllowedToBeInvited, \
+    HasProfilePhoto
 from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
     PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer, CityDetailSerializer, \
-    PersonSearchSerializer
+    PersonSearchSerializer, ImageCropSerializer
 from utils.mail import send_templated_email
 from utils.rest import RetrieveCachedAPIView
+from PIL import Image
+from cStringIO import StringIO
+from django.core.files.base import ContentFile
 import signals
 
 
@@ -235,10 +239,37 @@ class PersonSimilarityView(views.APIView):
 
 class PersonPhotoView(generics.RetrieveUpdateAPIView):
     serializer_class = PersonPhotoSerializer
-    permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+    permission_classes = (IsAuthenticated, IsCommunityMember, IsOwnerOrReadOnly)
 
     def get_object(self):
         return self.request.user.person
+
+
+class PersonPhotoCropView(views.APIView):
+    permission_classes = (IsAuthenticated, IsCommunityMember, HasProfilePhoto)
+
+    def put(self, request, *args, **kwargs):
+        picture = request.user.person.picture
+
+        serializer = ImageCropSerializer(data=request.data, context={'picture': picture})
+        serializer.is_valid(raise_exception=True)
+
+        data = serializer.data
+
+        f = StringIO()
+        try:
+            original = Image.open(picture.path)
+
+            cropped = original.crop((data['x'], data['y'], data['x'] + data['width'], data['y'] + data['height']))
+
+            cropped.save(f, format='jpeg')
+            s = f.getvalue()
+            picture.save(picture.name, ContentFile(s))
+            #model_instance.save()
+        finally:
+            f.close()
+
+        return Response({ 'success': True }, status=status.HTTP_200_OK)
 
 
 class PersonProfileView(generics.RetrieveAPIView):
