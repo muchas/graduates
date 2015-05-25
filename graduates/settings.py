@@ -31,7 +31,7 @@ class Default(Configuration):
         (u'Sławomir Mucha', 'mucha.slawomir@gmail.com'),
     )
 
-    ALLOWED_HOSTS = ['.lo5.bielsko.pl', '127.0.0.1', 'localhost', '188.226.230.41']
+    ALLOWED_HOSTS = ['lo5.bielsko.pl', '127.0.0.1', 'localhost', '188.226.230.41', '185.43.137.73']
 
     INTERNAL_IPS = ('127.0.0.1',)
 
