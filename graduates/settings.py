@@ -27,9 +27,9 @@ class Default(Configuration):
     SECRET_KEY = os.environ.get('SECRET_KEY',
                                 'kekq!7l%@v)42papk*w1(*=-&rpls9av#9g$@ua(8871)%qz*f')
 
-    ADMINS = (
-        (u'Sławomir Mucha', 'mucha.slawomir@gmail.com'),
-    )
+    # ADMINS = (
+    #     (u'Sławomir Mucha', 'mucha.slawomir@gmail.com'),
+    # )
 
     ALLOWED_HOSTS = ['.lo5.bielsko.pl', '127.0.0.1', 'localhost', '188.226.230.41', '185.43.137.73', 'lo5.bielsko.pl']
 
