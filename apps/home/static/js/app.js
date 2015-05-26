@@ -88,4 +88,9 @@ App.instance.vent.on("sync/init", function (displayIntroductionWizard) {
     }
 });
 
+App.instance.vent.on("profile-photo-uploaded", function(src) {
+    console.log(src);
+   $('#profile-image-thubmnail').attr('src', src);
+});
+
 App.instance.vent.trigger("sync/init");

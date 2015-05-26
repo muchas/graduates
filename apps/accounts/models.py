@@ -93,6 +93,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_guest(self):
         return not self.person
 
+    @property
+    def is_student(self):
+        return self.is_community_member and self.person.is_student
 
 class RegistrationManager(models.Manager):
     """

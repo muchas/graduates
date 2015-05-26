@@ -391,8 +391,8 @@ App.Form.Photo = Marionette.ItemView.extend({
         this.ui.image.attr('src', '');
         App.loader.show();
         App.instance.execute("profile/cropPhoto", data, function(response) {
-            App.instance.vent.trigger('profile-photo-uploaded');
             this.render();
+            App.instance.vent.trigger('profile-photo-uploaded', this.model.get('picture'));
             App.loader.hide();
         }.bind(this));
     },
@@ -454,7 +454,6 @@ App.Form.Photo = Marionette.ItemView.extend({
         App.loader.show();
         App.instance.execute("profile/removePhoto", function(response) {
             this.model.set(response);
-            App.instance.vent.trigger('profile-photo-uploaded');
             this.render();
             App.loader.hide();
         }.bind(this));

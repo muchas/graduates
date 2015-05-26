@@ -157,11 +157,11 @@
           <li class="dropdown navbar-profile">
             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
               {% if request.user.person.picture %}
-              <img src="{{ request.user.person.picture|thumbnail_url:"thumbnail" }}" class="navbar-profile-avatar" alt="">
+              <img id="profile-image-thubmnail" src="{{ request.user.person.picture|thumbnail_url:"thumbnail" }}" class="navbar-profile-avatar" alt="">
                 {% else %}
-              <img src="/media/unknown.png" class="navbar-profile-avatar" alt="avatar">
+              <img id="profile-image-thumbnail" src="/media/unknown.png" class="navbar-profile-avatar" alt="avatar">
                 {% endif %}
-              <span class="navbar-profile-label">rod@rod.me &nbsp;</span>
+              <span class="navbar-profile-label">{{ request.user.email }} &nbsp;</span>
               <i class="fa fa-caret-down"></i>
             </a>
 
@@ -251,10 +251,11 @@
           </li>
 
 
+          {% if request.user.is_student %}
           <li class="dropdown ">
             <a href="#/group/{{ request.user.person.group.pk }}">Moja klasa</a>
           </li>
-
+          {% endif %}
 
           <li class="dropdown ">
 
