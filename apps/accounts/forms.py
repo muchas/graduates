@@ -30,6 +30,10 @@ class PersonForm(forms.Form):
         if not existing:
             raise forms.ValidationError(u"Osoba o podanym imieniu i nazwisku nie istnieje w naszej bazie.")
 
+        if not existing.allow_registration:
+            raise forms.ValidationError(u"Portal gromadzi społeczność absolwentów włącznie z uczniami klas trzecich. "
+                                        u"Dla klas pierwszych i drugich rejestracja jest zablokowana.")
+
         if hasattr(existing, 'user'):
             raise forms.ValidationError(u"Podana osoba posiada już konto użytkownika.")
 

@@ -115,6 +115,7 @@ class Person(models.Model):
     sex = models.SmallIntegerField(choices=SEX_CHOICES, default=NOT_KNOWN)
     description = models.TextField(null=True, blank=True)
     allow_invitation = models.BooleanField(default=True)
+    allow_registration = models.BooleanField(default=True)
 
     group = models.ForeignKey(Group, related_name='pupils', blank=True, null=True)
     universities = models.ManyToManyField(University, through='Student')
