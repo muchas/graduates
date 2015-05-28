@@ -21,7 +21,7 @@ msgstr ""
 
 #: apps/accounts/forms.py:103
 msgid "Password"
-msgstr ""
+msgstr "Hasło"
 
 #: apps/accounts/forms.py:109
 msgid "Wprowadź poprawny email oraz hasło. Uwaga: wielkość liter ma znaczenie!"
@@ -33,15 +33,15 @@ msgstr ""
 
 #: apps/accounts/models.py:48
 msgid "email adress"
-msgstr ""
+msgstr "adres e-mail"
 
 #: apps/accounts/models.py:49
 msgid "first name"
-msgstr ""
+msgstr "imię"
 
 #: apps/accounts/models.py:50
 msgid "last name"
-msgstr ""
+msgstr "nazwisko"
 
 #: apps/accounts/models.py:51
 msgid "staff status"
@@ -157,7 +157,7 @@ msgstr[2] "%(count)d firm"
 
 #: apps/community/views.py:300
 msgid "Invitation to V LO graduates community."
-msgstr ""
+msgstr "Zaproszenie do Portalu Absolwentów V LO"
 
 #: graduates/settings.py:48
 msgid "Polish"
