@@ -66,6 +66,7 @@ $.ajaxSetup({
  * Leaflet map
  */
   function LeafletMap(options) {
+    L.Icon.Default.imagePath = 'static/css/images/';
     this.markers = [];
     this.onMarkerClick = options.onMarkerClick;
     this.map = new L.Map(options.name);
