@@ -9,13 +9,14 @@ from django.contrib.auth.views import login
 from django.contrib.auth import login as auth_login
 from django.contrib.formtools.wizard.views import SessionWizardView
 from django.utils.translation import ugettext as _
+
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from apps.accounts import signals
-from apps.accounts.models import RegistrationProfile, Claim
-from apps.community.models import Person
-from forms import AuthenticationForm, PersonForm, RegistrationForm, ClaimForm
+
+from . import signals
+from .models import RegistrationProfile, Claim, Person
+from .forms import AuthenticationForm, PersonForm, RegistrationForm, ClaimForm
 
 
 class LoginView(View):

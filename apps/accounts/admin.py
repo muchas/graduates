@@ -1,5 +1,6 @@
 from django.contrib import admin
-from models import Claim, User
+
+from .models import Claim, User
 
 
 @admin.register(User)

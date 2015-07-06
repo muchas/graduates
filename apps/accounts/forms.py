@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext_lazy as _
 
-from django.contrib.auth import authenticate, get_user_model
-from apps.accounts.models import User, Claim
-from apps.community.models import Person
 from captcha.fields import ReCaptchaField
+
+from apps.community.models import Person
+from .models import User, Claim
 
 
 class PersonForm(forms.Form):

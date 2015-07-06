@@ -1,20 +1,18 @@
-import datetime
-import hashlib
-import random
-import re
 from uuid import UUID
+import datetime
 import uuidfield
 
+from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from django.core.mail import send_mail
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now as datetime_now
 from django.template.loader import render_to_string
 from django.db import models, transaction
+
+from helpers.mail import send_templated_email
 from apps.community.models import Person, Attribute, PersonalData
-from utils.mail import send_templated_email
 
 
 class UserManager(BaseUserManager):
@@ -126,7 +124,7 @@ class RegistrationManager(models.Manager):
 
         """
         try:
-            value = UUID(activation_key)
+            UUID(activation_key)
             profile = self.get(activation_key=activation_key)
         except self.model.DoesNotExist:
             return False

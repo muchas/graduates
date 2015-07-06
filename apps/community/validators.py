@@ -1,4 +1,5 @@
 from django.core.validators import validate_email, validate_integer
+
 from rest_framework.validators import UniqueValidator as BaseUniqueValidator
 
 

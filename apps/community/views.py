@@ -1,23 +1,26 @@
-from django.shortcuts import get_object_or_404, redirect
+from cStringIO import StringIO
+
+from django.core.files.base import ContentFile
+from django.shortcuts import get_object_or_404
 from django.utils.translation import ungettext, ugettext as _
+
+from PIL import Image
 from haystack.query import EmptySearchQuerySet, SearchQuerySet
 from rest_framework import generics, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from apps.community.models import Person, City, Group, Student, Employment, PersonalData, Attribute, University, \
+from braces.views import PrefetchRelatedMixin
+
+from helpers.mail import send_templated_email
+from helpers.rest import RetrieveCachedAPIView
+from .models import Person, City, Group, Student, Employment, PersonalData, Attribute, University,\
     UniversityDepartment, Branch
-from apps.community.permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale, IsAllowedToBeInvited, \
-    HasProfilePhoto
-from apps.community.serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
+from .permissions import IsCommunityMember, IsOwnerOrReadOnly, IsFemale, IsAllowedToBeInvited, HasProfilePhoto
+from .serializers import TeacherSerializer, GroupDetailsSerializer, CitySerializer, StudentSerializer, \
     EmploymentSerializer, PersonDescriptionSerializer, PersonProfileSerializer, PersonalDataSerializer, \
     AttributeSerializer, UniversitySerializer, UniversityDepartmentSerializer, BranchSerializer, PersonPhotoSerializer, \
     PersonSerializer, PersonMarriedNameSerializer, GroupSerializer, InvitationSerializer, CityDetailSerializer, \
     PersonSearchSerializer, ImageCropSerializer
-from utils.mail import send_templated_email
-from utils.rest import RetrieveCachedAPIView
-from PIL import Image
-from cStringIO import StringIO
-from django.core.files.base import ContentFile
 import signals
 
 
@@ -45,8 +48,9 @@ class BranchListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-class TeacherListView(generics.ListAPIView):
-    queryset = Person.objects.exclude(teacher_learn_years=None).prefetch_related('teacher_learn_years', 'subjects')
+class TeacherListView(PrefetchRelatedMixin, generics.ListAPIView):
+    queryset = Person.objects.exclude(teacher_learn_years=None)
+    prefetch_related = ['teacher_learn_years', 'subjects']
     serializer_class = TeacherSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -77,8 +81,9 @@ class StudentGroupListView(GroupListView):
     is_graduated = False
 
 
-class GroupDetailView(RetrieveCachedAPIView):
-    queryset = Group.objects.all().prefetch_related('pupils__user')
+class GroupDetailView(PrefetchRelatedMixin, RetrieveCachedAPIView):
+    queryset = Group.objects.all()
+    prefetch_related = ['pupils__user']
     serializer_class = GroupDetailsSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -272,10 +277,11 @@ class PersonPhotoCropView(views.APIView):
         return Response({ 'success': True }, status=status.HTTP_200_OK)
 
 
-class PersonProfileView(generics.RetrieveAPIView):
+class PersonProfileView(PrefetchRelatedMixin, generics.RetrieveAPIView):
     serializer_class = PersonProfileSerializer
     permission_classes = (IsAuthenticated,)
-    queryset = Person.objects.all().prefetch_related("achievements__edition__contest")
+    queryset = Person.objects.all()
+    prefetch_related = ['achievements__edition_contest']
 
 
 class PersonalDataUpdateView(generics.UpdateAPIView):

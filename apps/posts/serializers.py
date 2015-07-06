@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404
+
 from rest_framework import serializers
+
 from apps.community.serializers import PersonSerializer
-from apps.posts.models import Post, Comment
+from .models import Post, Comment
 
 
 class PostSerializer(serializers.ModelSerializer):

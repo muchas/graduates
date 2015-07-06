@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
+
 from model_mommy import mommy
 from rest_framework import status
 from rest_framework.test import APITestCase
+
 from apps.accounts.models import User
-from apps.community.models import Person, Student, Employment, City, TeacherLearnYears, Group, Attribute, PersonalData
+from ..models import Person, Student, Employment, City, TeacherLearnYears, Group, Attribute, PersonalData
 
 
 class StudentListViewTests(APITestCase):
     def setUp(self):
-        self.url = reverse('student-list')
+        self.url = reverse('student_list')
         self.username = 'john@doe.com'
         self.password = 'secret'
 
@@ -178,7 +180,7 @@ class StudentViewTests(APITestCase):
 
 class EmploymentListViewTests(APITestCase):
     def setUp(self):
-        self.url = reverse('employment-list')
+        self.url = reverse('employment_list')
         self.username = 'mungo@jerry.com'
         self.password = 'inthesummertime'
 
@@ -340,7 +342,7 @@ class EmploymentViewTests(APITestCase):
 
 class CityListViewTests(APITestCase):
     def setUp(self):
-        self.url = reverse('city-list')
+        self.url = reverse('city_list')
         mommy.make(City, is_verified=True, _quantity=3)
         mommy.make(City, is_verified=False, _quantity=6)
 
@@ -358,7 +360,7 @@ class CityListViewTests(APITestCase):
 
 class TeacherListViewTests(APITestCase):
     def setUp(self):
-        self.url = reverse('teacher-list')
+        self.url = reverse('teacher_list')
         mommy.make(TeacherLearnYears, _quantity=3)
 
     def test_teacher_list(self):
@@ -411,8 +413,8 @@ class PersonalDataUpdateViewTests(APITestCase):
         self.username = 'john@doe.pl'
         self.password = 'randomized'
         self.attribute = mommy.make(Attribute, data_type=Attribute.EMAIL_FIELD)
-        self.url = reverse('personal-data', kwargs={'pk': self.attribute.id})
-        self.bad_url = reverse('personal-data', kwargs={'pk': 1000})
+        self.url = reverse('personal_data', kwargs={'pk': self.attribute.id})
+        self.bad_url = reverse('personal_data', kwargs={'pk': 1000})
         person = mommy.make(Person)
         User.objects.create_user(self.username, self.password, person=person)
 
@@ -463,7 +465,7 @@ class PersonalDataUpdateViewTests(APITestCase):
 
 class AttributeListViewTests(APITestCase):
     def setUp(self):
-        self.url = reverse('personal-data-list')
+        self.url = reverse('personal_data_list')
         self.username = 'john@doe.com'
         self.password = '123123'
 

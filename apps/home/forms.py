@@ -1,5 +1,6 @@
 from django import forms
-from apps.home.models import Guest
+
+from .models import Guest
 
 
 class GuestForm(forms.ModelForm):

@@ -1,5 +1,6 @@
 from rest_framework import permissions
-from apps.community.models import Person
+
+from .models import Person
 
 
 class IsCommunityMember(permissions.BasePermission):

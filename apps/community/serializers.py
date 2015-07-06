@@ -1,12 +1,14 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
+
 from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
+
 from apps.accounts.models import User
-from apps.community.fields import ImageField
-from apps.community.models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
+from .fields import ImageField
+from .models import Person, Subject, Group, City, Student, Employment, Company, Branch, University, \
     UniversityDepartment, PersonalData, Attribute, Invitation, Achievement
-from apps.community.validators import EmailValidator, IntegerValidator, UniqueValidator
+from .validators import EmailValidator, IntegerValidator, UniqueValidator
 
 
 class CityNameSerializer(serializers.ModelSerializer):

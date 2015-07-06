@@ -1,10 +1,12 @@
 from django.shortcuts import get_object_or_404
+
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+
 from apps.community.permissions import IsCommunityMember
-from apps.posts.models import Post, Comment
-from apps.posts.permissions import IsAuthorOrReadOnly
-from apps.posts.serializers import PostSerializer, CommentSerializer
+from .models import Post, Comment
+from .permissions import IsAuthorOrReadOnly
+from .serializers import PostSerializer, CommentSerializer
 
 
 class PostView(generics.RetrieveUpdateDestroyAPIView):

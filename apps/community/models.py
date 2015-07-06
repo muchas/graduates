@@ -1,8 +1,11 @@
 from random import randint
-from django.db import models
-import datetime
-from model_utils.models import TimeStampedModel
 import uuidfield
+import datetime
+
+from django.db import models
+
+from model_utils.models import TimeStampedModel
+
 
 CURRENT_YEAR = datetime.datetime.now().year+1
 

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from models import Person, TeacherLearnYears, Subject, Group, City, Employment, Student, University, \
+
+from .models import Person, TeacherLearnYears, Subject, Group, City, Employment, Student, University, \
     UniversityDepartment, Branch, Company, Attribute, PersonalData, Invitation, Contest, ContestEdition, ContestScope, \
     Achievement, ContestResult
 
