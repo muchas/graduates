@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
+from django.core import mail
+
 from model_mommy import mommy
 from rest_framework import status
 from rest_framework.test import APITestCase
+
 from apps.accounts.models import User
-from apps.community.models import Person, Student, Employment, City, TeacherLearnYears, Group, Attribute, PersonalData
+from ..models import Person, Student, Employment, City, TeacherLearnYears, Group, Attribute, PersonalData
 
 
-class StudentListViewTests(APITestCase):
+class StudentListViewSetTests(APITestCase):
     def setUp(self):
         self.url = reverse('student-list')
         self.username = 'john@doe.com'
@@ -78,14 +81,14 @@ class StudentListViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class StudentViewTests(APITestCase):
+class StudentDetailViewSetTests(APITestCase):
     def setUp(self):
         self.username = 'john@doe.pl'
         self.password = 'random'
         person = mommy.make(Person)
         self.student = mommy.make(Student, person=person)
-        self.url = reverse('student', kwargs={'pk': self.student.pk})
-        self.bad_url = reverse('student', kwargs={'pk': 1000})
+        self.url = reverse('student-detail', kwargs={'pk': self.student.pk})
+        self.bad_url = reverse('student-detail', kwargs={'pk': 1000})
         User.objects.create_user(self.username, self.password, person=person)
 
     def get_student_sample_data(self):
@@ -176,7 +179,7 @@ class StudentViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
-class EmploymentListViewTests(APITestCase):
+class EmploymentListViewSetTests(APITestCase):
     def setUp(self):
         self.url = reverse('employment-list')
         self.username = 'mungo@jerry.com'
@@ -245,14 +248,14 @@ class EmploymentListViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class EmploymentViewTests(APITestCase):
+class EmploymentDetailViewSetTests(APITestCase):
     def setUp(self):
         self.username = 'john@doe.pl'
         self.password = 'random'
         person = mommy.make(Person)
         self.employment = mommy.make(Employment, person=person)
-        self.url = reverse('employment', kwargs={'pk': self.employment.pk})
-        self.bad_url = reverse('employment', kwargs={'pk': 1000})
+        self.url_detail = reverse('employment-detail', kwargs={'pk': self.employment.pk})
+        self.bad_url = reverse('employment-detail', kwargs={'pk': 1000})
         User.objects.create_user(self.username, self.password, person=person)
 
     def get_employment_sample_data(self):
@@ -273,12 +276,12 @@ class EmploymentViewTests(APITestCase):
 
     def test_retrieve_employment(self):
         self.client.login(username=self.username, password=self.password)
-        response = self.client.get(self.url, format='json')
+        response = self.client.get(self.url_detail, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['name'], self.employment.name)
 
     def test_retrieve_employment_without_authentication(self):
-        response = self.client.get(self.url, format='json')
+        response = self.client.get(self.url_detail, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_retrieve_non_existing_employment(self):
@@ -289,14 +292,14 @@ class EmploymentViewTests(APITestCase):
     def test_update_employment(self):
         self.client.login(username=self.username, password=self.password)
         data = self.get_employment_sample_data()
-        response = self.client.put(self.url, data, format='json')
+        response = self.client.put(self.url_detail, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['name'], data['name'])
         self.assertEqual(response.data['company']['name'], data['company']['name'])
 
     def test_update_employment_without_authentication(self):
         data = self.get_employment_sample_data()
-        response = self.client.put(self.url, data, format='json')
+        response = self.client.put(self.url_detail, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_update_non_existing_employment(self):
@@ -313,16 +316,16 @@ class EmploymentViewTests(APITestCase):
         User.objects.create_user('tricky@hacker.com', '321', person=person)
         self.client.login(username='tricky@hacker.com', password='321')
         data = self.get_employment_sample_data()
-        response = self.client.put(self.url, data, format='json')
+        response = self.client.put(self.url_detail, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_delete_employment(self):
         self.client.login(username=self.username, password=self.password)
-        response = self.client.delete(self.url, format='json')
+        response = self.client.delete(self.url_detail, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_delete_employment_without_authentication(self):
-        response = self.client.delete(self.url, format='json')
+        response = self.client.delete(self.url_detail, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_delete_non_existing_employment(self):
@@ -334,25 +337,40 @@ class EmploymentViewTests(APITestCase):
         person = mommy.make(Person)
         User.objects.create_user('tricky@hacker.com', '321', person=person)
         self.client.login(username='tricky@hacker.com', password='321')
-        response = self.client.delete(self.url, format='json')
+        response = self.client.delete(self.url_detail, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
-class CityListViewTests(APITestCase):
-    def setUp(self):
-        self.url = reverse('city-list')
+class CityViewSetTests(APITestCase):
+    def test_city_list(self):
         mommy.make(City, is_verified=True, _quantity=3)
         mommy.make(City, is_verified=False, _quantity=6)
-
-    def test_city_list(self):
+        url = reverse('city-list')
         User.objects.create_user('john@doe.com', '312')
         self.client.login(username='john@doe.com', password='312')
-        response = self.client.get(self.url, format='json')
+        response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)
 
     def test_city_list_without_authentication(self):
-        response = self.client.get(self.url, format='json')
+        mommy.make(City, is_verified=True, _quantity=3)
+        mommy.make(City, is_verified=False, _quantity=6)
+        url = reverse('city-list')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_city_detail(self):
+        city = mommy.make(City, is_verified=True)
+        url = reverse('city-detail', kwargs={'pk': city.pk})
+        User.objects.create_user('john@doe.com', '312')
+        self.client.login(username='john@doe.com', password='312')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_city_detail_without_authentication(self):
+        city = mommy.make(City, is_verified=True)
+        url = reverse('city-detail', kwargs={'pk': city.pk})
+        response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
@@ -494,3 +512,65 @@ class AttributeListViewTests(APITestCase):
         self.client.login(username=self.username, password=self.password)
         response = self.client.get(self.url, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class PersonInvitationViewTests(APITestCase):
+    def setUp(self):
+        self.unregistered = mommy.make(Person)
+        self.url = reverse('invitation', kwargs={'pk': self.unregistered.pk})
+        self.username = 'john@doe.com'
+        self.password = '123123'
+
+    def get_sample_invitation_data(self, person_id):
+        return {
+            'email': u'patrick@doe.com',
+            'message': u'Hello, I want to invite you!',
+            'person': person_id
+        }
+
+    def test_invitation_sending(self):
+        person = mommy.make(Person)
+        User.objects.create_user(self.username, self.password, person=person)
+        self.client.login(username=self.username, password=self.password)
+        data = self.get_sample_invitation_data(self.unregistered.pk)
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [data['email']])
+
+    def test_invitation_creation_without_authentication(self):
+        data = self.get_sample_invitation_data(self.unregistered.pk)
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_invitation_sent_to_existing_user(self):
+        person = mommy.make(Person)
+        User.objects.create_user('unregistered@doe.com', 'pass', person=self.unregistered)
+        User.objects.create_user(self.username, self.password, person=person)
+
+        self.client.login(username=self.username, password=self.password)
+        data = self.get_sample_invitation_data(self.unregistered.pk)
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_invitation_sent_to_repeated_email(self):
+        username, password = 'registered@doe.com', 'pass'
+        person = mommy.make(Person)
+        registered_person = mommy.make(Person)
+        User.objects.create_user(username, password, person=registered_person)
+        User.objects.create_user(self.username, self.password, person=person)
+
+        data = self.get_sample_invitation_data(self.unregistered.pk)
+        data['email'] = username
+
+        self.client.login(username=self.username, password=self.password)
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_invitation_sent_to_non_existing_person(self):
+        person = mommy.make(Person)
+        User.objects.create_user(self.username, self.password, person=person)
+        self.client.login(username=self.username, password=self.password)
+        data = self.get_sample_invitation_data(self.unregistered.pk + 5)
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

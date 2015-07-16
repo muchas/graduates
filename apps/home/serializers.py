@@ -1,6 +1,8 @@
 from django.core.mail import mail_admins
+
 from rest_framework import serializers
-from apps.home.models import Feedback
+
+from .models import Feedback
 
 
 class FeedbackSerializer(serializers.ModelSerializer):

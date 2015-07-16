@@ -1,12 +1,13 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView, CreateView
-from rest_framework import generics, views, status
+from django.views.generic.edit import FormView
+
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
+
 from apps.accounts.models import User
-from apps.home.forms import GuestForm
-from apps.home.serializers import FeedbackSerializer
+from .forms import GuestForm
+from .serializers import FeedbackSerializer
 
 
 class HomePageView(TemplateView):

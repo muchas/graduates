@@ -1,19 +1,13 @@
+from uuid import UUID
 import datetime
 
-from model_mommy import mommy
-from uuid import UUID
 from django.test import TestCase
 from django.conf import settings
 from django.core import mail
-from apps.accounts.models import RegistrationProfile, User, Claim, Invitation
 
+from model_mommy import mommy
 
-class InvitationTests(TestCase):
-    def test_invitation_creation(self):
-        invitation = mommy.make(Invitation)
-        self.assertEqual(Invitation.objects.all().count(), 1)
-        self.assertTrue(isinstance(invitation.uuid, UUID))
-        self.assertFalse(invitation.is_expired())
+from ..models import RegistrationProfile, User, Claim
 
 
 class ClaimTests(TestCase):
@@ -54,16 +48,16 @@ class UserTests(TestCase):
         self.assertEqual(User.objects.filter(is_staff=True).count(), 1)
 
     def test_user_full_name(self):
-        user = mommy.make(User, first_name='John', last_name='Doe')
+        user = mommy.prepare(User, first_name='John', last_name='Doe')
         full_name = "%s %s" % (user.first_name, user.last_name)
         self.assertEqual(user.get_full_name(), full_name.strip())
 
     def test_user_short_name(self):
-        user = mommy.make(User, first_name='John', last_name='Doe')
+        user = mommy.prepare(User, first_name='John', last_name='Doe')
         self.assertEqual(user.get_short_name(), user.first_name)
 
     def test_user_email_sending(self):
-        user = mommy.make(User)
+        user = mommy.prepare(User)
         user.email_user('subject', 'message')
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [user.email])
@@ -165,7 +159,7 @@ class RegistrationProfileTests(TestCase):
         """
         new_user = RegistrationProfile.objects.create_inactive_user(**self.user_info)
         profile = RegistrationProfile.objects.get(user=new_user)
-        activated = RegistrationProfile.objects.activate_user(profile.activation_key)
+        activated = RegistrationProfile.objects.activate_user(str(profile.activation_key))
 
         self.assertTrue(isinstance(activated, User))
         self.assertEqual(activated.id, new_user.id)
@@ -185,7 +179,7 @@ class RegistrationProfileTests(TestCase):
         new_user.save()
 
         profile = RegistrationProfile.objects.get(user=new_user)
-        activated = RegistrationProfile.objects.activate_user(profile.activation_key)
+        activated = RegistrationProfile.objects.activate_user(str(profile.activation_key))
 
         self.assertFalse(isinstance(activated, User))
         self.assertFalse(activated)
@@ -211,10 +205,10 @@ class RegistrationProfileTests(TestCase):
         """
         new_user = RegistrationProfile.objects.create_inactive_user(**self.user_info)
         profile = RegistrationProfile.objects.get(user=new_user)
-        RegistrationProfile.objects.activate_user(profile.activation_key)
+        RegistrationProfile.objects.activate_user(str(profile.activation_key))
 
         profile = RegistrationProfile.objects.get(user=new_user)
-        self.assertFalse(RegistrationProfile.objects.activate_user(profile.activation_key))
+        self.assertFalse(RegistrationProfile.objects.activate_user(str(profile.activation_key)))
 
     def test_expired_user_deletion(self):
         """

@@ -1,6 +1,8 @@
 import mock
+
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+
 from templatetags.navigation import current, current_url_equals
 
 

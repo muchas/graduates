@@ -1,6 +1,7 @@
 from django.db.models.signals import pre_save, post_delete
 from django.dispatch import receiver
-from apps.community.models import Employment, Student
+
+from .models import Employment, Student
 
 
 @receiver(pre_save, sender=Employment)

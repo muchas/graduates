@@ -56,15 +56,35 @@ App.Controller.CommunityController = {
         App.layout.content.show(layout);
         App.loader.show();
         App.instance.execute('community/student-groups', function(response) {
+            response = this.formatGroupsJSON(response);
            var groups = new App.Collection.Groups(response);
             layout.students.show(new App.CollectionView.Groups({ collection: groups }));
-        });
+        }.bind(this));
 
         App.instance.execute('community/graduated-groups', function(response) {
+            response = this.formatGroupsJSON(response);
            var groups = new App.Collection.Groups(response);
             layout.graduates.show(new App.CollectionView.Groups({ collection: groups }));
             App.loader.hide();
+        }.bind(this));
+    },
+
+    formatGroupsJSON: function(groups) {
+        var years = [];
+        var buckets = {};
+        _.each(groups, function(group) {
+            if(!buckets[group.last_year]) {
+                buckets[group.last_year] = [];
+            }
+            buckets[group.last_year].push(group);
         });
+        _.each(buckets, function(value, key) {
+            years.push({
+                'year': key,
+                'groups': value
+            });
+        });
+        return years.reverse();
     },
 
     showUniversity: function() {

@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 from django.forms import ImageField as DjangoImageField
+
 from rest_framework.fields import FileField as BaseFileField
 
 
