@@ -20,7 +20,6 @@ class PersonTests(TestCase):
         person = mommy.make(Person)
         self.assertEqual(Person.objects.all().count(), 1)
 
-
 class CityTests(TestCase):
     def test_city_creation(self):
         city = mommy.make(City)

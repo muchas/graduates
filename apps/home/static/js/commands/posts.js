@@ -26,11 +26,11 @@ App.Command.Posts = App.Command.Base.extend({
     },
 
     editPost: function(id, data, callback, failure) {
-        this.jsonRequest("PUT", "post", {pk: id}, data, callback, failure);
+        this.jsonRequest("PUT", "post-detail", {pk: id}, data, callback, failure);
     },
 
     removePost: function(id, callback) {
-        this.jsonRequest("DELETE", "post", {pk: id}, {}, callback);
+        this.jsonRequest("DELETE", "post-detail", {pk: id}, {}, callback);
     },
 
     addComment: function(id, data, callback, failure) {

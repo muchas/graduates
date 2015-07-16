@@ -1,9 +1,14 @@
+from cStringIO import StringIO
+from PIL import Image
 from random import randint
 import uuidfield
 import datetime
 
+from django.utils.translation import ugettext as _
+from django.core.files.base import ContentFile
 from django.db import models
 
+from helpers.mail import send_templated_email
 from model_utils.models import TimeStampedModel
 
 
@@ -167,6 +172,17 @@ class Person(models.Model):
     def is_registered(self):
         return hasattr(self, 'user')
 
+    def crop_picture(self, x, y, width, height):
+        f = StringIO()
+        try:
+            original = Image.open(self.picture.path)
+            cropped = original.crop((x, y, x + width, y + height))
+            cropped.save(f, format='jpeg')
+            s = f.getvalue()
+            self.picture.save(self.picture.name, ContentFile(s))
+        finally:
+            f.close()
+
     def retrieve_common_tutor_with(self, person):
         if self.group and person.group and self.group.id == person.group.id:
             return self.group.tutor
@@ -289,6 +305,16 @@ class Invitation(models.Model):
 
     def is_expired(self):
         return hasattr(self.person, 'user')
+
+    def send(self):
+        subject = _("Invitation to V LO graduates community.")
+        context = {
+            'person': self.person,
+            'invited_by': self.invited_by,
+            'message': self.message
+        }
+
+        send_templated_email(subject, 'community/invite.html', context, [self.email], )
 
 
 ###### Contests/achievements models #####

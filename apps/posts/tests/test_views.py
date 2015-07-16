@@ -9,7 +9,7 @@ from apps.posts.models import Post, Comment
 
 class PostListViewTests(APITestCase):
     def setUp(self):
-        self.url=reverse('post_list')
+        self.url=reverse('post-list')
         self.username = 'john@doe.com'
         self.password = '999'
 
@@ -96,21 +96,21 @@ class PostViewTest(APITestCase):
         user=self.create_community_member(self.username, self.password)
         self.client.login(username=self.username, password=self.password)
         post=mommy.make(Post)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['content'], post.content)
 
     def test_retrieve_post_without_authentication(self):
         post=mommy.make(Post)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_retrieve_non_existing_post(self):
         user=self.create_community_member(self.username, self.password)
         self.client.login(username=self.username, password=self.password)
-        url=reverse('post',kwargs={'pk': 999})
+        url=reverse('post-detail',kwargs={'pk': 999})
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -119,7 +119,7 @@ class PostViewTest(APITestCase):
         self.client.login(username=self.username, password=self.password)
         data = self.get_post_sample_data()
         post=mommy.make(Post, author=user.person)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['content'], data['content'])
@@ -129,7 +129,7 @@ class PostViewTest(APITestCase):
         self.client.login(username=self.username, password=self.password)
         data = self.get_post_sample_data()
         post=mommy.make(Post)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
@@ -138,7 +138,7 @@ class PostViewTest(APITestCase):
         self.client.login(username=self.username, password=self.password)
         bad_data = self.get_post_sample_bad_data()
         post=mommy.make(Post, author=user.person)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.put(url, bad_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['author']['id'],user.person.id)
@@ -149,7 +149,7 @@ class PostViewTest(APITestCase):
         self.client.login(username=self.username, password=self.password)
         data = self.get_post_sample_data()
         post=mommy.make(Post, author=user.person)
-        url=reverse('post',kwargs={'pk': 999})
+        url=reverse('post-detail',kwargs={'pk': 999})
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -157,7 +157,7 @@ class PostViewTest(APITestCase):
         user=self.create_community_member(self.username, self.password)
         data = self.get_post_sample_data()
         post=mommy.make(Post, author=user.person)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
@@ -166,7 +166,7 @@ class PostViewTest(APITestCase):
         self.client.login(username=self.username, password=self.password)
         data = self.get_post_sample_data()
         post=mommy.make(Post, author=user.person)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
@@ -175,7 +175,7 @@ class PostViewTest(APITestCase):
         self.client.login(username=self.username, password=self.password)
         data = self.get_post_sample_data()
         post=mommy.make(Post)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
@@ -184,7 +184,7 @@ class PostViewTest(APITestCase):
         self.client.login(username=self.username, password=self.password)
         data = self.get_post_sample_data()
         post=mommy.make(Post, author=user.person)
-        url=reverse('post',kwargs={'pk': 999})
+        url=reverse('post-detail',kwargs={'pk': 999})
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -192,7 +192,7 @@ class PostViewTest(APITestCase):
         user=self.create_community_member(self.username, self.password)
         data = self.get_post_sample_data()
         post=mommy.make(Post, author=user.person)
-        url=reverse('post',kwargs={'pk': post.id})
+        url=reverse('post-detail',kwargs={'pk': post.id})
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 

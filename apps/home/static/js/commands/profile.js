@@ -17,7 +17,7 @@ App.Command.Profile = App.Command.Base.extend({
     },
 
     getPersonInformation: function(id, callback) {
-        this.jsonRequest("GET", "person-card", { pk: id }, {}, callback);
+        this.jsonRequest("GET", "person_card", { pk: id }, {}, callback);
     },
 
     getPhoto: function(callback) {
@@ -103,11 +103,11 @@ App.Command.University = App.Command.Base.extend({
     },
 
     putStudent: function(id, data, callback) {
-        this.jsonRequest("PUT", 'student', { pk: id }, data, callback);
+        this.jsonRequest("PUT", 'student-detail', { pk: id }, data, callback);
     },
 
     deleteStudent: function(id, callback) {
-        this.jsonRequest("DELETE", 'student', { pk: id }, {}, callback);
+        this.jsonRequest("DELETE", 'student-detail', { pk: id }, {}, callback);
     }
 });
 
@@ -125,11 +125,11 @@ App.Command.Employment = App.Command.Base.extend({
     },
 
     putEmployment: function(id, data, callback) {
-        this.jsonRequest("PUT", 'employment', { pk: id }, data, callback);
+        this.jsonRequest("PUT", 'employment-detail', { pk: id }, data, callback);
     },
 
     deleteEmployment: function(id, callback) {
-        this.jsonRequest("DELETE", 'employment', { pk: id }, {}, callback);
+        this.jsonRequest("DELETE", 'employment-detail', { pk: id }, {}, callback);
     }
 });
 

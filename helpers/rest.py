@@ -1,8 +1,46 @@
 from django.core.cache import get_cache
-from rest_framework import generics
-from rest_framework import status
+from rest_framework import status, mixins, generics, viewsets
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
+
+
+class DynamicFieldsMixin(object):
+    """
+    A serializer mixin that takes an additional `fields` argument that controls
+    which fields should be displayed.
+
+    Usage::
+
+        class MySerializer(DynamicFieldsMixin, serializers.HyperlinkedModelSerializer):
+            class Meta:
+                model = MyModel
+
+    """
+    def __init__(self, *args, **kwargs):
+        super(DynamicFieldsMixin, self).__init__(*args, **kwargs)
+        fields = None
+        if 'request' in self.context:
+            fields = self.context['request'].QUERY_PARAMS.get('fields')
+        if fields:
+            fields = fields.split(',')
+            # Drop any fields that are not specified in the `fields` argument.
+            allowed = set(fields)
+            existing = set(self.fields.keys())
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+
+
+class CreateListRetrieveViewSet(mixins.CreateModelMixin,
+                                mixins.UpdateModelMixin,
+                                mixins.RetrieveModelMixin,
+                                viewsets.GenericViewSet):
+    """
+    A viewset that provides `retrieve`, `create`  actions.
+
+    To use it, override the class and set the `.queryset` and
+    `.serializer_class` attributes.
+    """
+    pass
 
 
 class CacheModelMixin(object):

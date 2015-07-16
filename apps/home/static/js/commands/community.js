@@ -26,15 +26,15 @@ App.Command.Community =  App.Command.Base.extend({
     },
 
     getGraduatedGroups: function(callback) {
-        this.jsonRequest('GET', 'graduated-group-list', {}, {}, callback);
+        this.jsonRequest('GET', 'group-list', {}, {'is_graduated': 'True', 'ordering': 'symbol' }, callback);
     },
 
     getStudentGroups: function(callback) {
-        this.jsonRequest('GET', 'student-group-list', {}, {}, callback);
+        this.jsonRequest('GET', 'group-list', {}, {'is_graduated': 'False', 'ordering': 'symbol' }, callback);
     },
 
     invitePerson: function(id, data, callback, failure) {
-        this.jsonRequest('POST', 'profile-invitation', { pk: id }, data, callback, failure);
+        this.jsonRequest('POST', 'invitation', { pk: id }, data, callback, failure);
     },
 
     getAllCities: function(callback) {
@@ -42,11 +42,11 @@ App.Command.Community =  App.Command.Base.extend({
     },
 
     getNotEmptyCities: function(callback) {
-        this.jsonRequest('GET', 'connected-city-list', {}, {}, callback);
+        this.jsonRequest('GET', 'city-list', {}, {'is_empty': 'False' }, callback);
     },
 
     getCity: function(id, callback) {
-        this.jsonRequest('GET', 'city', { pk: id }, {}, callback);
+        this.jsonRequest('GET', 'city-detail', { pk: id }, {}, callback);
     },
 
     postFeedback: function(data, callback)  {

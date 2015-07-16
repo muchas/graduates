@@ -86,11 +86,31 @@ class PersonDescriptionSerializer(serializers.ModelSerializer):
 
 
 class PersonPhotoSerializer(serializers.ModelSerializer):
-    picture = ImageField(max_size=2621440, allow_null=True)  # max-size: 2.5 MB
+    picture = ImageField(max_size=2621440)  # max-size: 2.5 MB
 
     class Meta:
         model = Person
         fields = ('id', 'picture')
+
+
+class ProfileImageSerializer(serializers.ModelSerializer):
+    picture = ImageField(max_size=2621440, allow_null=True)  # max-size: 2.5 MB
+    x = serializers.IntegerField(min_value=0)
+    y = serializers.IntegerField(min_value=0)
+    width = serializers.IntegerField(min_value=0)
+    height = serializers.IntegerField(min_value=0)
+
+    class Meta:
+        model = Person
+        fields = ('id', 'picture')
+
+    def validate(self, data):
+        picture = self.context['picture']
+        if data['x'] + data['width'] > picture.width:
+            raise serializers.ValidationError(_("Cropped width is bigger than image width."))
+        if data['y'] + data['height'] > picture.height:
+            raise serializers.ValidationError(_("Cropped height is bigger than image height."))
+        return data
 
 
 class ImageCropSerializer(serializers.Serializer):
@@ -135,9 +155,8 @@ class CityDetailSerializer(serializers.ModelSerializer):
                   'years', 'companies', 'universities')
 
     def get_years(self, city):
-        years = Group.objects.filter(pupils__in=city.people).distinct('last_year')\
-            .order_by('-last_year').values('last_year')
-        return [obj.get('last_year') for obj in years]
+        return Group.objects.filter(pupils__in=city.people).order_by('-last_year')\
+            .values_list('last_year', flat=True).distinct()
 
     def count_people(self, city):
         return city.people.count()
@@ -169,15 +188,21 @@ class InvitationSerializer(serializers.ModelSerializer):
         ]
     )
 
+    person = serializers.PrimaryKeyRelatedField(
+        queryset=Person.objects.filter(user=None)
+    )
+
     class Meta:
         model = Invitation
         fields = ('email', 'message', 'person')
 
     def create(self, validated_data):
-        return Invitation.objects.create(
+        invitation = Invitation.objects.create(
             invited_by=self.context['request'].user.person,
             **validated_data
         )
+        invitation.send()
+        return invitation
 
 
 class TeacherSerializer(serializers.ModelSerializer):

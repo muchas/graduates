@@ -6,10 +6,13 @@ App.Command.Base = Backbone.View.extend({
 
     jsonRequest: function (method, routeUrl, routeParams, data, successCallback, failureCallback) {
         this.failureCallback = failureCallback;
+        if(method != 'GET') {
+            data = JSON.stringify(data);
+        }
         $.ajax({
             url: Routing.generate(routeUrl, routeParams),
             method: method,
-            data: JSON.stringify(data),
+            data: data,
             success: successCallback,
             error: this.handleErrors.bind(this),
             dataType: "json"

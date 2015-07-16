@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from apps.community.permissions import IsCommunityMember
@@ -9,16 +9,10 @@ from .permissions import IsAuthorOrReadOnly
 from .serializers import PostSerializer, CommentSerializer
 
 
-class PostView(generics.RetrieveUpdateDestroyAPIView):
+class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-    permission_classes = (IsAuthenticated, IsAuthorOrReadOnly)
-
-
-class PostListView(generics.ListCreateAPIView):
-    serializer_class = PostSerializer
-    queryset = Post.objects.all()
-    permission_classes = (IsAuthenticated, IsCommunityMember)
+    permission_classes = (IsAuthenticated, IsCommunityMember, IsAuthorOrReadOnly)
 
 
 class CommentListView(generics.ListCreateAPIView):
