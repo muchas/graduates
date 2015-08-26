@@ -123,7 +123,7 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, '/../', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, '../', 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -204,7 +204,7 @@ REST_FRAMEWORK = {
     )
 }
 
-URLS_JS_GENERATED_FILE = os.path.join(STATIC_ROOT, 'js/routes.js')
+URLS_JS_GENERATED_FILE = BASE_DIR + '/static/js/routes.js'
 
 THUMBNAIL_ALIASES = {
     '': {
