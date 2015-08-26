@@ -66,17 +66,16 @@ $.ajaxSetup({
  * Leaflet map
  */
   function LeafletMap(options) {
+    L.mapbox.accessToken = 'pk.eyJ1Ijoic211Y2hhIiwiYSI6ImFhNGM0NDQxNzNjNGUxZWNiYzYwNTY3YmZiZDc5ZmZjIn0.jkqUQ-LU6vPbigq5Gxr6-g';
     L.Icon.Default.imagePath = 'static/css/images/';
     this.markers = [];
     this.onMarkerClick = options.onMarkerClick;
-    this.map = new L.Map(options.name);
+    this.map = new L.mapbox.map(options.name, 'mapbox.streets')
     this.osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     this.mbUrl = 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
     this.mblayer = new L.TileLayer(this.mbUrl, {id: 'examples.map-i875mjb7'});
-
     this.osm = new L.TileLayer(this.osmUrl, { minZoom: options.minZoom, maxZoom: options.maxZoom });
     this.map.setView(new L.LatLng(options.x, options.y), options.zoom);
-    this.map.addLayer(this.mblayer);
   }
 
   LeafletMap.prototype.addCity = function(city, x, y) {

@@ -185,6 +185,7 @@ module.exports = function (grunt) {
                          "static/js/routes.js",
 
                          "apps/home/static/js/libs/leaflet.js",
+                         "apps/home/static/js/libs/mapbox.js",
 
                          "apps/home/static/js/config.js",
                          "apps/home/static/js/utils.js",
