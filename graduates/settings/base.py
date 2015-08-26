@@ -204,7 +204,7 @@ REST_FRAMEWORK = {
     )
 }
 
-URLS_JS_GENERATED_FILE = BASE_DIR + '/static/js/routes.js'
+URLS_JS_GENERATED_FILE = os.path.join(STATIC_ROOT, '/js/routes.js')
 
 THUMBNAIL_ALIASES = {
     '': {
