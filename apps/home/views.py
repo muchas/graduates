@@ -1,12 +1,15 @@
+# -*- coding: utf-8 -*-
+from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView
 
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from apps.accounts.models import User
-from .forms import GuestForm
+from .forms import GuestForm, JubileeBookingForm
 from .serializers import FeedbackSerializer
 
 
@@ -47,3 +50,15 @@ class FeedbackView(generics.CreateAPIView):
     serializer_class = FeedbackSerializer
     permission_classes = (IsAuthenticated,)
 
+
+class JubileeBookingView(FormView):
+    template_name = 'home/jubilee_form.html'
+    form_class = JubileeBookingForm
+
+    def get_success_url(self):
+        return reverse('jubilee_booking')
+
+    def form_valid(self, form):
+        form.save()
+        messages.add_message(self.request, messages.SUCCESS, u'Twoje zgłoszenie zostało pomyślnie wysłane. Dziękujemy.')
+        return super(JubileeBookingView, self).form_valid(form)

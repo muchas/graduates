@@ -1,0 +1,77 @@
+{% extends 'front_base.html' %}
+{% load fieldtype %}
+
+{% block header %}
+<div id="header">
+    <div class="container">
+	    <div class="row">
+            <div class="span12">
+                <h1>Jubileusz XXV-lecia liceum</h1>
+            </div>
+		</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content">
+  <div class="container">
+      <div class="row">
+        <div class="span7" style="line-height: 25px;">
+            <h2>Uroczystość</h2>
+            <p>Zapraszamy wszystkich absolwentów na uroczystość jubileuszu XXV-lecia V Liceum Ogólnokształcącego w Bielsku-Białej.
+            Jeżeli chcesz wziąć udział w uroczystości zaznacz swoją obecność poprzez wypełnienie formularza rejestracji.</p>
+            <br />
+            <h2>Upominki dla absolwentów</h2>
+            <p>Czy chciałbyś podczas uroczystości otrzymać upominki? W tym celu zaznacz tę opcję w formularzu rejestracji, a następnie
+            wpłać kwotę 30 zł na konto <strong>Szkolnej Rady Rodziców</strong>.</p>
+            <p><strong>Dane konta bankowego Szkolnej Rady Rodziców</strong> <br />
+                32 1020 1390 0000 6302 0018 3061 <br />
+            Szkolna Rada Rodziców  V Liceum Ogólnokształcące <br />
+            ul. Józefa Lompy 10 <br />
+            43-300 Bielsko-Biała
+            </p>
+            <br />
+            <h2>Kontakt ze szkołą</h2>
+            <p>W przypadku problemów z wysłaniem formularza lub pytań dotyczących uroczystości skontaktuj się z sekretariatem szkoły.</p>
+            <p>Telefon do sekretariatu: (33) 822-18-09</p>
+            <p>E-mail: biuro@lo5.bielsko.pl </p>
+        </div>
+        <div class="span5">
+          <div class="well well-form txt-lefty" style="margin-top:30px">
+            <h3>Formularz rejestracji</h3>
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-error">
+                      {{ error|escape }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post">{% csrf_token %}
+                {% for field in form %}
+		        <div class="control-group">
+		          <div class="controls">
+                    {{ field.label_tag }}
+			        <div class="input-prepend" {% if field|fieldtype == 'CheckboxInput' %}style="float: left; width: 6%"{% endif %}>
+                        {{ field }}
+			        </div>
+                    <div class="help-block">
+                        <small>{{ field.help_text }}</small>
+                    </div>
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                            <p style="color:#b94a48">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+				  </div>
+			    </div>
+                {% endfor %}
+            <button type="submit" class="btn btn-primary">Wyślij zgłoszenie</button>
+            </form>
+        </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
