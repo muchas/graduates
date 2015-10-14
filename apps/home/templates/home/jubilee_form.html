@@ -51,36 +51,11 @@
             <p>E-mail: biuro@lo5.bielsko.pl </p>
         </div>
         <div class="span5">
-          <div class="well well-form txt-lefty" style="margin-top:30px">
-            <h3>Zgłoszenie udziału na uroczystości w teatrze</h3>
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <div class="alert alert-error">
-                      {{ error|escape }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            <form action="" method="post">{% csrf_token %}
-                {% for field in form %}
-		        <div class="control-group">
-		          <div class="controls">
-                    {{ field.label_tag }}
-			        <div class="input-prepend" {% if field|fieldtype == 'CheckboxInput' %}style="float: left; width: 6%"{% endif %}>
-                        {{ field }}
-			        </div>
-                    <div class="help-block">
-                        <small>{{ field.help_text }}</small>
-                    </div>
-                      {% if field.errors %}
-                        {% for error in field.errors %}
-                            <p style="color:#b94a48">{{ error }}</p>
-                        {% endfor %}
-                    {% endif %}
-				  </div>
-			    </div>
-                {% endfor %}
-            <button type="submit" class="btn btn-primary">Wyślij zgłoszenie</button>
-            </form>
+          <div class="well well-form txt-lefty" style="margin-top:30px; min-height: 200px;">
+            <h3>Rejestracja została zakończona</h3>
+              <h4>Przyjęliśmy ponad 185 zgłoszeń.</h4>
+              <br />
+              <h4>Dziękujemy.</h4>
         </div>
         </div>
       </div>
